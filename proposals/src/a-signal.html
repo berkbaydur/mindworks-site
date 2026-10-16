@@ -1,0 +1,1010 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mindworks | Software and IoT engineering consultancy, London</title>
+<meta name="description" content="Mindworks Technology Ltd is a London software and IoT engineering consultancy, founded in 2021. Device management, connectivity, software development and DevOps for technology companies, billed by the hour.">
+<meta property="og:title" content="Mindworks | Software and IoT engineering consultancy">
+<meta property="og:description" content="Software for things that live in the real world. Device management, connectivity, software delivery and DevOps, billed by the hour.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.mindworkss.co.uk/">
+<meta name="theme-color" content="#060607">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Mindworks Technology Ltd",
+  "alternateName": "Mindworks",
+  "url": "https://www.mindworkss.co.uk/",
+  "logo": "https://www.mindworkss.co.uk/logo.svg",
+  "description": "Software and IoT engineering consultancy: device management, connectivity, software development and DevOps.",
+  "foundingDate": "2021-04",
+  "vatID": "GB466082284",
+  "email": "berk.baydur@mindworkss.co.uk",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Unit 408 Screenworks, 22 Highbury Grove",
+    "addressLocality": "London",
+    "postalCode": "N5 2ER",
+    "addressCountry": "GB"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Berk Baydur",
+    "jobTitle": "Founder & Principal Consultant",
+    "sameAs": "https://www.linkedin.com/in/berk-baydur-4765bba2"
+  }
+}
+</script>
+<style>
+@font-face { font-family: "Inter Tight"; src: url("{{font:assets/inter-tight-normal-400-800.woff2}}") format("woff2"); font-weight: 400 800; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("{{font:assets/jetbrains-mono-normal-400.woff2}}") format("woff2"); font-weight: 400 500; font-display: swap; }
+
+/* Signal: near-black canvas, three layered neutrals, hairlines.
+   Lime has one job: live signal (packets, LEDs) and the primary action. */
+:root {
+  --bg: #060607;
+  --s1: #0C0D0F;
+  --s2: #131417;
+  --line: rgba(255,255,255,.08);
+  --line-2: rgba(255,255,255,.14);
+  --tx: #ECECEA;
+  --mu: #9A9B98;
+  --lime: #D4FF4F;
+  --on-lime: #0A0B06;
+  --sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --g: clamp(16px, 4vw, 56px);
+  --max: 1360px;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --gap: clamp(96px, 12vw, 168px);
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 96px; background: var(--bg); }
+body {
+  margin: 0; background: var(--bg); color: var(--tx);
+  font-family: var(--sans); font-size: 17px; line-height: 1.55; letter-spacing: -.005em;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: clip;
+}
+/* fine grain over everything (~4%) */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .045;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.2 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+h1, h2, h3, h4, p, ul, ol, dl, dd, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+h1, h2, h3 { font-weight: 400; text-wrap: balance; }
+p { text-wrap: pretty; }
+::selection { background: var(--lime); color: var(--on-lime); }
+:focus-visible { outline: 1.5px solid var(--tx); outline-offset: 4px; border-radius: 6px; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--g); }
+.mono { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; font-weight: 400; }
+.mu { color: var(--mu); }
+.skip { position: fixed; left: 16px; top: -60px; z-index: 100; background: var(--tx); color: var(--bg); padding: 10px 16px; border-radius: 999px; font-size: 14px; transition: top .2s; }
+.skip:focus { top: 16px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- glass ---------- */
+.glass {
+  background: rgba(19, 20, 23, .52);
+  -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: inset 0 0 0 .5px rgba(255,255,255,.22), inset 0 1px 0 rgba(255,255,255,.16), 0 20px 50px -20px rgba(0,0,0,.7);
+}
+
+/* ---------- nav ---------- */
+.nav {
+  position: fixed; top: 18px; left: 50%; z-index: 50; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 28px; padding: 8px 8px 8px 22px; border-radius: 999px;
+  width: max-content; max-width: calc(100vw - 32px);
+  transition: gap .5s var(--ease), padding .5s var(--ease), top .5s var(--ease), background .5s;
+}
+.nav.condensed { top: 12px; gap: 14px; padding: 6px 6px 6px 18px; background: rgba(12, 13, 15, .72); }
+.nav .brand { display: flex; align-items: center; border-radius: 6px; }
+.nav .brand svg { display: block; height: 34px; width: auto; transition: height .5s var(--ease); }
+.nav.condensed .brand svg { height: 28px; }
+.logo .lw { fill: var(--tx); stroke: var(--tx); stroke-width: 1.3; stroke-linejoin: round; }
+.logo .lt { fill: var(--mu); }
+.nav ul { display: flex; gap: 2px; }
+.nav ul a { display: block; font-size: 14px; color: var(--mu); padding: 8px 12px; border-radius: 999px; transition: color .2s, background .2s; }
+.nav ul a:hover, .nav ul a[aria-current="true"] { color: var(--tx); background: rgba(255,255,255,.06); }
+.btn-lime {
+  display: inline-flex; align-items: center; gap: 10px; background: var(--lime); color: var(--on-lime);
+  font-weight: 500; font-size: 14px; padding: 10px 18px; border-radius: 999px; white-space: nowrap;
+  transition: transform .3s var(--ease), box-shadow .3s;
+  box-shadow: 0 0 0 0 rgba(212,255,79,0);
+}
+.btn-lime:hover { box-shadow: 0 0 32px -4px rgba(212,255,79,.45); }
+.btn-lime:focus-visible { outline-color: var(--lime); }
+.btn-lime .arr { transition: transform .3s var(--ease); }
+.btn-lime:hover .arr { transform: translateX(3px); }
+.menu-btn { display: none; align-items: center; gap: 10px; background: rgba(255,255,255,.08); color: var(--tx); border: 0; border-radius: 999px; padding: 10px 16px; font: 500 14px var(--sans); cursor: pointer; }
+.menu-btn i { display: grid; gap: 4px; }
+.menu-btn i::before, .menu-btn i::after { content: ""; display: block; width: 14px; height: 1.5px; background: currentColor; border-radius: 2px; }
+@media (max-width: 960px) {
+  .nav { left: 16px; right: 16px; transform: none; width: auto; justify-content: space-between; padding: 6px 6px 6px 16px; }
+  .nav.condensed { gap: 14px; padding: 6px 6px 6px 16px; }
+  .nav ul, .nav .btn-lime { display: none; }
+  .menu-btn { display: inline-flex; }
+  .nav .brand svg, .nav.condensed .brand svg { height: 28px; }
+}
+.sheet {
+  position: fixed; inset: 0; z-index: 60; display: flex; flex-direction: column; padding: 18px 16px 28px;
+  background: rgba(6, 6, 7, .62);
+  -webkit-backdrop-filter: blur(34px) saturate(180%); backdrop-filter: blur(34px) saturate(180%);
+  opacity: 0; visibility: hidden; transition: opacity .35s var(--ease), visibility 0s .35s;
+}
+.sheet.open { opacity: 1; visibility: visible; transition: opacity .35s var(--ease); }
+.sheet .top { display: flex; justify-content: space-between; align-items: center; padding: 6px 6px 6px 16px; border-radius: 999px; }
+.sheet .top svg { height: 28px; width: auto; display: block; }
+.sheet nav { margin-top: 40px; flex: 1; }
+.sheet nav a { display: flex; align-items: baseline; gap: 16px; font-size: 40px; letter-spacing: -.035em; line-height: 1.15; padding: 10px 4px; border-bottom: 1px solid var(--line); }
+.sheet nav a span { font-family: var(--mono); font-size: 11px; color: var(--mu); letter-spacing: .06em; }
+.sheet .foot { display: grid; gap: 16px; }
+.sheet .btn-lime { justify-content: space-between; font-size: 16px; padding: 16px 20px; }
+
+/* ---------- hero ---------- */
+.hero { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; display: flex; }
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
+.hero::before { /* vignette + floor fade */
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(90deg, rgba(6,6,7,.82) 0, rgba(6,6,7,.55) 34%, transparent 60%), radial-gradient(120% 90% at 66% 50%, transparent 40%, rgba(6,6,7,.75) 85%), linear-gradient(to top, var(--bg) 0, transparent 22%);
+}
+.hero .wrap { width: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding-top: 140px; padding-bottom: clamp(40px, 7vh, 88px); }
+.eyebrow { display: flex; align-items: center; gap: 12px; color: var(--mu); margin-bottom: 28px; }
+.led { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 10px var(--lime); flex: none; animation: blink 2.4s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1 } 50% { opacity: .35 } }
+.hero h1 {
+  font-size: clamp(48px, 8.2vw, 136px); line-height: .98; letter-spacing: -.045em; max-width: 11.5ch;
+}
+.hero .lede { margin-top: 32px; max-width: 34ch; font-size: clamp(17px, 1.45vw, 20px); color: var(--mu); line-height: 1.5; }
+.hero .ctas { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.hero .ctas .btn-lime { font-size: 15px; padding: 14px 22px; }
+.btn-ghost { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; padding: 13px 20px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line-2); transition: background .2s, box-shadow .2s; }
+.btn-ghost:hover { background: rgba(255,255,255,.05); box-shadow: inset 0 0 0 1px rgba(255,255,255,.3); }
+.telemetry {
+  position: absolute; right: var(--g); bottom: clamp(40px, 7vh, 88px); width: 248px; border-radius: 14px; padding: 14px 16px 12px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .04em; color: var(--mu);
+}
+.telemetry header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; margin-bottom: 8px; border-bottom: 1px solid var(--line); text-transform: uppercase; }
+.telemetry header span:first-child { display: flex; gap: 8px; align-items: center; color: var(--tx); }
+.telemetry dl { display: grid; grid-template-columns: 1fr auto; row-gap: 5px; }
+.telemetry dd { color: var(--tx); font-variant-numeric: tabular-nums; text-align: right; }
+.telemetry .note { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 10px; line-height: 1.45; }
+.coords { position: absolute; left: var(--g); top: 112px; color: var(--mu); display: none; }
+.scroll-cue { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); color: var(--mu); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.scroll-cue::after { content: ""; width: 1px; height: 28px; background: linear-gradient(var(--mu), transparent); }
+@media (min-width: 961px) { .coords { display: block; } }
+@media (max-width: 960px) {
+  .telemetry { position: static; width: auto; margin-top: 40px; }
+  .scroll-cue { display: none; }
+  .hero .wrap { padding-top: 47svh; padding-bottom: 48px; }
+  .eyebrow { margin-bottom: 20px; }
+  .hero .lede { margin-top: 22px; }
+  .hero .ctas { margin-top: 26px; }
+}
+@media (max-width: 560px) { .hero .ctas a { flex: 1 1 auto; justify-content: center; } }
+
+/* split-word reveal */
+.js [data-split] .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.js [data-split] .wi { display: inline-block; transform: translateY(105%); transition: transform 1.1s var(--ease); transition-delay: calc(var(--i) * 55ms + 120ms); }
+.js [data-split].in .wi { transform: none; }
+.js .rv { opacity: 0; transform: translateY(18px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0ms); }
+.js .rv.in { opacity: 1; transform: none; }
+
+/* ---------- section scaffolding ---------- */
+section.block { padding: var(--gap) 0 0; }
+.label { display: flex; align-items: center; gap: 14px; color: var(--mu); margin-bottom: 40px; }
+.label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.label b { font-weight: 400; color: var(--tx); }
+h2.d { font-size: clamp(40px, 6vw, 92px); line-height: 1.0; letter-spacing: -.04em; max-width: 16ch; }
+.sub { color: var(--mu); font-size: 18px; margin-top: 20px; max-width: 40ch; }
+.head-row { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 40px; margin-bottom: 64px; }
+@media (max-width: 760px) { .head-row { grid-template-columns: 1fr; gap: 0; margin-bottom: 40px; } }
+
+/* ---------- services: big rows ---------- */
+.svc { border-top: 1px solid var(--line); }
+.svc li { border-bottom: 1px solid var(--line); position: relative; }
+.svc li::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,255,255,.035), transparent 70%); opacity: 0; transition: opacity .4s; pointer-events: none; }
+.svc li:hover::before, .svc li.open::before { opacity: 1; }
+.svc button {
+  all: unset; box-sizing: border-box; cursor: pointer; width: 100%;
+  display: grid; grid-template-columns: 72px 1fr auto 40px; align-items: center; gap: 24px; padding: 30px 0;
+}
+.svc button:focus-visible { outline: 1.5px solid var(--tx); outline-offset: -2px; border-radius: 4px; }
+.svc .n { color: var(--mu); padding-left: 4px; }
+.svc h3 { font-size: clamp(26px, 3.4vw, 50px); letter-spacing: -.035em; line-height: 1.05; transition: transform .5s var(--ease), color .3s; color: #cfd0cd; }
+.svc li:hover h3, .svc li.open h3, .svc li:focus-within h3 { color: var(--tx); transform: translateX(10px); }
+.svc .tags-peek { color: var(--mu); text-align: right; max-width: 36ch; white-space: nowrap; transition: opacity .3s; }
+.svc .pm { width: 40px; height: 40px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--line-2); position: relative; justify-self: end; transition: transform .5s var(--ease), background .3s; }
+.svc .pm::before, .svc .pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 1.2px; background: var(--tx); transform: translate(-50%, -50%); }
+.svc .pm::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform .4s var(--ease); }
+.svc li.open .pm::after, .svc li:hover .pm::after { transform: translate(-50%, -50%) rotate(0deg); }
+.svc .det { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .6s var(--ease); }
+.svc .det > div { overflow: hidden; }
+.svc li.open .det { grid-template-rows: 1fr; }
+@media (hover: hover) and (min-width: 961px) {
+  .svc li:hover .det, .svc li:focus-within .det { grid-template-rows: 1fr; }
+  .svc li:hover .tags-peek, .svc li:focus-within .tags-peek, .svc li.open .tags-peek { opacity: 0; }
+}
+.svc .det-in { display: grid; grid-template-columns: 72px minmax(0, 1.4fr) minmax(0, 1fr) 40px; gap: 24px; padding: 0 0 36px; }
+.svc .det p { grid-column: 2; font-size: 18px; color: var(--mu); max-width: 56ch; padding-left: 10px; }
+.svc .det ul { grid-column: 3; display: flex; flex-wrap: wrap; gap: 6px; align-content: start; }
+.svc .det ul li { border: 0; font-family: var(--mono); font-size: 11px; letter-spacing: .04em; color: var(--tx); padding: 6px 10px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line-2); }
+.svc .det ul li::before { display: none; }
+@media (max-width: 960px) {
+  .svc button { grid-template-columns: 40px 1fr 36px; gap: 12px; padding: 22px 0; }
+  .svc .tags-peek { display: none; }
+  .svc .pm { width: 34px; height: 34px; }
+  .svc .det-in { grid-template-columns: 40px 1fr; gap: 16px 12px; padding-bottom: 28px; }
+  .svc .det p, .svc .det ul { grid-column: 2; padding-left: 0; font-size: 16px; }
+  .svc li:hover h3 { transform: none; }
+  .svc li.open h3 { transform: none; }
+}
+
+/* ---------- stack: pinned scroll scene ---------- */
+#stack { position: relative; }
+.stk-pin { position: relative; }
+.stk-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; align-items: center; }
+.stk-copy h2 { font-size: clamp(36px, 4.4vw, 68px); max-width: 15ch; }
+.stage { position: relative; height: 560px; perspective: 2200px; display: grid; place-items: center; }
+.iso { position: relative; width: var(--pw, 300px); height: var(--pw, 300px); transform-style: preserve-3d; transform: rotateX(58deg) rotateZ(-45deg); margin-top: 220px; }
+.plate {
+  position: absolute; inset: 0; transform-style: preserve-3d; border-radius: 18px;
+  transform: translateZ(calc(var(--i) * var(--sg, 56px)));
+  background:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 25px 25px,
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 25px 25px,
+    rgba(19, 20, 23, .28);
+  box-shadow: inset 0 0 0 .75px rgba(255,255,255,.2);
+  transition: background-color .4s, box-shadow .4s;
+}
+.plate::before { /* thickness */
+  content: ""; position: absolute; inset: 0; border-radius: 18px; transform: translateZ(-7px);
+  background: rgba(12,13,15,.35); box-shadow: inset 0 0 0 .75px rgba(255,255,255,.07);
+}
+.plate .pl { position: absolute; left: 18px; bottom: 16px; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--mu); transition: color .4s; }
+.plate .port { position: absolute; left: 50%; top: 50%; width: 14px; height: 14px; margin: -7px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(255,255,255,.25); transition: background .3s, box-shadow .3s; }
+.plate .chip { position: absolute; border-radius: 6px; box-shadow: inset 0 0 0 .75px rgba(255,255,255,.12); }
+.plate.on { background-color: rgba(48, 50, 55, .55); box-shadow: inset 0 0 0 1px rgba(255,255,255,.55), 0 0 60px rgba(255,255,255,.06); }
+.plate.on .pl { color: var(--tx); }
+.plate.on .port, .plate.past .port { background: var(--lime); box-shadow: 0 0 14px var(--lime); }
+.pulse { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(212,255,79,.95) 0 14%, rgba(212,255,79,.35) 30%, transparent 68%); transform: translateZ(0); }
+.conduit { position: absolute; left: 50%; top: 50%; width: 1.5px; margin-left: -.75px; transform-origin: 50% 0; transform: rotateX(-90deg); background: linear-gradient(to top, rgba(212,255,79,.9), rgba(212,255,79,.0)); height: 0; }
+.layers { counter-reset: l; margin-top: 40px; border-top: 1px solid var(--line); }
+.layers > li { border-bottom: 1px solid var(--line); padding: 14px 0; transition: opacity .4s; }
+.layers .lh { display: grid; grid-template-columns: 36px 1fr auto; align-items: baseline; gap: 12px; }
+.layers .lh .mono:first-child { color: var(--mu); }
+.layers .nm { font-size: 22px; letter-spacing: -.02em; }
+.layers .ttl { color: var(--mu); }
+.layers .items { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 0 0 48px; }
+.layers .items::before { content: ""; flex-basis: 100%; height: 6px; }
+.layers .items li { font-family: var(--mono); font-size: 11px; letter-spacing: .04em; padding: 5px 10px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line-2); }
+.progress { display: none; }
+/* pinned mode (JS, motion allowed, wide screens) */
+#stack.pinned { height: 420vh; }
+#stack.pinned .stk-pin { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; }
+#stack.pinned .stk-pin > .wrap { width: 100%; }
+#stack.pinned .layers > li { opacity: .38; }
+#stack.pinned .layers > li.on { opacity: 1; }
+#stack.pinned .layers .items-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s var(--ease); }
+#stack.pinned .layers .items-wrap > ul { overflow: hidden; }
+#stack.pinned .layers li.on .items-wrap { grid-template-rows: 1fr; }
+#stack.pinned .progress { display: flex; gap: 12px; align-items: center; margin-top: 28px; color: var(--mu); }
+#stack.pinned .progress i { flex: 1; height: 1px; background: var(--line-2); position: relative; overflow: hidden; }
+#stack.pinned .progress i::after { content: ""; position: absolute; inset: 0; background: var(--tx); transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
+#stack.pinned .stk-copy .label { margin-bottom: 24px; }
+#stack.pinned .stk-copy h2 { font-size: clamp(32px, 3.3vw, 52px); }
+#stack.pinned .layers { margin-top: 28px; }
+#stack.pinned .layers > li { padding: 11px 0; }
+#stack.pinned .layers .items { padding-bottom: 4px; }
+#stack:not(.pinned) .pulse, #stack:not(.pinned) .conduit { display: none; }
+#stack:not(.pinned) .plate .port { background: var(--lime); box-shadow: 0 0 12px var(--lime); }
+@media (max-width: 960px) {
+  .stk-grid { grid-template-columns: 1fr; gap: 0; }
+  .stk-copy { display: contents; }
+  .stk-copy .layers { order: 3; }
+  .stage { order: 2; }
+  .stage { height: 380px; margin: 24px 0 0; }
+  .iso { --pw: 190px; margin-top: 160px; }
+  .plate .pl { font-size: 10px; left: 12px; bottom: 10px; }
+  .layers { display: grid; grid-template-columns: 1fr; }
+}
+@media (min-width: 961px) { #stack:not(.pinned) .stk-grid { align-items: start; } #stack:not(.pinned) .stage { position: sticky; top: 120px; } }
+
+/* ---------- engagements: horizontal timeline ---------- */
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border-radius: 16px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--line); margin-bottom: 88px; }
+.facts li { background: var(--s1); padding: 20px 22px 22px; display: grid; gap: 14px; align-content: start; }
+.facts .k { color: var(--mu); display: flex; justify-content: space-between; }
+.facts .v { font-family: var(--mono); font-size: 14px; line-height: 1.5; letter-spacing: 0; }
+.tl { position: relative; }
+.tl ol { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+.tl::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; height: 1px; background: var(--line-2); }
+.tl .packet { position: absolute; top: 4px; left: 0; width: 64px; height: 7px; margin-left: -64px; border-radius: 4px; background: linear-gradient(90deg, transparent, var(--lime)); filter: drop-shadow(0 0 6px rgba(212,255,79,.7)); animation: run 6s linear infinite; }
+@keyframes run { from { left: 0 } to { left: calc(100% + 64px) } }
+.tl li { position: relative; padding-top: 40px; }
+.tl .node { position: absolute; top: 0; left: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--bg); box-shadow: inset 0 0 0 1px rgba(255,255,255,.4); }
+.tl .node::after { content: ""; position: absolute; inset: 4px; border-radius: 50%; background: var(--tx); }
+.tl .st { color: var(--mu); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.tl .st em { font-style: normal; color: var(--tx); padding: 3px 8px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line-2); }
+.tl h3 { font-size: clamp(24px, 2.2vw, 32px); letter-spacing: -.03em; line-height: 1.1; margin: 18px 0 12px; }
+.tl p { color: var(--mu); font-size: 16px; max-width: 32ch; }
+.tl p.st { font-size: 11.5px; max-width: none; }
+@media (max-width: 960px) {
+  .facts { grid-template-columns: 1fr; margin-bottom: 56px; }
+  .tl { padding-left: 36px; }
+  .tl ol { grid-template-columns: 1fr; gap: 0; }
+  .tl::before { left: 7px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+  .tl .packet { left: 4px; top: 0; width: 7px; height: 64px; margin: -64px 0 0; background: linear-gradient(180deg, transparent, var(--lime)); animation-name: runv; }
+  @keyframes runv { from { top: 0 } to { top: calc(100% + 64px) } }
+  .tl li { padding: 0 0 44px; }
+  .tl .node { left: -36px; top: 4px; }
+  .tl h3 { margin-top: 12px; }
+}
+
+/* ---------- work ---------- */
+.cases { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.case { position: relative; border-radius: 22px; background: var(--s1); box-shadow: inset 0 0 0 1px var(--line); padding: clamp(24px, 3vw, 40px); overflow: hidden; }
+.case .tag { color: var(--mu); display: flex; justify-content: space-between; gap: 16px; }
+.case .tag span:first-child { white-space: nowrap; color: var(--tx); }
+.case .tag span:last-child { text-align: right; }
+.case h3 { font-size: clamp(26px, 2.6vw, 38px); letter-spacing: -.03em; line-height: 1.08; margin: 22px 0 14px; max-width: 22ch; }
+.case p { color: var(--mu); max-width: 52ch; }
+.case.main { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 40px; padding: 0; background: var(--s1); }
+.case.main .txt { padding: clamp(28px, 3.4vw, 48px); display: flex; flex-direction: column; }
+.case.main h3 { font-size: clamp(30px, 3.4vw, 50px); }
+.case.main dl { margin-top: auto; padding-top: 40px; display: grid; grid-template-columns: auto 1fr; gap: 10px 28px; font-size: 15px; }
+.case.main dt { color: var(--mu); }
+.case.main .fig { position: relative; min-height: 460px; background: var(--s2); border-left: 1px solid var(--line); display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(28px, 3.4vw, 48px); overflow: hidden; }
+.leds { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(var(--cols, 22), 1fr); align-content: start; gap: 0; padding: 28px; opacity: .9; -webkit-mask: linear-gradient(to bottom, #000 0, #000 35%, transparent 80%); mask: linear-gradient(to bottom, #000 0, #000 35%, transparent 80%); }
+.leds span { aspect-ratio: 1; display: grid; place-items: center; }
+.leds span::after { content: ""; width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,.18); }
+.leds span.l::after { background: var(--lime); box-shadow: 0 0 6px var(--lime); animation: blink var(--t, 3s) var(--dl, 0s) infinite; }
+.big { position: relative; font-size: clamp(64px, 8.4vw, 136px); line-height: .9; letter-spacing: -.055em; }
+.big-sub { position: relative; margin-top: 18px; color: var(--mu); }
+.case.small { min-height: 300px; display: flex; flex-direction: column; }
+.case.small p { margin-top: auto; }
+.case.small h3 { margin-bottom: 28px; }
+@media (max-width: 960px) {
+  .cases { grid-template-columns: 1fr; }
+  .case.main { grid-template-columns: 1fr; gap: 0; }
+  .case.main .fig { border-left: 0; border-top: 1px solid var(--line); min-height: 340px; }
+  .leds { --cols: 14 !important; padding: 20px; }
+  .case.small { min-height: 0; }
+  .case.small h3 { margin-bottom: 14px; }
+}
+
+/* ---------- company ---------- */
+.co { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 96px); align-items: start; }
+.co h2 { font-size: clamp(36px, 4.6vw, 70px); max-width: 18ch; }
+.co .body { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; color: var(--mu); }
+.co .body p:first-child { color: var(--tx); }
+.co .kv { margin-top: 48px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+.co .kv div { padding: 18px 0 0; border-right: 1px solid var(--line); padding-left: 18px; }
+.co .kv div:first-child { padding-left: 0; }
+.co .kv div:last-child { border-right: 0; }
+.co .kv dt { color: var(--mu); margin-bottom: 8px; }
+.co .kv dd { font-size: 20px; letter-spacing: -.02em; }
+.founder { border-radius: 22px; background: var(--s1); box-shadow: inset 0 0 0 1px var(--line); padding: 12px; }
+.ph { position: relative; aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden; background: #0e1013; isolation: isolate; }
+.ph img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.18) brightness(.82); mix-blend-mode: luminosity; opacity: .92; }
+.ph::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(160deg, #3a4150 0%, #14161a 70%); mix-blend-mode: multiply; opacity: .55; }
+.ph::after { content: ""; position: absolute; inset: 0; z-index: 2; background: radial-gradient(70% 60% at 50% 40%, transparent, rgba(6,6,7,.55)); }
+.ph .cap { position: absolute; z-index: 3; left: 14px; top: 12px; color: rgba(236,236,234,.75); }
+.founder .info { padding: 22px 12px 12px; }
+.founder .nm { font-size: 28px; letter-spacing: -.03em; }
+.founder .role { color: var(--mu); margin-top: 6px; }
+.founder p { margin-top: 18px; color: var(--mu); font-size: 16px; }
+.founder p.role { margin-top: 8px; font-size: 11.5px; }
+.founder p.nm { margin: 0; color: var(--tx); font-size: 28px; }
+.founder .li { display: inline-flex; gap: 8px; margin-top: 20px; font-size: 15px; padding: 9px 16px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line-2); transition: background .2s; }
+.founder .li:hover { background: rgba(255,255,255,.06); }
+@media (max-width: 960px) {
+  .co { grid-template-columns: 1fr; }
+  .co .body { grid-template-columns: 1fr; gap: 18px; }
+  .founder { max-width: 460px; }
+}
+@media (max-width: 520px) {
+  .co .kv { grid-template-columns: 1fr; }
+  .co .kv div { border-right: 0; padding: 14px 0; border-bottom: 1px solid var(--line); padding-left: 0; display: flex; justify-content: space-between; align-items: baseline; }
+  .co .kv dt { margin: 0; }
+  .co .kv dd { font-size: 17px; }
+}
+
+/* ---------- closing scene ---------- */
+.cta { position: relative; min-height: 100svh; margin-top: var(--gap); display: flex; align-items: center; overflow: hidden; isolation: isolate; border-top: 1px solid var(--line); }
+.cta .floor { position: absolute; left: -50%; right: -50%; bottom: 0; height: 60%; z-index: -1; transform: perspective(600px) rotateX(62deg); transform-origin: 50% 100%;
+  background-image: radial-gradient(circle, rgba(255,255,255,.5) 1.2px, transparent 1.8px); background-size: 34px 34px;
+  -webkit-mask: linear-gradient(to top, #000 10%, transparent 90%); mask: linear-gradient(to top, #000 10%, transparent 90%);
+  animation: drift 4s linear infinite; }
+@keyframes drift { to { background-position: 0 34px; } }
+.cta::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(60% 50% at 50% 100%, rgba(255,255,255,.05), transparent 70%); }
+.cta .wrap { width: 100%; padding-top: 120px; padding-bottom: 120px; }
+.cta h2 { font-size: clamp(56px, 10.4vw, 184px); line-height: .92; letter-spacing: -.055em; max-width: 12ch; }
+.cta .act { margin-top: clamp(40px, 6vw, 72px); display: flex; flex-wrap: wrap; align-items: center; gap: 24px 36px; }
+.mail {
+  display: inline-flex; align-items: center; gap: clamp(14px, 2vw, 28px); background: var(--lime); color: var(--on-lime);
+  padding: clamp(16px, 2vw, 26px) clamp(16px, 2vw, 26px) clamp(16px, 2vw, 26px) clamp(22px, 3vw, 40px); border-radius: 999px;
+  font-size: clamp(18px, 2.6vw, 40px); letter-spacing: -.03em; font-weight: 500; max-width: 100%;
+  transition: box-shadow .4s, transform .4s var(--ease);
+}
+.mail:hover { box-shadow: 0 0 80px -10px rgba(212,255,79,.55); }
+.mail:focus-visible { outline-color: var(--lime); }
+.mail .circ { width: clamp(38px, 4vw, 64px); height: clamp(38px, 4vw, 64px); border-radius: 50%; background: var(--on-lime); color: var(--lime); display: grid; place-items: center; flex: none; transition: transform .4s var(--ease); }
+.mail:hover .circ { transform: rotate(-45deg); }
+.mail .circ svg { width: 42%; height: 42%; }
+.cta .meta { color: var(--mu); display: grid; gap: 6px; }
+.cta .meta span:first-child { color: var(--tx); display: flex; gap: 10px; align-items: center; }
+
+/* ---------- footer ---------- */
+footer { border-top: 1px solid var(--line); padding-top: 56px; overflow: hidden; }
+.fcols { display: grid; grid-template-columns: 2fr repeat(5, 1fr); gap: 32px; font-size: 13px; line-height: 1.6; color: var(--mu); }
+.fcols h4 { font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; font-weight: 400; color: var(--tx); margin: 0 0 12px; }
+.fcols p { margin: 0; }
+.fcols a:hover { color: var(--tx); }
+.fcols .lead { font-size: 15px; color: var(--tx); max-width: 26ch; line-height: 1.45; }
+.fbar { display: flex; justify-content: space-between; gap: 16px; margin-top: 48px; padding: 14px 0; border-top: 1px solid var(--line); color: var(--mu); }
+.fbar a:hover { color: var(--tx); }
+.wordmark-xl { display: block; width: 100%; height: auto; margin-top: 8px; margin-bottom: -1px; }
+.wordmark-xl text { font-family: var(--sans); font-weight: 400; fill: var(--tx); }
+.wordmark-xl { padding: 0 6px; }
+@media (max-width: 960px) { .fcols { grid-template-columns: 1fr 1fr; gap: 28px 20px; } .fcols > div:first-child { grid-column: 1 / -1; } }
+@media (max-width: 520px) { .fbar { flex-direction: column; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+  .tl .packet { left: 60%; }
+  .js [data-split] .wi { transform: none; }
+  .js .rv { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav glass" id="nav">
+  <a class="brand" href="#top" aria-label="Mindworks, back to top">{{logo}}</a>
+  <nav aria-label="Primary">
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#engagements">Engagements</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#company">Company</a></li>
+    </ul>
+  </nav>
+  <a class="btn-lime" href="#contact">Book an intro call <span class="arr" aria-hidden="true">→</span></a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="sheet">Menu <i aria-hidden="true"></i></button>
+</header>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="top glass">
+    <svg viewBox="0 0 435 60" aria-hidden="true" style="height:22px"><use href="#lwref"/></svg>
+    <button class="menu-btn" type="button" data-close>Close</button>
+  </div>
+  <nav aria-label="Menu">
+    <a href="#services"><span>01</span>Services</a>
+    <a href="#stack"><span>02</span>Stack</a>
+    <a href="#engagements"><span>03</span>Engagements</a>
+    <a href="#work"><span>04</span>Work</a>
+    <a href="#company"><span>05</span>Company</a>
+  </nav>
+  <div class="foot">
+    <a class="btn-lime" href="#contact">Book an intro call <span aria-hidden="true">→</span></a>
+    <span class="mono mu">Unit 408 Screenworks, London N5 2ER</span>
+  </div>
+</div>
+
+<main id="main">
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top" aria-labelledby="h1">
+    <canvas id="globe" aria-hidden="true"></canvas>
+    <p class="coords mono" aria-hidden="true">51.5468° N &nbsp;0.1007° W &nbsp;/&nbsp; London N5</p>
+    <div class="wrap">
+      <p class="eyebrow mono"><span class="led" aria-hidden="true"></span>Software and IoT engineering consultancy · London</p>
+      <h1 id="h1" data-split>Software for things that live in the real world.</h1>
+      <p class="lede rv" style="--d:500ms">A London consultancy that designs, builds and runs connected products, from the device in the field to the cloud behind it.</p>
+      <div class="ctas rv" style="--d:650ms">
+        <a class="btn-lime" href="#contact">Book an intro call <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn-ghost" href="#work">See selected work</a>
+      </div>
+      <aside class="telemetry glass rv" style="--d:900ms" aria-label="Simulated telemetry, illustrative only">
+        <header><span><span class="led" aria-hidden="true"></span>Sim · fleet-01</span><span id="t-clock">00:00:00</span></header>
+        <dl>
+          <dt>Fleet points</dt><dd id="t-pts">3,400</dd>
+          <dt>Devices online</dt><dd id="t-dev">0</dd>
+          <dt>Edge nodes</dt><dd id="t-hub">3</dd>
+          <dt>Messages / s</dt><dd id="t-mps">0.0</dd>
+        </dl>
+        <p class="note">Simulated, illustrative only. Not client data.</p>
+      </aside>
+    </div>
+    <span class="scroll-cue mono" aria-hidden="true">Scroll</span>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="block" id="services" aria-labelledby="svc-h">
+    <div class="wrap">
+      <p class="label mono"><b>01</b> Services</p>
+      <div class="head-row">
+        <h2 class="d" id="svc-h" data-split>Six ways to work with Mindworks.</h2>
+        <p class="sub rv">Clients combine whichever ones the work needs.</p>
+      </div>
+      <ol class="svc">
+        <li>
+          <button type="button" aria-expanded="false" aria-controls="s1"><span class="n mono">01</span><h3>Architecture and technical consultancy</h3><span class="tags-peek mono">Reviews · Due diligence · ADRs</span><span class="pm" aria-hidden="true"></span></button>
+          <div class="det" id="s1"><div><div class="det-in">
+            <p>System design reviews, target architectures and the decisions in between: build or buy, monolith or services, which cloud, which protocol. Clients receive written recommendations their teams can act on, with the reasoning behind each one.</p>
+            <ul><li>Architecture reviews</li><li>Tech due diligence</li><li>ADRs</li><li>Roadmaps</li></ul>
+          </div></div></div>
+        </li>
+        <li>
+          <button type="button" aria-expanded="false" aria-controls="s2"><span class="n mono">02</span><h3>IoT systems, end to end</h3><span class="tags-peek mono">Fleet · 4G/LTE · MQTT · OTA</span><span class="pm" aria-hidden="true"></span></button>
+          <div class="det" id="s2"><div><div class="det-in">
+            <p>Connected products from the device up: provisioning, telemetry pipelines, OTA updates, fleet management and the dashboards on top. This is the layer where hardware and software teams most often talk past each other, and where Mindworks does its best work.</p>
+            <ul><li>Device management</li><li>Fleet tracking</li><li>4G/LTE</li><li>MQTT</li><li>Remote updates</li></ul>
+          </div></div></div>
+        </li>
+        <li>
+          <button type="button" aria-expanded="false" aria-controls="s3"><span class="n mono">03</span><h3>Hands-on software delivery</h3><span class="tags-peek mono">Backend · APIs · CI/CD</span><span class="pm" aria-hidden="true"></span></button>
+          <div class="det" id="s3"><div><div class="det-in">
+            <p>When a project needs code more than advice, Mindworks builds it: backend services, APIs, integrations and the infrastructure they run on, delivered with tests, documentation and a codebase the client team can own.</p>
+            <ul><li>Backend and APIs</li><li>Cloud infrastructure</li><li>CI/CD</li><li>Integrations</li></ul>
+          </div></div></div>
+        </li>
+        <li>
+          <button type="button" aria-expanded="false" aria-controls="s4"><span class="n mono">04</span><h3>DevOps and infrastructure operations</h3><span class="tags-peek mono">Servers · CDN · Monitoring</span><span class="pm" aria-hidden="true"></span></button>
+          <div class="det" id="s4"><div><div class="det-in">
+            <p>Keeping production fast, stable and observable. Mindworks manages servers and cloud infrastructure, configures CDNs and traffic routing, and sets up monitoring and alerting so issues are caught before customers notice. Available as a one-off hardening project or as ongoing support.</p>
+            <ul><li>Server management</li><li>CDN</li><li>Load balancing</li><li>Monitoring</li><li>Alerting</li></ul>
+          </div></div></div>
+        </li>
+        <li>
+          <button type="button" aria-expanded="false" aria-controls="s5"><span class="n mono">05</span><h3>Interim team leadership</h3><span class="tags-peek mono">Management · Process · Hiring</span><span class="pm" aria-hidden="true"></span></button>
+          <div class="det" id="s5"><div><div class="det-in">
+            <p>Engineering leadership while a company hires, reorganises or recovers a delivery that has slipped. That covers running the team day to day, introducing processes that fit its size, and a clean handover once a permanent lead is in place.</p>
+            <ul><li>Engineering management</li><li>Delivery process</li><li>Hiring</li><li>Mentoring</li></ul>
+          </div></div></div>
+        </li>
+        <li>
+          <button type="button" aria-expanded="false" aria-controls="s6"><span class="n mono">06</span><h3>Technology evaluation and adoption</h3><span class="tags-peek mono">Trials · PoCs · Rollout</span><span class="pm" aria-hidden="true"></span></button>
+          <div class="det" id="s6"><div><div class="det-in">
+            <p>Before a client commits to a platform, vendor or tool, Mindworks trials it against their real constraints, reports the findings and, if it holds up, leads the rollout. Problems surface in week one rather than month six.</p>
+            <ul><li>Vendor trials</li><li>Proofs of concept</li><li>Rollout</li><li>Developer tooling</li></ul>
+          </div></div></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ STACK (pinned) ============ -->
+  <section class="block" id="stack" aria-labelledby="stk-h">
+    <div class="stk-pin">
+      <div class="wrap">
+        <div class="stk-grid">
+          <div class="stk-copy">
+            <p class="label mono"><b>02</b> Stack</p>
+            <h2 class="d" id="stk-h">Every hop of the signal path, from the sensor to the server room.</h2>
+            <ol class="layers" id="layers">
+              <li data-l="0"><div class="lh"><span class="mono">L1</span><span class="nm">Device</span><span class="ttl mono">In the field</span></div>
+                <div class="items-wrap"><ul class="items"><li>Industrial 4G routers</li><li>Home appliances</li><li>Embedded Linux</li><li>Provisioning</li></ul></div></li>
+              <li data-l="1"><div class="lh"><span class="mono">L2</span><span class="nm">Transport</span><span class="ttl mono">Connectivity</span></div>
+                <div class="items-wrap"><ul class="items"><li>4G/LTE cellular</li><li>MQTT</li><li>Wi-Fi, BLE</li><li>Secure tunnels</li></ul></div></li>
+              <li data-l="2"><div class="lh"><span class="mono">L3</span><span class="nm">Fleet</span><span class="ttl mono">Device management</span></div>
+                <div class="items-wrap"><ul class="items"><li>Tracking and health</li><li>Remote configuration</li><li>Firmware updates</li><li>10,000s of devices</li></ul></div></li>
+              <li data-l="3"><div class="lh"><span class="mono">L4</span><span class="nm">Cloud</span><span class="ttl mono">Platform</span></div>
+                <div class="items-wrap"><ul class="items"><li>AWS, Azure</li><li>Kubernetes</li><li>Terraform</li><li>Time-series data</li></ul></div></li>
+              <li data-l="4"><div class="lh"><span class="mono">L5</span><span class="nm">Product</span><span class="ttl mono">Applications</span></div>
+                <div class="items-wrap"><ul class="items"><li>Ruby on Rails</li><li>Node.js, Python</li><li>Web dashboards</li><li>Analytics and alerts</li></ul></div></li>
+              <li data-l="5"><div class="lh"><span class="mono">L6</span><span class="nm">Operations</span><span class="ttl mono">Run and observe</span></div>
+                <div class="items-wrap"><ul class="items"><li>Server management</li><li>CDN servers</li><li>Load balancing</li><li>Logs, uptime, alerts</li></ul></div></li>
+            </ol>
+            <p class="progress mono" aria-hidden="true"><span id="stk-n">L1 / 6</span><i id="stk-bar"></i><span>Scroll</span></p>
+          </div>
+          <div class="stage" aria-hidden="true">
+            <div class="iso" id="iso">
+              <div class="plate" style="--i:0"><span class="chip" style="left:24px;top:24px;width:70px;height:46px"></span><span class="chip" style="right:24px;top:24px;width:46px;height:46px"></span><span class="port"></span><span class="pl">01 Device</span></div>
+              <div class="plate" style="--i:1"><span class="chip" style="left:24px;top:24px;width:120px;height:22px"></span><span class="port"></span><span class="pl">02 Transport</span></div>
+              <div class="plate" style="--i:2"><span class="chip" style="right:24px;top:24px;width:60px;height:60px"></span><span class="chip" style="left:24px;top:24px;width:60px;height:60px"></span><span class="port"></span><span class="pl">03 Fleet</span></div>
+              <div class="plate" style="--i:3"><span class="chip" style="left:24px;top:24px;right:24px;height:30px"></span><span class="port"></span><span class="pl">04 Cloud</span></div>
+              <div class="plate" style="--i:4"><span class="chip" style="right:24px;top:24px;width:90px;height:52px"></span><span class="port"></span><span class="pl">05 Product</span></div>
+              <div class="plate" style="--i:5"><span class="chip" style="left:24px;top:24px;width:40px;height:40px"></span><span class="chip" style="left:72px;top:24px;width:40px;height:40px"></span><span class="port"></span><span class="pl">06 Operations</span></div>
+              <div class="conduit" id="conduit"></div>
+              <div class="pulse" id="pulse"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ENGAGEMENTS ============ -->
+  <section class="block" id="engagements" aria-labelledby="eng-h">
+    <div class="wrap">
+      <p class="label mono"><b>03</b> Engagements</p>
+      <div class="head-row">
+        <h2 class="d" id="eng-h" data-split>Billed by the hour. Judged by what ships.</h2>
+      </div>
+      <ul class="facts rv">
+        <li><span class="k mono"><span>Rate</span><span>01</span></span><span class="v">An hourly rate, agreed in writing</span></li>
+        <li><span class="k mono"><span>Log</span><span>02</span></span><span class="v">Hours logged against tasks, so every invoice is traceable</span></li>
+        <li><span class="k mono"><span>Retainer</span><span>03</span></span><span class="v">Retainers available, never required</span></li>
+      </ul>
+      <div class="tl">
+        <span class="packet" aria-hidden="true"></span>
+        <ol>
+        <li class="rv"><span class="node" aria-hidden="true"></span><p class="st mono">Step 01 <em>30 min · free</em></p><h3>Introductory call</h3><p>A free thirty-minute conversation to understand the problem and confirm whether Mindworks is the right fit.</p></li>
+        <li class="rv" style="--d:100ms"><span class="node" aria-hidden="true"></span><p class="st mono">Step 02 <em>Written</em></p><h3>Scope and rate</h3><p>A short written scope, an agreed hourly rate and an estimate of hours.</p></li>
+        <li class="rv" style="--d:200ms"><span class="node" aria-hidden="true"></span><p class="st mono">Step 03 <em>Your tools</em></p><h3>Work in the open</h3><p>Mindworks works inside the client's own tools, repositories and rituals, and reports progress where the team already looks.</p></li>
+        <li class="rv" style="--d:300ms"><span class="node" aria-hidden="true"></span><p class="st mono">Step 04 <em>Handover</em></p><h3>Hand over</h3><p>Documentation, recorded walkthroughs and a team that can carry on independently. That is how Mindworks measures a successful engagement.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WORK ============ -->
+  <section class="block" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <p class="label mono"><b>04</b> Work</p>
+      <div class="head-row">
+        <h2 class="d" id="work-h" data-split>Selected work.</h2>
+      </div>
+      <div class="cases">
+        <article class="case main rv">
+          <div class="txt">
+            <p class="tag mono"><span>Case 01</span><span>Industrial IoT, implemented and maintained</span></p>
+            <h3>Device management platform for industrial 4G routers</h3>
+            <p>A manufacturer of industrial 4G routers needed visibility and control over devices deployed in the field. Mindworks designed and implemented the platform that tracks and manages that router fleet, and continues to maintain and operate it.</p>
+            <dl>
+              <dt class="mono">Client</dt><dd>Industrial networking manufacturer</dd>
+              <dt class="mono">Role</dt><dd>Platform design, implementation, ongoing maintenance</dd>
+            </dl>
+          </div>
+          <div class="fig">
+            <div class="leds" id="leds" aria-hidden="true"></div>
+            <p class="big">Tens of thousands</p>
+            <p class="big-sub mono">of industrial routers tracked and managed</p>
+          </div>
+        </article>
+        <article class="case small rv">
+          <p class="tag mono"><span>Case 02</span><span>Consumer IoT</span></p>
+          <h3>Connected home appliances</h3>
+          <p>Tracking and management for small home appliances: connecting the devices, collecting their state, and giving operators control of the fleet.</p>
+        </article>
+        <article class="case small rv" style="--d:100ms">
+          <p class="tag mono"><span>Case 03</span><span>Infrastructure</span></p>
+          <h3>CDN and server operations</h3>
+          <p>Managing CDN servers and the infrastructure around them, including provisioning, traffic management, monitoring and metrics, so content is delivered quickly and reliably.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPANY ============ -->
+  <section class="block" id="company" aria-labelledby="co-h">
+    <div class="wrap">
+      <p class="label mono"><b>05</b> Company</p>
+      <div class="co">
+        <div>
+          <h2 class="d" id="co-h" data-split>An independent technology consultancy, founded in London in 2021.</h2>
+          <div class="body rv">
+            <p>Mindworks Technology Ltd was founded in April 2021 to give technology companies direct access to senior engineering across software development, connectivity, device management and DevOps.</p>
+            <p>Its clients build products where software meets hardware: industrial networking equipment, connected home appliances, and the platforms and infrastructure behind them. Engagements range from a few days of architectural advice to long-running platform delivery and operations.</p>
+          </div>
+          <dl class="kv rv">
+            <div><dt class="mono">Founded</dt><dd>April 2021</dd></div>
+            <div><dt class="mono">Headquarters</dt><dd>London, UK</dd></div>
+            <div><dt class="mono">Sector</dt><dd>Technology</dd></div>
+          </dl>
+        </div>
+        <figure class="founder rv" style="--d:150ms">
+          <div class="ph">
+            <img src="{{img:../founder.jpg}}" width="320" height="320" alt="Portrait of Berk Baydur" loading="lazy">
+            <span class="cap mono" aria-hidden="true">Founder</span>
+          </div>
+          <figcaption class="info">
+            <p class="nm">Berk Baydur</p>
+            <p class="role mono">Founder and Principal Consultant</p>
+            <p>14 years in software engineering. Previously founded and ran an IoT start-up. Specialises in software development, connectivity, device management and DevOps.</p>
+            <a class="li" href="https://www.linkedin.com/in/berk-baydur-4765bba2" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta" id="contact" aria-labelledby="cta-h">
+    <div class="floor" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="label mono"><b>06</b> Contact</p>
+      <h2 id="cta-h" data-split>Building a connected product?</h2>
+      <div class="act rv">
+        <a class="mail" href="mailto:berk.baydur@mindworkss.co.uk">berk.baydur@mindworkss.co.uk <span class="circ" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 3.5 13.5 8 9 12.5"/></svg></span></a>
+        <p class="meta mono"><span><span class="led" aria-hidden="true"></span>Replies within one working day.</span><span>Unit 408 Screenworks, London N5 2ER</span></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fcols">
+      <div><p class="lead">Software and IoT engineering consultancy.</p></div>
+      <div><h4>Company</h4><p>Mindworks Technology Ltd<br>Registered in England and Wales</p></div>
+      <div><h4>Address</h4><p>Unit 408 Screenworks<br>22 Highbury Grove<br>London N5 2ER</p></div>
+      <div><h4>© 2026</h4><p>VAT No. GB 466 0822 84<br>No cookies, no tracking.</p></div>
+      <div><h4>Index</h4><p><a href="#services">Services</a><br><a href="#stack">Stack</a><br><a href="#engagements">Engagements</a><br><a href="#work">Work</a><br><a href="#company">Company</a></p></div>
+      <div><h4>Contact</h4><p><a href="mailto:berk.baydur@mindworkss.co.uk">Email</a><br><a href="https://www.linkedin.com/in/berk-baydur-4765bba2" rel="noopener">LinkedIn ↗</a></p></div>
+    </div>
+    <div class="fbar mono"><span>Mindworks Technology Ltd · London</span><a href="#top">Back to top ↑</a></div>
+  </div>
+  <svg class="wordmark-xl" viewBox="0 0 1000 166" role="img" aria-label="Mindworks">
+    <text x="500" y="160" text-anchor="middle" font-size="221" textLength="992" lengthAdjust="spacing">Mindworks</text>
+  </svg>
+</footer>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="lwref"></g></defs></svg>
+
+<script>
+(() => {
+  const d = document, root = d.documentElement;
+  root.classList.add('js');
+  const RM = matchMedia('(prefers-reduced-motion: reduce)');
+  const reduced = () => RM.matches;
+
+  /* reuse the nav wordmark in the mobile sheet */
+  const lw = d.querySelector('.nav .lw');
+  if (lw) { const c = lw.cloneNode(true); c.setAttribute('fill', '#ECECEA'); c.setAttribute('stroke', '#ECECEA'); c.setAttribute('stroke-width', '1.3'); d.getElementById('lwref').appendChild(c); }
+
+  /* ---------- nav ---------- */
+  const nav = d.getElementById('nav');
+  const onNav = () => nav.classList.toggle('condensed', scrollY > 60);
+  addEventListener('scroll', onNav, { passive: true }); onNav();
+  const sheet = d.getElementById('sheet'), mbtn = nav.querySelector('.menu-btn');
+  const setMenu = (open) => {
+    sheet.classList.toggle('open', open); mbtn.setAttribute('aria-expanded', open);
+    d.body.style.overflow = open ? 'hidden' : '';
+    if (open) sheet.querySelector('[data-close]').focus(); else mbtn.focus({ preventScroll: true });
+  };
+  mbtn.addEventListener('click', () => setMenu(true));
+  sheet.querySelector('[data-close]').addEventListener('click', () => setMenu(false));
+  sheet.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { sheet.classList.remove('open'); mbtn.setAttribute('aria-expanded', false); d.body.style.overflow = ''; }));
+  d.addEventListener('keydown', e => { if (e.key === 'Escape' && sheet.classList.contains('open')) setMenu(false); });
+  // current section highlight
+  const links = [...nav.querySelectorAll('ul a')];
+  const secIO = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) links.forEach(a => a.setAttribute('aria-current', a.hash === '#' + e.target.id ? 'true' : 'false'));
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  ['services', 'stack', 'engagements', 'work', 'company'].forEach(id => secIO.observe(d.getElementById(id)));
+
+  /* ---------- split words + reveals ---------- */
+  d.querySelectorAll('[data-split]').forEach(el => {
+    const words = el.textContent.trim().split(/\s+/);
+    el.setAttribute('aria-label', el.textContent.trim());
+    el.innerHTML = words.map((w, i) => `<span class="w" aria-hidden="true"><span class="wi" style="--i:${i}">${w}</span></span>`).join(' ');
+  });
+  const rvIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rvIO.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+  d.querySelectorAll('[data-split], .rv').forEach(el => rvIO.observe(el));
+
+  /* ---------- services rows ---------- */
+  d.querySelectorAll('.svc li > button').forEach(b => b.addEventListener('click', () => {
+    const li = b.parentElement, open = !li.classList.contains('open');
+    li.classList.toggle('open', open); b.setAttribute('aria-expanded', open);
+  }));
+
+  /* ---------- work: router LED field ---------- */
+  const leds = d.getElementById('leds');
+  if (leds) {
+    let s = 7; const r = () => (s = (s * 16807) % 2147483647) / 2147483647;
+    let h = '';
+    for (let i = 0; i < 22 * 14; i++) {
+      const on = r() < .07;
+      h += on ? `<span class="l" style="--t:${(2 + r() * 4).toFixed(1)}s;--dl:-${(r() * 4).toFixed(1)}s"></span>` : '<span></span>';
+    }
+    leds.innerHTML = h;
+  }
+
+  /* ---------- HERO: hand-written canvas globe ---------- */
+  const cv = d.getElementById('globe'), ctx = cv.getContext('2d');
+  const N = 3400, P = new Float32Array(N * 3), LAND = new Float32Array(N);
+  let seed = 42; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const GA = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < N; i++) {
+    const y = 1 - (i / (N - 1)) * 2, rr = Math.sqrt(1 - y * y), th = GA * i;
+    const x = Math.cos(th) * rr, z = Math.sin(th) * rr;
+    P[i * 3] = x; P[i * 3 + 1] = y; P[i * 3 + 2] = z;
+    // pseudo landmass: low-frequency field so the fleet clusters like continents
+    const f = Math.sin(x * 2.6 + 1.1) * Math.cos(y * 3.1 - .4) + Math.sin(z * 3.4 + y * 1.7) * .8 + Math.cos(x * 5.1 - z * 2.3) * .25;
+    LAND[i] = f > .25 ? 1 : (f > 0 ? .6 : .3);
+  }
+  const devs = [];
+  while (devs.length < 54) { const i = (rnd() * N) | 0; if (LAND[i] === 1 && !devs.includes(i)) devs.push(i); }
+  const norm = (a) => { const l = Math.hypot(a[0], a[1], a[2]); return [a[0] / l, a[1] / l, a[2] / l]; };
+  const hubs = [norm([.35, -.42, .84]), norm([-.82, -.18, -.3]), norm([.45, .4, -.78])].map(v => ({ v, flash: 0 }));
+  const devHub = devs.map(i => { // nearest hub
+    let best = 0, bd = -2; hubs.forEach((h, k) => { const dt = P[i * 3] * h.v[0] + P[i * 3 + 1] * h.v[1] + P[i * 3 + 2] * h.v[2]; if (dt > bd) { bd = dt; best = k; } }); return best;
+  });
+  const devFlash = new Float32Array(devs.length);
+  const packets = [];
+  let W = 0, H = 0, dpr = 1, cx = 0, cy = 0, R = 0;
+  let mx = 0, my = 0, tmx = 0, tmy = 0, t = 0, last = 0, running = false, arrivals = [], started = performance.now();
+
+  function size() {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    const r = cv.getBoundingClientRect(); W = r.width; H = r.height;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (W < 961) { cx = W * .56; cy = Math.min(H * .27, W * .62); R = Math.min(W * .52, H * .27); }
+    else { cx = W * .69; cy = H * .5; R = Math.min(W * .3, H * .41); }
+  }
+  let cY, sY, cX, sX;
+  const o = { x: 0, y: 0, z: 0, s: 1 };
+  function proj(x, y, z) {
+    const x1 = x * cY + z * sY, z1 = -x * sY + z * cY;
+    const y1 = y * cX - z1 * sX, z2 = y * sX + z1 * cX;
+    const s = 3.4 / (3.4 - z2);
+    o.x = cx + x1 * R * s; o.y = cy + y1 * R * s; o.z = z2; o.s = s; return o;
+  }
+  function slerp(a, b, om, so, u, out) {
+    const k1 = Math.sin((1 - u) * om) / so, k2 = Math.sin(u * om) / so;
+    out[0] = a[0] * k1 + b[0] * k2; out[1] = a[1] * k1 + b[1] * k2; out[2] = a[2] * k1 + b[2] * k2;
+  }
+  function spawn(u0) {
+    const k = (rnd() * devs.length) | 0, i = devs[k], h = hubs[devHub[k]];
+    const a = [P[i * 3], P[i * 3 + 1], P[i * 3 + 2]], b = h.v;
+    const dt = Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2])), om = Math.acos(dt);
+    if (om < .05) return;
+    packets.push({ a, b, om, so: Math.sin(om), u: u0 || 0, sp: (.32 + rnd() * .3) / Math.max(.6, om), lift: .06 + om * .16, k, h });
+    devFlash[k] = 1;
+  }
+  const tmp = [0, 0, 0];
+  function arcPt(p, u) {
+    slerp(p.a, p.b, p.om, p.so, u, tmp);
+    const l = 1 + p.lift * Math.sin(Math.PI * u);
+    return proj(tmp[0] * l, tmp[1] * l, tmp[2] * l);
+  }
+  function frame(dt) {
+    t += dt; mx += (tmx - mx) * .04; my += (tmy - my) * .04;
+    const ry = t * .07 + mx * .35 + 2.1, rx = -.38 + my * .22;
+    cY = Math.cos(ry); sY = Math.sin(ry); cX = Math.cos(rx); sX = Math.sin(rx);
+    ctx.clearRect(0, 0, W, H);
+    // atmosphere
+    const g = ctx.createRadialGradient(cx, cy, R * .2, cx, cy, R * 1.25);
+    g.addColorStop(0, 'rgba(255,255,255,0.025)'); g.addColorStop(.78, 'rgba(255,255,255,0.035)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R * 1.25, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(cx, cy, R * 1.03, 0, Math.PI * 2); ctx.stroke();
+    // fleet dots
+    ctx.fillStyle = '#ECECEA';
+    for (let i = 0; i < N; i++) {
+      const q = proj(P[i * 3], P[i * 3 + 1], P[i * 3 + 2]);
+      const front = q.z > 0;
+      let a = front ? .22 + .66 * q.z : .04 + .1 * (1 + q.z);
+      a *= LAND[i];
+      if (a < .015) continue;
+      const sz = (front ? 1.6 : 1.05) * q.s * (LAND[i] === 1 ? 1.15 : .85);
+      ctx.globalAlpha = a; ctx.fillRect(q.x - sz / 2, q.y - sz / 2, sz, sz);
+    }
+    ctx.globalAlpha = 1;
+    // devices
+    for (let k = 0; k < devs.length; k++) {
+      const i = devs[k]; const q = proj(P[i * 3], P[i * 3 + 1], P[i * 3 + 2]);
+      const vis = q.z > -.05 ? 1 : .25; devFlash[k] = Math.max(0, devFlash[k] - dt * 1.8);
+      ctx.globalAlpha = (.55 + .45 * Math.max(0, q.z)) * vis;
+      ctx.fillStyle = '#FFFFFF'; ctx.beginPath(); ctx.arc(q.x, q.y, 1.9 * q.s, 0, 6.283); ctx.fill();
+      if (devFlash[k] > 0) { ctx.globalAlpha = devFlash[k] * vis; ctx.fillStyle = '#D4FF4F'; ctx.beginPath(); ctx.arc(q.x, q.y, 2.4 * q.s, 0, 6.283); ctx.fill();
+        ctx.globalAlpha = devFlash[k] * .25 * vis; ctx.beginPath(); ctx.arc(q.x, q.y, 9 * q.s, 0, 6.283); ctx.fill(); }
+    }
+    // packets
+    ctx.lineCap = 'round';
+    for (let j = packets.length - 1; j >= 0; j--) {
+      const p = packets[j]; p.u += p.sp * dt;
+      if (p.u >= 1) { p.h.flash = 1; arrivals.push(t); packets.splice(j, 1); continue; }
+      // faint path
+      ctx.strokeStyle = 'rgba(212,255,79,0.09)'; ctx.lineWidth = 1; ctx.beginPath();
+      for (let s = 0; s <= 24; s++) { const q = arcPt(p, s / 24); if (q.z < -.15) { ctx.moveTo(q.x, q.y); continue; } s ? ctx.lineTo(q.x, q.y) : ctx.moveTo(q.x, q.y); }
+      ctx.stroke();
+      // trail
+      const tl = .16, steps = 10; let px, py;
+      for (let s = 0; s <= steps; s++) {
+        const u = Math.max(0, p.u - tl + tl * s / steps), q = arcPt(p, u);
+        if (s) { const vis = q.z > -.15 ? 1 : .2; ctx.strokeStyle = `rgba(212,255,79,${(s / steps) * .9 * vis})`; ctx.lineWidth = .6 + 1.6 * s / steps; ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(q.x, q.y); ctx.stroke(); }
+        px = q.x; py = q.y;
+      }
+      const q = arcPt(p, p.u), vis = q.z > -.15 ? 1 : .2;
+      ctx.fillStyle = '#D4FF4F'; ctx.globalAlpha = .18 * vis; ctx.beginPath(); ctx.arc(q.x, q.y, 7, 0, 6.283); ctx.fill();
+      ctx.globalAlpha = vis; ctx.beginPath(); ctx.arc(q.x, q.y, 2.1, 0, 6.283); ctx.fill(); ctx.globalAlpha = 1;
+    }
+    // edge nodes
+    ctx.font = '10px "JetBrains Mono", monospace';
+    hubs.forEach((h, k) => {
+      const q = proj(h.v[0] * 1.02, h.v[1] * 1.02, h.v[2] * 1.02), vis = q.z > -.05 ? 1 : .18;
+      h.flash = Math.max(0, h.flash - dt * 1.4);
+      ctx.globalAlpha = vis;
+      ctx.strokeStyle = 'rgba(212,255,79,.55)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(q.x, q.y, 7 * q.s, 0, 6.283); ctx.stroke();
+      if (h.flash > 0) { ctx.strokeStyle = `rgba(212,255,79,${h.flash * .7})`; ctx.beginPath(); ctx.arc(q.x, q.y, (7 + (1 - h.flash) * 22) * q.s, 0, 6.283); ctx.stroke(); }
+      ctx.fillStyle = '#D4FF4F'; ctx.globalAlpha = vis * (.1 + h.flash * .25); ctx.beginPath(); ctx.arc(q.x, q.y, 12 * q.s, 0, 6.283); ctx.fill();
+      ctx.globalAlpha = vis; ctx.beginPath(); ctx.arc(q.x, q.y, 3.2 * q.s, 0, 6.283); ctx.fill();
+      if (q.z > .1) { ctx.globalAlpha = Math.min(1, q.z * 2) * .8; ctx.fillStyle = '#ECECEA'; ctx.fillText('EDGE-0' + (k + 1), q.x + 14, q.y - 10); }
+      ctx.globalAlpha = 1;
+    });
+  }
+  let acc = 0;
+  function loop(now) {
+    if (!running) return;
+    const dt = Math.min(.05, (now - (last || now)) / 1000); last = now;
+    acc += dt; while (acc > .085) { acc -= .085; if (packets.length < 46) spawn(); }
+    frame(dt); requestAnimationFrame(loop);
+  }
+  function start() { if (running || reduced()) return; running = true; last = 0; requestAnimationFrame(loop); }
+  function stop() { running = false; }
+  function still() { // reduced motion: a single complete frame
+    packets.length = 0; for (let i = 0; i < 18; i++) spawn(.2 + rnd() * .7);
+    t = 0; frame(0);
+  }
+  size();
+  addEventListener('resize', () => { size(); if (reduced()) still(); }, { passive: true });
+  addEventListener('pointermove', e => { tmx = (e.clientX / innerWidth - .5) * 2; tmy = (e.clientY / innerHeight - .5) * 2; }, { passive: true });
+  new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? start() : stop())).observe(cv);
+  d.addEventListener('visibilitychange', () => d.hidden ? stop() : start());
+  RM.addEventListener?.('change', () => { if (reduced()) { stop(); still(); } else start(); });
+  if (reduced()) still(); else { for (let i = 0; i < 16; i++) spawn(rnd()); }
+
+  /* telemetry (values are from the simulation itself) */
+  const tDev = d.getElementById('t-dev'), tMps = d.getElementById('t-mps'), tClk = d.getElementById('t-clock');
+  let mps = 0;
+  const pad = n => String(n).padStart(2, '0');
+  function tele() {
+    const el = (performance.now() - started) / 1000;
+    const on = reduced() ? devs.length : Math.min(devs.length, Math.round(devs.length * Math.min(1, el / 2.2)));
+    tDev.textContent = on;
+    arrivals = arrivals.filter(a => a > t - 2);
+    mps += ((arrivals.length / 2) - mps) * .35; tMps.textContent = reduced() ? '—' : mps.toFixed(1);
+    const s = Math.floor(el); tClk.textContent = `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}`;
+  }
+  tele(); setInterval(tele, 250);
+
+  /* ---------- STACK: pinned scroll-scrub ---------- */
+  const stk = d.getElementById('stack'), plates = [...stk.querySelectorAll('.plate')], items = [...d.querySelectorAll('#layers > li')];
+  const pulse = d.getElementById('pulse'), conduit = d.getElementById('conduit'), bar = d.getElementById('stk-bar'), lbl = d.getElementById('stk-n');
+  let pinned = false, G = 56;
+  const bump = x => { const v = Math.max(0, 1 - Math.abs(x) * 1.6); return v * v * (3 - 2 * v); };
+  function setPinned() {
+    const want = !reduced() && innerWidth >= 961 && innerHeight >= 620;
+    if (want === pinned) return; pinned = want; stk.classList.toggle('pinned', pinned);
+    if (!pinned) { plates.forEach(p => { p.style.transform = ''; p.classList.remove('on', 'past'); }); items.forEach(l => l.classList.remove('on')); }
+    onStack();
+  }
+  function zOf(i, f) {
+    let z = i * G + 34 * bump(f - (i + .5));
+    for (let j = 0; j < i; j++) z += 46 * bump(f - (j + .5));
+    return z;
+  }
+  function onStack() {
+    if (!pinned) return;
+    G = Math.max(40, Math.min(60, innerHeight * .058));
+    const r = stk.getBoundingClientRect(), total = stk.offsetHeight - innerHeight;
+    const p = Math.max(0, Math.min(1, -r.top / total)), f = p * 6;
+    const a = Math.min(5, Math.floor(f));
+    const zs = plates.map((pl, i) => zOf(i, f));
+    plates.forEach((pl, i) => { pl.style.transform = `translateZ(${zs[i].toFixed(1)}px)`; pl.classList.toggle('on', i === a); pl.classList.toggle('past', i < a); });
+    items.forEach((li, i) => li.classList.toggle('on', i === a));
+    const q = Math.max(0, Math.min(5, f - .5)), lo = Math.floor(q), hi = Math.min(5, lo + 1);
+    const zp = zs[lo] + (zs[hi] - zs[lo]) * (q - lo) + 3;
+    pulse.style.transform = `translateZ(${zp.toFixed(1)}px)`;
+    conduit.style.height = Math.max(0, zp) + 'px';
+    bar.style.setProperty('--p', p.toFixed(4)); lbl.textContent = `L${a + 1} / 6`;
+  }
+  addEventListener('scroll', onStack, { passive: true });
+  addEventListener('resize', setPinned, { passive: true });
+  RM.addEventListener?.('change', setPinned);
+  setPinned();
+})();
+</script>
+</body>
+</html>
