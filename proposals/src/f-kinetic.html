@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mindworks | Software and IoT engineering consultancy, London</title>
+<meta name="description" content="Mindworks Technology Ltd is a London software and IoT engineering consultancy, founded in 2021. Device management, connectivity, software development and DevOps for technology companies, billed by the hour.">
+<meta property="og:title" content="Mindworks | Software and IoT engineering consultancy">
+<meta property="og:description" content="Software for things that live in the real world. Device management, connectivity, software delivery and DevOps, billed by the hour.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.mindworkss.co.uk/">
+<meta name="theme-color" content="#F4F2EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Mindworks Technology Ltd",
+  "alternateName": "Mindworks",
+  "url": "https://www.mindworkss.co.uk/",
+  "logo": "https://www.mindworkss.co.uk/logo.svg",
+  "description": "Software and IoT engineering consultancy: device management, connectivity, software development and DevOps.",
+  "foundingDate": "2021-04",
+  "vatID": "GB466082284",
+  "email": "berk.baydur@mindworkss.co.uk",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Unit 408 Screenworks, 22 Highbury Grove",
+    "addressLocality": "London",
+    "postalCode": "N5 2ER",
+    "addressCountry": "GB"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Berk Baydur",
+    "jobTitle": "Founder & Principal Consultant",
+    "sameAs": "https://www.linkedin.com/in/berk-baydur-4765bba2"
+  }
+}
+</script>
+<style>
+@font-face{font-family:"Brico";src:url({{font:assets/bricolage-grotesque-normal-400-800.woff2}}) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"JBM";src:url({{font:assets/jetbrains-mono-normal-400.woff2}}) format("woff2");font-weight:400 800;font-display:swap}
+:root{
+  --paper:#F4F2EE;--ink:#111111;--red:#FF2E1F;
+  --ink-2:rgba(17,17,17,.72);--ink-line:rgba(17,17,17,.14);
+  --paper-2:rgba(244,242,238,.72);--paper-line:rgba(244,242,238,.2);
+  --gl:56px;--gr:136px;--rail:96px;--gap:24px;--kv:0;--u:15vw;
+  --disp:"Brico",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JBM",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html.menu-open{overflow:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.55 var(--disp);font-optical-sizing:auto;overflow-x:clip;-webkit-font-smoothing:antialiased}
+body::after{content:"";position:fixed;inset:0;z-index:200;pointer-events:none;opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit}
+h1,h2,h3,p,ul,ol,dl,dd,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+img{max-width:100%}
+::selection{background:var(--red);color:var(--ink)}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+[data-theme=red] :focus-visible,.menu :focus-visible,.mail:focus-visible{outline-color:var(--ink)}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:fixed;left:16px;top:-80px;z-index:300;background:var(--ink);color:var(--paper);padding:12px 16px;font:500 13px var(--mono);text-decoration:none}
+.skip:focus{top:16px}
+.mono{font-family:var(--mono);font-size:12px;line-height:1.5;letter-spacing:.04em;text-transform:uppercase;font-weight:400}
+.wrap{padding-left:var(--gl);padding-right:var(--gr)}
+.g12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap)}
+
+/* ---------- chrome: edge-anchored ---------- */
+.brand{position:fixed;top:0;left:0;z-index:70;height:88px;display:flex;align-items:center;padding:0 28px 0 34px;background:var(--ink);color:var(--paper);text-decoration:none}
+.brand .logo{height:42px;width:auto;display:block}
+.logo .lw{fill:currentColor;stroke:currentColor;stroke-width:1.3}
+.logo .lt{fill:currentColor}
+.prog{position:fixed;left:0;top:0;bottom:0;width:6px;z-index:72;background:rgba(17,17,17,.08)}
+.prog i{display:block;height:100%;background:var(--red);transform-origin:50% 0;transform:scaleY(0)}
+body[data-bar=red] .prog i{background:var(--ink)}
+body[data-bar=ink] .prog{background:rgba(244,242,238,.14)}
+.sq{position:fixed;top:0;right:0;z-index:70;width:var(--rail);height:var(--rail);background:var(--red);color:var(--ink);display:flex;flex-direction:column;justify-content:space-between;padding:12px 12px 8px;text-decoration:none;transition:background .2s,color .2s}
+.sq b{font:800 46px/1 var(--disp);align-self:flex-end;transition:transform .25s}
+.sq:hover b{transform:translate(4px,4px)}
+body[data-sq=red] .sq{background:var(--ink);color:var(--paper)}
+.sq:hover{background:var(--ink);color:var(--paper)}
+body[data-sq=ink] .sq:hover{background:var(--paper);color:var(--ink)}
+.rail{position:fixed;top:var(--rail);right:0;bottom:0;width:var(--rail);z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;color:var(--ink);border-left:1px solid var(--ink-line);transition:color .2s,opacity .35s}
+.rail a{writing-mode:vertical-rl;text-decoration:none;position:relative;padding:4px 0;white-space:nowrap}
+.rail a span{opacity:.5;margin-bottom:10px;display:inline-block}
+.rail a::before{content:"";position:absolute;left:-12px;top:0;width:5px;height:0;background:var(--red);transition:height .3s}
+.rail a[aria-current=true]::before,.rail a:hover::before{height:100%}
+.rail .pct{position:absolute;bottom:18px;left:0;right:0;text-align:center;font-size:11px}
+body[data-rail=ink] .rail{color:var(--paper);border-left-color:var(--paper-line)}
+body[data-rail=red] .rail{border-left-color:rgba(17,17,17,.3)}
+body[data-rail=red] .rail a::before{background:var(--ink)}
+body.foot-in .rail,body.cta-in .rail{opacity:0;pointer-events:none}
+.menu-btn{display:none}
+.menu{display:none}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100vh;padding:128px var(--gr) 56px var(--gl);display:flex;flex-direction:column;overflow:clip}
+.gridlines{position:absolute;top:0;bottom:0;left:var(--gl);right:var(--gr);pointer-events:none;z-index:0}
+.gridlines i{border-left:1px solid rgba(17,17,17,.06);border-right:1px solid rgba(17,17,17,.06)}
+.hero-meta{position:relative;z-index:2;border-top:2px solid var(--ink);padding-top:10px;row-gap:4px}
+.hero-meta span{grid-column:span 3}
+.ht{position:relative;z-index:2;margin-top:28px;font-weight:800;line-height:.8;letter-spacing:-.045em;transform-origin:0 50%;will-change:transform}
+.hl{display:block;white-space:nowrap}
+.fit{display:inline-block;white-space:nowrap}
+.l1 .fit{font-size:var(--u)}
+.l2{font-size:calc(var(--u)*.3);font-weight:300;letter-spacing:-.03em;line-height:1.02;margin:.22em 0 .06em 33.6%}
+.l3{font-size:calc(var(--u)*.48);text-align:right;line-height:.86}
+.l4 .fit{font-size:calc(var(--u)*.86)}
+.o{color:transparent;-webkit-text-stroke:max(1.5px,.022em) var(--ink)}
+.disc{position:absolute;z-index:1;width:min(56vw,880px);aspect-ratio:1;right:var(--gr);top:33%;will-change:transform}
+.disc .face{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,var(--paper) 0 25%,var(--red) 25% 100%)}
+.disc .dot{position:absolute;left:50%;top:50%;width:2.2%;aspect-ratio:1;background:var(--ink);transform:translate(-50%,-50%)}
+.disc svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.disc text{font-family:var(--mono);font-size:4.1px;fill:var(--ink);letter-spacing:.6px}
+.hero-foot{position:relative;z-index:2;margin-top:auto;padding-top:56px;align-items:end;row-gap:28px}
+.lede{grid-column:1/5;font-size:21px;line-height:1.38;font-weight:500;letter-spacing:-.01em;background:var(--paper);padding:14px 16px 0 0}
+.actions{grid-column:1/5;display:flex;flex-wrap:wrap;align-items:center;gap:22px;grid-row:2}
+.hero-list{grid-column:10/13;grid-row:1/3;border-top:2px solid var(--ink);padding-top:10px}
+.hero-list li{padding:6px 0;border-bottom:1px solid rgba(17,17,17,.35)}
+.btn{display:inline-flex;align-items:center;gap:18px;background:var(--red);color:var(--ink);font:700 18px/1 var(--disp);letter-spacing:-.01em;padding:20px 22px;text-decoration:none;transition:background .2s,color .2s}
+.btn b{font-weight:800;transition:transform .25s}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn:hover b{transform:translateX(5px)}
+.ul{font:500 16px var(--disp);text-decoration:none;border-bottom:2px solid currentColor;padding-bottom:2px}
+.ul:hover{border-bottom-color:var(--red)}
+
+/* ---------- section heads ---------- */
+.sec{padding:160px 0 150px}
+.sec-head{margin-bottom:80px;align-items:start}
+.sec-head .mono{grid-column:1/4;border-top:2px solid currentColor;padding-top:12px}
+.sec-head h2{grid-column:4/13;font-size:clamp(40px,5.4vw,88px);line-height:.94;letter-spacing:-.045em;font-weight:800}
+.split .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.2em;margin-bottom:-.2em}
+.split .wi{display:inline-block}
+.js .split .wi{transform:translateY(108%);transition:transform .8s cubic-bezier(.2,.8,.1,1);transition-delay:calc(var(--i)*45ms)}
+.js .split.in .wi{transform:none}
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .8s cubic-bezier(.2,.8,.1,1)}
+.js .rv.in{opacity:1;transform:none}
+
+/* ---------- services: pinned horizontal track ---------- */
+.hs{background:var(--ink);position:relative}
+.hs-track{display:block}
+.panel{position:relative;display:grid;grid-template-rows:1fr auto;min-height:100vh;padding:136px var(--gr) 56px var(--gl)}
+.panel[data-theme=paper]{background:var(--paper);color:var(--ink)}
+.panel[data-theme=ink]{background:var(--ink);color:var(--paper)}
+.panel[data-theme=red]{background:var(--red);color:var(--ink)}
+.p-num{font-size:min(46vh,34vw);line-height:.74;letter-spacing:-.065em;font-weight:calc(260 + 540*var(--kv));margin-left:-.04em;align-self:start}
+.p-label{position:absolute;top:136px;right:var(--gr)}
+.p-body{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:end;border-top:2px solid currentColor;padding-top:20px}
+.p-body h3{font-size:clamp(34px,3.7vw,60px);line-height:.96;letter-spacing:-.035em;font-weight:700}
+.p-body p{font-size:17px;line-height:1.5;margin-bottom:18px;max-width:48ch}
+.panel[data-theme=ink] .p-body p{color:var(--paper-2)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags li{font:400 11px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor;padding:6px 8px}
+.p-intro{display:flex;flex-direction:column;justify-content:space-between}
+.p-intro h2{font-size:clamp(52px,7.4vw,128px);line-height:.88;letter-spacing:-.05em;font-weight:800;max-width:7.5em;margin-top:36px}
+.p-intro .sub{font-size:21px;font-weight:500;color:var(--paper-2);max-width:26ch;margin-top:28px}
+.p-intro .hint{display:flex;gap:16px;align-items:center;border-top:2px solid var(--paper);padding-top:14px}
+.p-intro .hint b{font:800 34px/1 var(--disp);color:var(--red)}
+.p-intro .head .mono{display:inline-block;border-top:2px solid currentColor;padding-top:12px;min-width:220px}
+.hs.is-pinned .hs-pin{position:sticky;top:0;height:100vh;overflow:hidden}
+.hs.is-pinned .hs-track{display:flex;height:100%;width:max-content;will-change:transform}
+.hs.is-pinned .panel{flex:0 0 auto;height:100%;min-height:0;width:min(84vw,1300px);padding:136px 64px 56px 64px}
+.hs.is-pinned .panel.p-intro{width:min(66vw,1000px);padding-left:var(--gl)}
+.hs.is-pinned .panel:last-child{width:calc(min(84vw,1300px) + var(--rail));padding-right:calc(var(--rail) + 64px)}
+.hs.is-pinned .p-label{right:64px}
+.hs.is-pinned .panel:last-child .p-label{right:calc(var(--rail) + 64px)}
+
+/* ---------- stack ---------- */
+.layers{margin:0 calc(-1*var(--gr)) 0 calc(-1*var(--gl));border-top:2px solid var(--ink)}
+.layer{display:grid;grid-template-columns:64px minmax(0,1fr) 190px 380px;column-gap:var(--gap);align-items:center;padding:16px var(--gr) 16px var(--gl);border-bottom:1px solid var(--ink);transition:background .25s,color .25s}
+.l-name{font-size:clamp(48px,7.8vw,128px);line-height:.92;letter-spacing:-.05em;font-weight:400;transition:font-weight .4s cubic-bezier(.2,.8,.1,1),transform .4s cubic-bezier(.2,.8,.1,1);transform-origin:0 50%}
+.l-sub{align-self:center}
+.l-items{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;font:400 12.5px/1.45 var(--mono)}
+.l-items li::before{content:"/ ";opacity:.5}
+.layer:hover{background:var(--red)}
+.layer:hover .l-name{font-weight:800;transform:translateX(18px)}
+
+/* ---------- engagements ---------- */
+.eng{background:var(--red);color:var(--ink);padding:150px 0 140px}
+.eng .top{align-items:start}
+.eng .top .mono{grid-column:1/4;border-top:2px solid var(--ink);padding-top:12px}
+.eng h2{font-size:clamp(46px,8.8vw,152px);line-height:.84;letter-spacing:-.055em;font-weight:800;margin:72px 0 64px}
+.billing{border-top:2px solid var(--ink);padding-top:14px;margin-bottom:120px}
+.billing li{grid-column:span 4;font:500 19px/1.35 var(--disp);letter-spacing:-.01em;padding-right:24px}
+.billing li::before{content:"—";display:block;font:400 12px var(--mono);margin-bottom:8px}
+.steps li{grid-column:span 3;border-top:2px solid var(--ink);padding-top:14px}
+.steps .mono{display:block}
+.s-num{display:block;font-size:clamp(72px,9.5vw,160px);line-height:.78;letter-spacing:-.07em;font-weight:calc(260 + 540*var(--kv));margin:24px 0 36px -.04em}
+.steps h3{font-size:26px;line-height:1.1;letter-spacing:-.02em;font-weight:700;margin-bottom:10px}
+.steps p{font-size:16px;line-height:1.5;max-width:30ch}
+
+/* ---------- work ---------- */
+.flag{background:var(--ink);color:var(--paper);padding:56px 0 64px;position:relative}
+.flag-top{align-items:start}
+.flag-top .mono{grid-column:1/4;border-top:2px solid var(--red);padding-top:12px}
+.flag-top h3{grid-column:4/12;font-size:clamp(30px,3.5vw,56px);line-height:1;letter-spacing:-.035em;font-weight:700}
+.tens{display:block;font-weight:800;letter-spacing:-.055em;line-height:.8;margin:72px 0 0;white-space:nowrap}
+.tens .fit{font-size:11vw}
+.tens-sub{display:flex;align-items:center;gap:14px;margin-top:22px;padding-bottom:56px;border-bottom:1px solid var(--paper-line)}
+.tens-sub i{display:inline-block;width:40px;height:14px;background:var(--red)}
+.flag-bot{padding-top:28px;align-items:start}
+.flag-bot p{grid-column:1/7;font-size:19px;line-height:1.5;color:var(--paper-2)}
+.flag-bot .tbl{grid-column:8/13}
+.tbl{display:grid;grid-template-columns:minmax(120px,auto) 1fr;border-top:2px solid currentColor}
+.tbl dt,.tbl dd{padding:12px 0;border-bottom:1px solid var(--ink-line)}
+.tbl dt{font:400 12px/1.6 var(--mono);text-transform:uppercase;letter-spacing:.04em;padding-right:20px}
+.tbl dd{font-size:16px;font-weight:500}
+.flag .tbl dt,.flag .tbl dd{border-bottom-color:var(--paper-line)}
+.cases2{padding-top:var(--gap)}
+.case{grid-column:span 6;border-top:2px solid var(--ink);padding-top:14px;display:grid;grid-template-columns:1fr auto;column-gap:24px;align-content:start}
+.case .c-no{font:800 clamp(56px,6vw,96px)/.8 var(--disp);letter-spacing:-.06em;grid-row:1/4;grid-column:2;font-weight:calc(260 + 540*var(--kv))}
+.case h3{font-size:clamp(28px,2.9vw,46px);line-height:1;letter-spacing:-.035em;font-weight:700;margin:22px 0 16px}
+.case p{color:var(--ink-2);max-width:46ch}
+.case-wrap{padding-top:96px}
+
+/* ---------- company ---------- */
+.co{align-items:start;row-gap:56px}
+.portrait{grid-column:1/6;position:relative;margin-right:24px}
+.ph{position:relative;overflow:visible}
+.ph img{display:block;width:100%;aspect-ratio:1;object-fit:cover;filter:grayscale(1) contrast(1.6) brightness(1.06)}
+.ph::after{content:"";position:absolute;inset:0;background:radial-gradient(rgba(17,17,17,.38) .9px,transparent 1.3px) 0 0/4px 4px;mix-blend-mode:multiply;pointer-events:none}
+.ph .shape{position:absolute;width:58%;aspect-ratio:1;border-radius:50%;background:var(--red);right:-16%;bottom:-16%;mix-blend-mode:multiply;will-change:transform}
+.ph .bar{position:absolute;left:-24px;top:12%;width:24px;height:42%;background:var(--red)}
+.portrait figcaption{margin-top:28px;display:flex;justify-content:space-between;border-top:2px solid var(--ink);padding-top:10px}
+.co-text{grid-column:7/13}
+.co-text .bio p{font-size:20px;line-height:1.5;margin-bottom:18px;letter-spacing:-.005em}
+.co-text .bio p:first-child{font-size:24px;line-height:1.36;font-weight:500;letter-spacing:-.015em}
+.co-text .tbl{margin-top:44px}
+.founder{margin-top:72px}
+.founder h3{font-size:clamp(44px,5vw,84px);line-height:.88;letter-spacing:-.05em;font-weight:800}
+.founder .role{display:block;margin:16px 0 18px}
+.founder p{font-size:18px;color:var(--ink-2);max-width:48ch;margin-bottom:20px}
+
+/* ---------- CTA ---------- */
+.cta{background:var(--ink);color:var(--paper);min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:136px 0 56px;overflow:clip;row-gap:56px}
+.cta .top .mono{grid-column:1/4;border-top:2px solid var(--paper);padding-top:12px}
+.cta .top p{grid-column:4/9;font-size:19px;color:var(--paper-2)}
+.mq{white-space:nowrap;font-weight:800;letter-spacing:-.05em;line-height:.9}
+.mq-track{display:inline-block;will-change:transform}
+.mq1{font-size:clamp(76px,13.5vw,240px)}
+.mq2{font-size:clamp(40px,6.4vw,112px);font-weight:300;color:transparent;-webkit-text-stroke:1.5px var(--paper);margin-top:.15em}
+.mail{display:block;margin:0 var(--gr) 0 var(--gl);background:var(--red);color:var(--ink);text-decoration:none;padding:22px 28px 26px;transition:background .25s}
+.mail .row{display:flex;justify-content:space-between;align-items:center}
+.mail .addr{display:block;margin-top:18px;font-weight:800;letter-spacing:-.045em;line-height:.95}
+.mail .addr .fit{font-size:5vw}
+.mail b{font:800 40px/1 var(--disp);transition:transform .25s}
+.mail:hover{background:var(--paper)}
+.mail:hover b{transform:translate(6px,-6px)}
+.cta-meta{row-gap:10px}
+.cta-meta > *{grid-column:span 4;border-top:1px solid var(--paper-line);padding-top:12px}
+.cta-meta a{text-decoration:none}
+.cta-meta a:hover{color:var(--red)}
+
+/* ---------- footer ---------- */
+footer{background:var(--paper);padding:56px 0 0;overflow:clip}
+.legal{border-top:2px solid var(--ink);padding:12px var(--gl) 0;font:400 11px/1.6 var(--mono);text-transform:uppercase;letter-spacing:.04em;display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1fr .8fr;gap:var(--gap);margin:0 var(--gl) 0 var(--gl);padding-left:0}
+.legal .logo{height:30px;width:auto;margin-bottom:8px}
+.legal a{text-decoration:none}
+.legal a:hover{color:var(--red)}
+.legal b{display:block;font-weight:400;opacity:.55;margin-bottom:4px}
+.giant{display:block;padding:0 var(--gl) 18px;margin-top:48px;font-weight:800;letter-spacing:-.06em;line-height:.8;white-space:nowrap;overflow:hidden}
+.giant .fit{font-size:17vw}
+
+/* ---------- responsive ---------- */
+@media (max-width:1200px){
+  .layer{grid-template-columns:48px minmax(0,1fr) 160px 300px}
+  .lede{grid-column:1/7}.actions{grid-column:1/7}.hero-list{grid-column:9/13}
+}
+@media (max-width:900px){
+  :root{--gl:16px;--gr:16px;--gap:16px}
+  body{font-size:16px}
+  .prog{width:3px}
+  .brand{height:56px;padding:0 14px 0 16px}
+  .brand .logo{height:30px}
+  .sq,.rail{display:none}
+  .menu-btn{display:flex;position:fixed;top:0;right:0;z-index:80;width:56px;height:56px;border:0;background:var(--red);color:var(--ink);font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.04em;align-items:flex-end;justify-content:flex-start;padding:7px;cursor:pointer}
+  .menu-btn[aria-expanded=true]{background:var(--ink);color:var(--paper)}
+  .menu-btn .bars{position:absolute;top:10px;right:9px;width:20px;height:10px;border-top:2px solid currentColor;border-bottom:2px solid currentColor}
+  .menu{position:fixed;inset:0;z-index:75;background:var(--red);color:var(--ink);padding:80px 16px 24px;display:flex;flex-direction:column;justify-content:space-between;overflow:auto}
+  .menu[hidden]{display:none}
+  .menu nav a{display:flex;justify-content:space-between;align-items:baseline;font-size:clamp(44px,14.5vw,80px);font-weight:800;line-height:.95;letter-spacing:-.05em;text-decoration:none;border-bottom:2px solid var(--ink);padding:6px 0 4px}
+  .menu nav a span{font:400 11px var(--mono);letter-spacing:.04em}
+  .menu .m-foot{display:grid;gap:6px;margin-top:28px}
+  .menu .m-foot a{font-weight:600;font-size:17px}
+  .hero{padding-top:84px;min-height:auto}
+  .gridlines{display:none}
+  .hero-meta span{grid-column:span 6}
+  .l2{margin-left:0;font-size:calc(var(--u)*.46)}
+  .l3{font-size:calc(var(--u)*.66);text-align:left}
+  .disc{width:96vw;right:-34vw;top:250px}
+  .hero-foot{padding-top:200px}
+  .lede,.actions,.hero-list{grid-column:1/-1;grid-row:auto}
+  .lede{font-size:19px;padding:12px 0 0}
+  .sec{padding:104px 0 96px}
+  .sec-head{margin-bottom:48px;row-gap:20px}
+  .sec-head .mono,.sec-head h2{grid-column:1/-1}
+  .sec-head h2{font-size:clamp(36px,10vw,56px)}
+  .panel{min-height:auto;padding:88px 16px 56px;row-gap:40px}
+  .p-label{top:88px;right:16px}
+  .p-num{font-size:44vw}
+  .p-body{grid-template-columns:1fr;gap:20px}
+  .p-intro{padding-top:104px}
+  .p-intro h2{font-size:clamp(44px,13vw,72px)}
+  .p-intro .hint{display:none}
+  .layer{grid-template-columns:36px minmax(0,1fr);row-gap:10px;padding-top:18px;padding-bottom:20px;align-items:baseline}
+  .l-name{font-size:clamp(44px,13.5vw,72px)}
+  .l-sub,.l-items{grid-column:2}
+  .eng{padding:104px 0 96px}
+  .eng .top .mono{grid-column:1/-1}
+  .eng h2{font-size:clamp(44px,13vw,72px);margin:40px 0 44px}
+  .billing{margin-bottom:72px;row-gap:20px}
+  .billing li,.steps li{grid-column:1/-1}
+  .steps{row-gap:44px}
+  .s-num{font-size:96px;margin:16px 0 24px}
+  .flag-top .mono,.flag-top h3,.flag-bot p,.flag-bot .tbl{grid-column:1/-1}
+  .flag-top{row-gap:20px}
+  .tens{margin-top:40px}
+  .tens .fit{display:table}
+  .flag-bot{row-gap:28px}
+  .case{grid-column:1/-1}
+  .cases2{row-gap:48px}
+  .case-wrap{padding-top:64px}
+  .portrait,.co-text{grid-column:1/-1}
+  .portrait{margin-right:40px;margin-left:24px}
+  .co-text .bio p:first-child{font-size:21px}
+  .co-text .bio p{font-size:18px}
+  .founder{margin-top:56px}
+  .cta{min-height:100svh;padding:96px 0 40px}
+  .cta .top .mono,.cta .top p{grid-column:1/-1}
+  .cta .top{row-gap:20px}
+  .mail{padding:16px 16px 18px}
+  .mail b{font-size:30px}
+  .cta-meta > *{grid-column:1/-1}
+  .legal{grid-template-columns:1fr 1fr;row-gap:20px}
+  .legal > :first-child{grid-column:1/-1}
+}
+@media (min-width:901px) and (max-width:1100px){
+  :root{--gl:40px;--gr:112px;--rail:80px}
+  .sq b{font-size:38px}
+  .billing li{grid-column:span 4}
+  .steps li{grid-column:span 6;margin-bottom:40px}
+  .layer{grid-template-columns:40px minmax(0,1fr) 260px;row-gap:8px}
+  .l-items{grid-column:3}.l-sub{grid-column:3;grid-row:1;align-self:end}
+  .layer .l-items{grid-row:2}
+  .layer .l-name{grid-row:1/3}.layer .l-num{grid-row:1/3}
+  .legal{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-height:820px) and (min-width:901px){.rail{gap:16px;padding-bottom:36px}.rail a{font-size:11px}.rail a span{margin-bottom:6px}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .js .split .wi,.js .rv{transform:none;opacity:1}
+}
+</style>
+</head>
+<body data-rail="paper" data-bar="paper" data-sq="paper">
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <a class="brand chrome" href="#main" aria-label="Mindworks home">{{logo}}</a>
+  <div class="prog chrome" aria-hidden="true"><i></i></div>
+  <a class="sq chrome" href="#contact"><span class="mono">Contact</span><b aria-hidden="true">↘</b></a>
+  <nav class="rail chrome" aria-label="Primary">
+    <a href="#services"><span>01</span> Services</a>
+    <a href="#stack"><span>02</span> Stack</a>
+    <a href="#engagements"><span>03</span> Engagements</a>
+    <a href="#work"><span>04</span> Work</a>
+    <a href="#company"><span>05</span> Company</a>
+    <span class="pct mono" aria-hidden="true">000</span>
+  </nav>
+  <button class="menu-btn chrome" type="button" aria-expanded="false" aria-controls="menu"><span class="bars" aria-hidden="true"></span><span class="mb-l">Menu</span></button>
+  <div class="menu chrome" id="menu" hidden>
+    <nav aria-label="Mobile">
+      <a href="#services">Services <span>01</span></a>
+      <a href="#stack">Stack <span>02</span></a>
+      <a href="#engagements">Engagements <span>03</span></a>
+      <a href="#work">Work <span>04</span></a>
+      <a href="#company">Company <span>05</span></a>
+      <a href="#contact">Contact <span>06</span></a>
+    </nav>
+    <div class="m-foot">
+      <span class="mono">Replies within one working day</span>
+      <a href="mailto:berk.baydur@mindworkss.co.uk">berk.baydur@mindworkss.co.uk</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" data-theme="paper" aria-labelledby="ht">
+    <div class="gridlines g12" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="hero-meta g12 mono">
+      <span>Mindworks Technology Ltd</span>
+      <span>Software + IoT engineering</span>
+      <span>London — since 2021</span>
+      <span>Billed by the hour</span>
+    </div>
+    <h1 class="ht" id="ht" aria-label="Software for things that live in the real world.">
+      <span class="hl l1" data-base="800" data-peak="200" aria-hidden="true"><span class="fit" data-fit="1">Software</span></span>
+      <span class="hl l2" data-base="300" data-peak="800" aria-hidden="true">for things that</span>
+      <span class="hl l3" data-base="800" data-peak="200" aria-hidden="true">live in the</span>
+      <span class="hl l4" data-base="800" data-peak="200" aria-hidden="true"><span class="fit" data-fit=".97"><span class="o">real</span> world.</span></span>
+    </h1>
+    <div class="disc" aria-hidden="true">
+      <div class="face"></div><span class="dot"></span>
+      <svg viewBox="0 0 200 200"><defs><path id="ring" d="M100,100 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs><text><textPath href="#ring" textLength="538" lengthAdjust="spacing">DEVICE — TRANSPORT — FLEET — CLOUD — PRODUCT — OPERATIONS — DEVICE — TRANSPORT — FLEET — CLOUD — PRODUCT — OPERATIONS —</textPath></text></svg>
+    </div>
+    <div class="hero-foot g12">
+      <p class="lede">A London consultancy that designs, builds and runs connected products, from the device in the field to the cloud behind it.</p>
+      <div class="actions">
+        <a class="btn" href="#contact">Book an intro call <b aria-hidden="true">→</b></a>
+        <a class="ul" href="#work">See selected work</a>
+      </div>
+      <ul class="hero-list mono" aria-label="Disciplines">
+        <li>Device management</li><li>Connectivity</li><li>Software delivery</li><li>DevOps</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="hs" id="services" data-theme="ink" aria-labelledby="svc-h">
+    <div class="hs-pin">
+      <div class="hs-track">
+        <div class="panel p-intro" data-theme="ink">
+          <div class="head">
+            <span class="mono">(01) Services</span>
+            <h2 id="svc-h" class="split">Six ways to work with Mindworks.</h2>
+            <p class="sub">Clients combine whichever ones the work needs.</p>
+          </div>
+          <div class="hint mono"><span>Keep scrolling — 01 to 06</span><b aria-hidden="true">→</b></div>
+        </div>
+        <article class="panel" data-theme="paper">
+          <span class="p-num" aria-hidden="true">01</span><span class="p-label mono">Service 01 / 06</span>
+          <div class="p-body">
+            <h3>Architecture and technical consultancy</h3>
+            <div><p>System design reviews, target architectures and the decisions in between: build or buy, monolith or services, which cloud, which protocol. Clients receive written recommendations their teams can act on, with the reasoning behind each one.</p>
+            <ul class="tags" aria-label="Covers"><li>Architecture reviews</li><li>Tech due diligence</li><li>ADRs</li><li>Roadmaps</li></ul></div>
+          </div>
+        </article>
+        <article class="panel" data-theme="ink">
+          <span class="p-num" aria-hidden="true">02</span><span class="p-label mono">Service 02 / 06</span>
+          <div class="p-body">
+            <h3>IoT systems, end to end</h3>
+            <div><p>Connected products from the device up: provisioning, telemetry pipelines, OTA updates, fleet management and the dashboards on top. This is the layer where hardware and software teams most often talk past each other, and where Mindworks does its best work.</p>
+            <ul class="tags" aria-label="Covers"><li>Device management</li><li>Fleet tracking</li><li>4G/LTE</li><li>MQTT</li><li>Remote updates</li></ul></div>
+          </div>
+        </article>
+        <article class="panel" data-theme="red">
+          <span class="p-num" aria-hidden="true">03</span><span class="p-label mono">Service 03 / 06</span>
+          <div class="p-body">
+            <h3>Hands-on software delivery</h3>
+            <div><p>When a project needs code more than advice, Mindworks builds it: backend services, APIs, integrations and the infrastructure they run on, delivered with tests, documentation and a codebase the client team can own.</p>
+            <ul class="tags" aria-label="Covers"><li>Backend and APIs</li><li>Cloud infrastructure</li><li>CI/CD</li><li>Integrations</li></ul></div>
+          </div>
+        </article>
+        <article class="panel" data-theme="paper">
+          <span class="p-num" aria-hidden="true">04</span><span class="p-label mono">Service 04 / 06</span>
+          <div class="p-body">
+            <h3>DevOps and infrastructure operations</h3>
+            <div><p>Keeping production fast, stable and observable. Mindworks manages servers and cloud infrastructure, configures CDNs and traffic routing, and sets up monitoring and alerting so issues are caught before customers notice. Available as a one-off hardening project or as ongoing support.</p>
+            <ul class="tags" aria-label="Covers"><li>Server management</li><li>CDN</li><li>Load balancing</li><li>Monitoring</li><li>Alerting</li></ul></div>
+          </div>
+        </article>
+        <article class="panel" data-theme="ink">
+          <span class="p-num" aria-hidden="true">05</span><span class="p-label mono">Service 05 / 06</span>
+          <div class="p-body">
+            <h3>Interim team leadership</h3>
+            <div><p>Engineering leadership while a company hires, reorganises or recovers a delivery that has slipped. That covers running the team day to day, introducing processes that fit its size, and a clean handover once a permanent lead is in place.</p>
+            <ul class="tags" aria-label="Covers"><li>Engineering management</li><li>Delivery process</li><li>Hiring</li><li>Mentoring</li></ul></div>
+          </div>
+        </article>
+        <article class="panel" data-theme="red">
+          <span class="p-num" aria-hidden="true">06</span><span class="p-label mono">Service 06 / 06</span>
+          <div class="p-body">
+            <h3>Technology evaluation and adoption</h3>
+            <div><p>Before a client commits to a platform, vendor or tool, Mindworks trials it against their real constraints, reports the findings and, if it holds up, leads the rollout. Problems surface in week one rather than month six.</p>
+            <ul class="tags" aria-label="Covers"><li>Vendor trials</li><li>Proofs of concept</li><li>Rollout</li><li>Developer tooling</li></ul></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="sec" id="stack" data-theme="paper" aria-labelledby="stack-h">
+    <div class="wrap">
+      <div class="sec-head g12">
+        <span class="mono">(02) Stack — six layers</span>
+        <h2 id="stack-h" class="split">Every hop of the signal path, from the sensor to the server room.</h2>
+      </div>
+      <ol class="layers">
+        <li class="layer"><span class="l-num mono">01</span><h3 class="l-name">Device</h3><span class="l-sub mono">In the field</span>
+          <ul class="l-items"><li>Industrial 4G routers</li><li>Home appliances</li><li>Embedded Linux</li><li>Provisioning</li></ul></li>
+        <li class="layer"><span class="l-num mono">02</span><h3 class="l-name">Transport</h3><span class="l-sub mono">Connectivity</span>
+          <ul class="l-items"><li>4G/LTE cellular</li><li>MQTT</li><li>Wi-Fi, BLE</li><li>Secure tunnels</li></ul></li>
+        <li class="layer"><span class="l-num mono">03</span><h3 class="l-name">Fleet</h3><span class="l-sub mono">Device management</span>
+          <ul class="l-items"><li>Tracking and health</li><li>Remote configuration</li><li>Firmware updates</li><li>10,000s of devices</li></ul></li>
+        <li class="layer"><span class="l-num mono">04</span><h3 class="l-name">Cloud</h3><span class="l-sub mono">Platform</span>
+          <ul class="l-items"><li>AWS, Azure</li><li>Kubernetes</li><li>Terraform</li><li>Time-series data</li></ul></li>
+        <li class="layer"><span class="l-num mono">05</span><h3 class="l-name">Product</h3><span class="l-sub mono">Applications</span>
+          <ul class="l-items"><li>Ruby on Rails</li><li>Node.js, Python</li><li>Web dashboards</li><li>Analytics and alerts</li></ul></li>
+        <li class="layer"><span class="l-num mono">06</span><h3 class="l-name">Operations</h3><span class="l-sub mono">Run and observe</span>
+          <ul class="l-items"><li>Server management</li><li>CDN servers</li><li>Load balancing</li><li>Logs, uptime, alerts</li></ul></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ENGAGEMENTS -->
+  <section class="eng" id="engagements" data-theme="red" aria-labelledby="eng-h">
+    <div class="wrap">
+      <div class="top g12"><span class="mono">(03) Engagements</span></div>
+      <h2 id="eng-h" class="split">Billed by the hour.<br>Judged by what ships.</h2>
+      <ul class="billing g12">
+        <li>An hourly rate, agreed in writing</li>
+        <li>Hours logged against tasks, so every invoice is traceable</li>
+        <li>Retainers available, never required</li>
+      </ul>
+      <ol class="steps g12">
+        <li class="rv"><span class="mono">Step</span><span class="s-num" aria-hidden="true">01</span><h3>Introductory call</h3><p>A free thirty-minute conversation to understand the problem and confirm whether Mindworks is the right fit.</p></li>
+        <li class="rv"><span class="mono">Step</span><span class="s-num" aria-hidden="true">02</span><h3>Scope and rate</h3><p>A short written scope, an agreed hourly rate and an estimate of hours.</p></li>
+        <li class="rv"><span class="mono">Step</span><span class="s-num" aria-hidden="true">03</span><h3>Work in the open</h3><p>Mindworks works inside the client's own tools, repositories and rituals, and reports progress where the team already looks.</p></li>
+        <li class="rv"><span class="mono">Step</span><span class="s-num" aria-hidden="true">04</span><h3>Hand over</h3><p>Documentation, recorded walkthroughs and a team that can carry on independently. That is how Mindworks measures a successful engagement.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="sec" id="work" data-theme="paper" aria-labelledby="work-h" style="padding-bottom:150px">
+    <div class="wrap">
+      <div class="sec-head g12">
+        <span class="mono">(04) Work — three cases</span>
+        <h2 id="work-h" class="split">Selected work.</h2>
+      </div>
+    </div>
+    <article class="flag" data-theme="ink" aria-labelledby="case1-h">
+      <div class="wrap">
+        <div class="flag-top g12">
+          <span class="mono">Case 01 — Industrial IoT, implemented and maintained</span>
+          <h3 id="case1-h">Device management platform for industrial 4G routers</h3>
+        </div>
+        <p class="tens"><span class="fit" data-fit="1">Tens of</span> <span class="fit" data-fit="1">thousands</span></p>
+        <p class="tens-sub mono"><i aria-hidden="true"></i>of industrial routers tracked and managed</p>
+        <div class="flag-bot g12">
+          <p>A manufacturer of industrial 4G routers needed visibility and control over devices deployed in the field. Mindworks designed and implemented the platform that tracks and manages that router fleet, and continues to maintain and operate it.</p>
+          <dl class="tbl"><dt>Client</dt><dd>Industrial networking manufacturer</dd><dt>Role</dt><dd>Platform design, implementation, ongoing maintenance</dd></dl>
+        </div>
+      </div>
+    </article>
+    <div class="wrap">
+      <div class="cases2 g12">
+        <article class="case rv"><span class="mono">Case 02 — Consumer IoT</span><span class="c-no" aria-hidden="true">02</span>
+          <h3>Connected home appliances</h3>
+          <p>Tracking and management for small home appliances: connecting the devices, collecting their state, and giving operators control of the fleet.</p></article>
+        <article class="case rv"><span class="mono">Case 03 — Infrastructure</span><span class="c-no" aria-hidden="true">03</span>
+          <h3>CDN and server operations</h3>
+          <p>Managing CDN servers and the infrastructure around them, including provisioning, traffic management, monitoring and metrics, so content is delivered quickly and reliably.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPANY -->
+  <section class="sec" id="company" data-theme="paper" aria-labelledby="co-h" style="padding-top:40px">
+    <div class="wrap">
+      <div class="sec-head g12">
+        <span class="mono">(05) Company</span>
+        <h2 id="co-h" class="split">An independent technology consultancy, founded in London in 2021.</h2>
+      </div>
+      <div class="co g12">
+        <figure class="portrait">
+          <div class="ph">
+            <span class="bar" aria-hidden="true"></span>
+            <img src="{{img:../founder.jpg}}" width="320" height="320" alt="Portrait of Berk Baydur" loading="lazy">
+            <span class="shape" aria-hidden="true"></span>
+          </div>
+          <figcaption class="mono"><span>Berk Baydur</span><span>Founder</span></figcaption>
+        </figure>
+        <div class="co-text">
+          <div class="bio">
+            <p>Mindworks Technology Ltd was founded in April 2021 to give technology companies direct access to senior engineering across software development, connectivity, device management and DevOps.</p>
+            <p>Its clients build products where software meets hardware: industrial networking equipment, connected home appliances, and the platforms and infrastructure behind them. Engagements range from a few days of architectural advice to long-running platform delivery and operations.</p>
+          </div>
+          <dl class="tbl">
+            <dt>Founded</dt><dd>April 2021</dd>
+            <dt>Headquarters</dt><dd>London, UK</dd>
+            <dt>Sector</dt><dd>Technology</dd>
+            <dt>Registered</dt><dd>England and Wales</dd>
+            <dt>Office</dt><dd>Unit 408 Screenworks, 22 Highbury Grove, London N5 2ER</dd>
+          </dl>
+          <div class="founder" aria-label="Leadership">
+            <h3>Berk Baydur</h3>
+            <span class="role mono">Founder and Principal Consultant</span>
+            <p>14 years in software engineering. Previously founded and ran an IoT start-up. Specialises in software development, connectivity, device management and DevOps.</p>
+            <a class="ul" href="https://www.linkedin.com/in/berk-baydur-4765bba2" rel="noopener">LinkedIn ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="cta" id="contact" data-theme="ink" aria-labelledby="cta-h">
+    <div class="wrap top g12">
+      <span class="mono">(06) Contact</span>
+      <p>A free thirty-minute introductory call is the first step. Tell Mindworks what you are building.</p>
+    </div>
+    <h2 id="cta-h" class="sr">Building a connected product?</h2>
+    <div class="mqs" aria-hidden="true">
+      <div class="mq mq1"><span class="mq-track" data-dir="-1">Building a connected product? —&nbsp;Building a connected product? —&nbsp;Building a connected product? —&nbsp;Building a connected product? —&nbsp;</span></div>
+      <div class="mq mq2"><span class="mq-track" data-dir="1">Building a connected product? —&nbsp;Building a connected product? —&nbsp;Building a connected product? —&nbsp;Building a connected product? —&nbsp;Building a connected product? —&nbsp;Building a connected product? —&nbsp;</span></div>
+    </div>
+    <div>
+      <a class="mail" href="mailto:berk.baydur@mindworkss.co.uk">
+        <span class="row"><span class="mono">Write to Berk — replies within one working day</span><b aria-hidden="true">↗</b></span>
+        <span class="addr"><span class="fit" data-fit="1">berk.baydur@mindworkss.co.uk</span></span>
+      </a>
+      <div class="wrap cta-meta g12 mono" style="margin-top:28px">
+        <span>Replies within one working day.</span>
+        <span>Unit 408 Screenworks, London N5 2ER</span>
+        <a href="https://www.linkedin.com/in/berk-baydur-4765bba2" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer data-theme="paper">
+  <div class="legal">
+    <div>{{logo}}<br>Mindworks Technology Ltd<br>Registered in England and Wales</div>
+    <div><b>Address</b>Unit 408 Screenworks<br>22 Highbury Grove<br>London N5 2ER</div>
+    <div><b>VAT</b>VAT No. GB 466 0822 84</div>
+    <div><b>Contact</b><a href="mailto:berk.baydur@mindworkss.co.uk">Email</a><br><a href="https://www.linkedin.com/in/berk-baydur-4765bba2" rel="noopener">LinkedIn</a></div>
+    <div><b>Privacy</b>No cookies, no tracking.</div>
+    <div><b>© <span id="yr">2026</span></b><a href="#main">Back to top ↑</a></div>
+  </div>
+  <p class="giant" aria-hidden="true"><span class="fit" data-fit="1">MINDWORKS</span></p>
+</footer>
+
+<script>
+(()=>{
+const d=document,root=d.documentElement,body=d.body;
+root.classList.add('js');
+const $=(s,c=d)=>c.querySelector(s),$$=(s,c=d)=>[...c.querySelectorAll(s)];
+const mq=matchMedia('(prefers-reduced-motion: reduce)');
+let reduce=mq.matches;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+$('#yr').textContent=new Date().getFullYear();
+
+/* ---- split-text reveals ---- */
+$$('.split').forEach(h=>{
+  let i=0;
+  const walk=n=>{[...n.childNodes].forEach(c=>{
+    if(c.nodeType===3){
+      const f=d.createDocumentFragment();
+      c.textContent.split(/(\s+)/).forEach(t=>{
+        if(!t)return;
+        if(/^\s+$/.test(t)){f.appendChild(d.createTextNode(' '));return}
+        const w=d.createElement('span');w.className='w';
+        const wi=d.createElement('span');wi.className='wi';wi.style.setProperty('--i',i++);wi.textContent=t;
+        w.appendChild(wi);f.appendChild(w);
+      });
+      c.replaceWith(f);
+    }else if(c.nodeType===1&&c.tagName!=='BR')walk(c);
+  })};
+  walk(h);
+});
+const rio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target)}}),{rootMargin:'0px 0px -12% 0px'});
+$$('.split,.rv').forEach(el=>reduce?el.classList.add('in'):rio.observe(el));
+
+/* ---- hero: split into letters ---- */
+const ht=$('.ht'),chars=[];
+$$('.hl',ht).forEach(line=>{
+  const base=+line.dataset.base,peak=+line.dataset.peak;
+  const walk=n=>{[...n.childNodes].forEach(c=>{
+    if(c.nodeType===3){
+      const f=d.createDocumentFragment();
+      for(const ch of c.textContent){
+        if(ch===' '||ch==='\n'){f.appendChild(d.createTextNode(ch));continue}
+        const s=d.createElement('span');s.className='ch';s.textContent=ch;s.style.fontWeight=base;
+        f.appendChild(s);chars.push({el:s,base,peak,w:base,last:base,x:0,y:0});
+      }
+      c.replaceWith(f);
+    }else if(c.nodeType===1)walk(c);
+  })};
+  walk(line);
+});
+
+/* ---- fit text to its container ---- */
+function fitEl(el,ratio=1,max=1e4){
+  el.style.fontSize='100px';
+  const w=el.getBoundingClientRect().width;
+  const p=el.parentElement,cs=getComputedStyle(p);
+  const avail=p.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+  const fs=Math.min(max,100*avail*ratio/w);
+  el.style.fontSize=fs+'px';return fs;
+}
+const tens=$('.tens'),tensFits=$$('.fit',tens);
+function fitAll(){
+  chars.forEach(c=>{c.w=c.last=c.base;c.el.style.fontWeight=c.base});
+  ht.style.transform='';
+  const u=fitEl($('.l1 .fit'),1);
+  ht.style.setProperty('--u',u+'px');
+  fitEl($('.l4 .fit'),.97);
+  // "Tens of thousands": one line on wide screens, two stacked lines on narrow
+  if(innerWidth>900){
+    tensFits.forEach(s=>s.style.fontSize='');
+    tens.style.fontSize='100px';tens.style.display='inline-block';
+    const w=tens.getBoundingClientRect().width,p=tens.parentElement,cs=getComputedStyle(p);
+    const avail=p.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+    tens.style.fontSize=(100*avail/w)+'px';tens.style.display='block';
+    tensFits.forEach(s=>s.style.fontSize='inherit');
+  }else{tens.style.fontSize='';tens.style.display='';tensFits.forEach(s=>fitEl(s,1))}
+  fitEl($('.mail .fit'),.97,innerWidth>900?132:999);
+  fitEl($('.giant .fit'),.985);
+}
+
+/* ---- pinned horizontal services track ---- */
+const hs=$('#services'),track=$('.hs-track');
+let pinOn=false,hsTop=0,hsLen=1,trackMax=0;
+function setupPin(){
+  pinOn=!reduce&&innerWidth>900;
+  hs.classList.toggle('is-pinned',pinOn);
+  if(pinOn){
+    track.style.transform='';
+    trackMax=track.scrollWidth-innerWidth;
+    hs.style.height=(trackMax+innerHeight)+'px';
+    hsTop=hs.getBoundingClientRect().top+scrollY;hsLen=hs.offsetHeight-innerHeight;
+  }else{hs.style.height='';track.style.transform=''}
+}
+
+function cacheChars(){
+  const sy=scrollY;
+  chars.forEach(c=>{const r=c.el.getBoundingClientRect();c.x=r.left+r.width/2;c.y=r.top+r.height/2+sy});
+}
+function layout(){fitAll();setupPin();cacheChars();probe(true)}
+
+/* ---- pointer ---- */
+let mx=-1e5,my=-1e5,hasPointer=false;
+addEventListener('pointermove',e=>{if(e.pointerType==='mouse'){mx=e.clientX;my=e.clientY;hasPointer=true}},{passive:true});
+d.addEventListener('mouseleave',()=>{hasPointer=false});
+
+/* ---- visibility ---- */
+let heroIn=true,ctaIn=false;
+const vio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.target.classList.contains('hero'))heroIn=e.isIntersecting;
+  else if(e.target.id==='contact'){ctaIn=e.isIntersecting;body.classList.toggle('cta-in',e.isIntersecting)}
+  else body.classList.toggle('foot-in',e.isIntersecting);
+}),{rootMargin:'0px 0px -10% 0px'});
+vio.observe($('.hero'));vio.observe($('#contact'));vio.observe($('footer'));
+
+/* ---- active nav ---- */
+const railLinks=$$('.rail a');
+const aio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  railLinks.forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#'+e.target.id?'true':'false'));
+}),{rootMargin:'-48% 0px -48% 0px'});
+['services','stack','engagements','work','company','contact'].forEach(id=>aio.observe(d.getElementById(id)));
+
+/* ---- theme probing for fixed chrome ---- */
+function themeAt(x,y){
+  for(const el of d.elementsFromPoint(x,y)){
+    if(el.closest('.chrome'))continue;
+    const t=el.closest('[data-theme]');if(t)return t.dataset.theme;
+  }
+  return 'paper';
+}
+function probe(){
+  const W=innerWidth,H=innerHeight;
+  const r=themeAt(W-40,H*.5),s=themeAt(W-40,40),b=themeAt(10,H*.5);
+  if(body.dataset.rail!==r)body.dataset.rail=r;
+  if(body.dataset.sq!==s)body.dataset.sq=s;
+  if(body.dataset.bar!==b)body.dataset.bar=b;
+}
+
+/* ---- marquee ---- */
+const mqs=$$('.mq-track').map(el=>({el,dir:+el.dataset.dir,x:0,half:0}));
+function measureMq(){mqs.forEach(m=>{m.half=m.el.scrollWidth/2;if(m.dir>0)m.x=-m.half})}
+
+/* ---- main loop ---- */
+const progI=$('.prog i'),pct=$('.pct'),disc=$('.disc'),shape=$('.ph .shape');
+let lastY=scrollY,vel=0,kv=0,kvSet=-1,lastProbeY=-1,lastP=-1;
+function frame(t){
+  const y=scrollY,dv=y-lastY;lastY=y;
+  vel+=(dv-vel)*.22;
+  const maxS=Math.max(1,root.scrollHeight-innerHeight),p=y/maxS;
+  if(Math.abs(p-lastP)>.0005){lastP=p;progI.style.transform=`scaleY(${p.toFixed(4)})`;pct.textContent=String(Math.round(p*100)).padStart(3,'0')}
+  if(!reduce){
+    const k=clamp(Math.abs(vel)/38,0,1);kv+=(k-kv)*.14;
+    if(Math.abs(kv-kvSet)>.004){kvSet=kv;root.style.setProperty('--kv',kv.toFixed(3))}
+    if(heroIn){
+      const sk=clamp(-vel*.07,-7,7),sy=1+clamp(Math.abs(vel)*.0028,0,.16);
+      ht.style.transform=Math.abs(vel)<.05?'':`skewY(${sk.toFixed(2)}deg) scaleY(${sy.toFixed(3)})`;
+      disc.style.transform=`rotate(${(y*.14).toFixed(2)}deg)`;
+      const R=Math.max(140,parseFloat(ht.style.getPropertyValue('--u'))*.95||200),R2=R*R,py=my+y;
+      for(const c of chars){
+        let f;
+        if(hasPointer){const dx=c.x-mx,dy=c.y-py;f=Math.exp(-(dx*dx+dy*dy)/R2)}
+        else{f=.5+.5*Math.sin(t/650-c.x/170);f=f**8*.85}
+        const tgt=c.base+(c.peak-c.base)*f;
+        c.w+=(tgt-c.w)*.16;
+        if(Math.abs(c.w-c.last)>.8){c.last=c.w;c.el.style.fontWeight=Math.round(c.w)}
+      }
+    }
+    if(ctaIn){
+      const sp=1.1+Math.abs(vel)*.35;
+      for(const m of mqs){
+        m.x+=sp*m.dir;
+        if(m.dir<0&&m.x<=-m.half)m.x+=m.half;
+        if(m.dir>0&&m.x>=0)m.x-=m.half;
+        m.el.style.transform=`translate3d(${m.x.toFixed(1)}px,0,0)`;
+      }
+    }
+    if(shape){const r=shape.parentElement.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight){const q=(r.top+r.height/2-innerHeight/2)/innerHeight;shape.style.transform=`translate(${(q*-40).toFixed(1)}px,${(q*60).toFixed(1)}px)`}}
+  }
+  if(pinOn){
+    const q=clamp((y-hsTop)/hsLen,0,1);
+    track.style.transform=`translate3d(${(-q*trackMax).toFixed(1)}px,0,0)`;
+  }
+  if(y!==lastProbeY||pinOn&&Math.abs(dv)>0){lastProbeY=y;probe()}
+  requestAnimationFrame(frame);
+}
+
+/* ---- mobile menu ---- */
+const mb=$('.menu-btn'),menu=$('#menu'),mbl=$('.mb-l');
+function setMenu(open){
+  mb.setAttribute('aria-expanded',open);menu.hidden=!open;root.classList.toggle('menu-open',open);
+  mbl.textContent=open?'Close':'Menu';
+  if(open)menu.querySelector('a').focus();
+}
+mb.addEventListener('click',()=>setMenu(mb.getAttribute('aria-expanded')!=='true'));
+$$('a',menu).forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+d.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menu.hidden){setMenu(false);mb.focus()}});
+menu.addEventListener('keydown',e=>{
+  if(e.key!=='Tab')return;
+  const f=[...$$('a',menu),mb],i=f.indexOf(d.activeElement);
+  if(e.shiftKey&&i<=0){e.preventDefault();mb.focus()}
+  else if(!e.shiftKey&&d.activeElement===mb){e.preventDefault();f[0].focus()}
+});
+
+/* ---- boot ---- */
+let rt;
+addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{layout();measureMq();if(innerWidth>900&&!menu.hidden)setMenu(false)},120)});
+mq.addEventListener('change',e=>{reduce=e.matches;if(reduce){ht.style.transform='';disc.style.transform='';root.style.setProperty('--kv',0);chars.forEach(c=>{c.el.style.fontWeight=c.base})}layout()});
+const go=()=>{layout();measureMq();requestAnimationFrame(frame)};
+(d.fonts&&d.fonts.ready?d.fonts.ready:Promise.resolve()).then(go);
+addEventListener('load',()=>{layout();measureMq()});
+})();
+</script>
+</body>
+</html>
