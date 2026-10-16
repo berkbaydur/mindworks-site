@@ -173,8 +173,9 @@ ul, ol { padding: 0; list-style: none; }
 
 @media (min-width: 960px) {
   .tb { right: var(--frame); bottom: var(--frame); width: 330px; border-left: 1px solid var(--hair-2); border-top: 1px solid var(--hair-2); }
-  .tb.compact:not(.pinned):not(:hover):not(:focus-within) .tb-links { grid-template-rows: 0fr; }
-  .tb.compact:not(.pinned):not(:hover):not(:focus-within) .tb-tog svg { transform: rotate(180deg); }
+  .tb.compact:not(.pinned):not(:hover):not(:has(.tb-links a:focus-visible)) .tb-links { grid-template-rows: 0fr; }
+  .tb.compact:not(.pinned) .tb-tog svg { transform: rotate(180deg); }
+  .tb:not(.compact) .tb-tog { visibility: hidden; }
 }
 @media (max-width: 959px) {
   .tb { inset: 0; display: none; flex-direction: column; overflow: auto; padding: 72px 16px 24px; }
@@ -1082,7 +1083,7 @@ footer { padding: 150px 0 0; }
     tog.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
   tog.addEventListener('click', function () {
-    if (tb.classList.contains('compact')) tb.classList.toggle('pinned'); else { tb.classList.add('compact'); tb.classList.remove('pinned'); window.scrollY < 5 && tb.classList.add('forced'); }
+    tb.classList.toggle('pinned');
     syncTog();
   });
   function openMenu(o) {
