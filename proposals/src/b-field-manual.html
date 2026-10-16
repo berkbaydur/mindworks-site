@@ -1,0 +1,1043 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mindworks | Software and IoT engineering consultancy, London</title>
+<meta name="description" content="Mindworks Technology Ltd is a London software and IoT engineering consultancy, founded in 2021. Device management, connectivity, software development and DevOps for technology companies, billed by the hour.">
+<meta property="og:title" content="Mindworks | Software and IoT engineering consultancy">
+<meta property="og:description" content="Software for things that live in the real world. Device management, connectivity, software delivery and DevOps, billed by the hour.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.mindworkss.co.uk/">
+<meta name="theme-color" content="#F2EFE8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14130F" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Mindworks Technology Ltd",
+  "alternateName": "Mindworks",
+  "url": "https://www.mindworkss.co.uk/",
+  "logo": "https://www.mindworkss.co.uk/logo.svg",
+  "description": "Software and IoT engineering consultancy: device management, connectivity, software development and DevOps.",
+  "foundingDate": "2021-04",
+  "vatID": "GB466082284",
+  "email": "berk.baydur@mindworkss.co.uk",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Unit 408 Screenworks, 22 Highbury Grove",
+    "addressLocality": "London",
+    "postalCode": "N5 2ER",
+    "addressCountry": "GB"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Berk Baydur",
+    "jobTitle": "Founder & Principal Consultant",
+    "sameAs": "https://www.linkedin.com/in/berk-baydur-4765bba2"
+  }
+}
+</script>
+<script>
+  (function () {
+    var r = document.documentElement; r.classList.add('js');
+    try { var t = localStorage.getItem('mw-b-theme'); if (t === 'light' || t === 'dark') r.setAttribute('data-theme', t); } catch (e) {}
+  })();
+</script>
+<style>
+@font-face { font-family: "Instrument Serif"; src: url("{{font:assets/instrument-serif-normal-400.woff2}}") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Instrument Serif"; src: url("{{font:assets/instrument-serif-italic-400.woff2}}") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Inter Tight"; src: url("{{font:assets/inter-tight-normal-400-800.woff2}}") format("woff2"); font-weight: 400 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("{{font:assets/jetbrains-mono-normal-400.woff2}}") format("woff2"); font-weight: 400 600; font-style: normal; font-display: swap; }
+
+/* Field Manual. Warm paper, one accent (international orange) with one job: action + signal. */
+:root {
+  --bg: #F2EFE8;
+  --surface: #E9E5DB;
+  --raised: #FBFAF6;
+  --ink: #16150F;
+  --ink-2: #5A574E;
+  --ink-3: #85817A;
+  --rule: #D3CEC2;
+  --rule-strong: #16150F;
+  --signal: #E8480C;
+  --on-signal: #16150F;
+  --grain-o: .07;
+  --grain-blend: multiply;
+  --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --gutter: clamp(16px, 3.4vw, 48px);
+  --max: 1520px;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --navh: 68px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14130F; --surface: #1C1B16; --raised: #22201B; --ink: #EDE9DE; --ink-2: #A9A496; --ink-3: #7E7A6F;
+    --rule: #34322A; --rule-strong: #EDE9DE; --grain-o: .06; --grain-blend: screen; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14130F; --surface: #1C1B16; --raised: #22201B; --ink: #EDE9DE; --ink-2: #A9A496; --ink-3: #7E7A6F;
+  --rule: #34322A; --rule-strong: #EDE9DE; --grain-o: .06; --grain-blend: screen; color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 72px; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--sans); font-size: 17px; line-height: 1.55; font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  transition: background-color .4s, color .4s;
+}
+/* paper grain */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 100; pointer-events: none;
+  opacity: var(--grain-o); mix-blend-mode: var(--grain-blend);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 1.1 -.2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+a { color: inherit; text-underline-offset: .18em; text-decoration-thickness: 1px; }
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; }
+::selection { background: var(--signal); color: var(--on-signal); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.mono { font-family: var(--mono); font-size: 11.5px; line-height: 1.5; letter-spacing: .04em; text-transform: uppercase; font-weight: 400; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: fixed; left: 12px; top: -60px; z-index: 200; background: var(--ink); color: var(--bg); padding: 10px 16px; text-decoration: none; font-family: var(--mono); font-size: 12px; transition: top .2s; }
+.skip:focus { top: 12px; }
+h1, h2, h3 { font-weight: 400; margin: 0; }
+h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+em { font-style: italic; }
+.serif { font-family: var(--serif); }
+.dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--signal); vertical-align: 1px; }
+.live .dot, .dot.live { animation: blink 2.4s steps(1) infinite; }
+@keyframes blink { 0%, 70% { opacity: 1 } 71%, 100% { opacity: .25 } }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer;
+  font-family: var(--sans); font-weight: 500; font-size: 16px; letter-spacing: -.005em;
+  background: var(--signal); color: var(--on-signal); padding: 15px 22px 15px 24px; border: 0; border-radius: 0;
+  transition: background-color .25s, transform .25s var(--ease);
+  position: relative;
+}
+.btn .arr { display: inline-block; transition: transform .3s var(--ease); }
+.btn:hover .arr { transform: translateX(4px); }
+.btn:hover { background: #F25A1F; }
+.btn-sm { font-size: 13.5px; padding: 9px 14px; gap: 8px; }
+.textlink { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 3px; }
+.textlink:hover { border-bottom-width: 2px; }
+
+/* ---------- nav ---------- */
+.nav { position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background-color .35s, border-color .35s, backdrop-filter .35s; border-bottom: 1px solid transparent; }
+.nav .wrap { height: var(--navh); display: flex; align-items: center; gap: 28px; transition: height .35s var(--ease); }
+.nav.scrolled { background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%); border-bottom-color: var(--rule); }
+.nav.scrolled .wrap { height: 52px; }
+.brand { display: flex; align-items: center; text-decoration: none; flex: none; }
+.brand svg { display: block; height: 32px; width: auto; aspect-ratio: 435 / 100; transition: height .35s var(--ease); }
+.nav.scrolled .brand svg { height: 26px; }
+.lw { fill: var(--ink); stroke: var(--ink); stroke-width: 1.3; stroke-linejoin: round; }
+.lt { fill: var(--ink-2); }
+.nav-links { display: flex; gap: 2px; margin-left: auto; }
+.nav-links a { text-decoration: none; padding: 8px 10px; color: var(--ink); position: relative; }
+.nav-links a i { font-style: normal; color: var(--ink-3); margin-right: 6px; }
+.nav-links a::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 4px; height: 1px; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
+.nav-links a:hover::after, .nav-links a[aria-current="true"]::after { transform: scaleX(1); }
+.clock { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.nav .clock { padding-left: 18px; border-left: 1px solid var(--rule); }
+.theme-btn { background: none; border: 1px solid var(--rule); width: 34px; height: 34px; display: grid; place-items: center; cursor: pointer; flex: none; transition: border-color .2s; }
+.theme-btn:hover { border-color: var(--ink); }
+.theme-btn svg { width: 16px; height: 16px; }
+.menu-btn { display: none; background: none; border: 0; padding: 8px 0; cursor: pointer; margin-left: auto; align-items: center; gap: 10px; }
+.menu-btn .bars { width: 22px; height: 10px; position: relative; }
+.menu-btn .bars::before, .menu-btn .bars::after { content: ""; position: absolute; left: 0; right: 0; height: 1.5px; background: var(--ink); transition: transform .3s var(--ease), top .3s var(--ease); }
+.menu-btn .bars::before { top: 0; } .menu-btn .bars::after { top: 8.5px; }
+.menu-btn[aria-expanded="true"] .bars::before { top: 4.25px; transform: rotate(45deg); }
+.menu-btn[aria-expanded="true"] .bars::after { top: 4.25px; transform: rotate(-45deg); }
+@media (max-width: 1240px) { .nav .clock { display: none; } }
+@media (max-width: 960px) {
+  .nav-links, .nav .btn-sm { display: none; }
+  .menu-btn { display: inline-flex; margin-left: 0; }
+  .theme-btn { margin-left: auto; }
+  .nav .wrap { gap: 14px; }
+}
+
+/* full-screen menu */
+.menu { position: fixed; inset: 0; z-index: 45; background: var(--bg); padding: calc(var(--navh) + 24px) var(--gutter) 28px; display: flex; flex-direction: column; opacity: 0; visibility: hidden; transition: opacity .35s var(--ease), visibility 0s .35s; }
+.menu.open { opacity: 1; visibility: visible; transition: opacity .35s var(--ease); }
+.menu ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.menu li { border-bottom: 1px solid var(--rule); }
+.menu li a { display: flex; align-items: baseline; gap: 14px; padding: 10px 0 8px; text-decoration: none; font-family: var(--serif); font-size: clamp(44px, 12.5vw, 84px); line-height: 1; letter-spacing: -.02em; transform: translateY(14px); opacity: 0; transition: transform .5s var(--ease), opacity .5s var(--ease); }
+.menu.open li a { transform: none; opacity: 1; }
+.menu li:nth-child(2) a { transition-delay: .04s } .menu li:nth-child(3) a { transition-delay: .08s } .menu li:nth-child(4) a { transition-delay: .12s } .menu li:nth-child(5) a { transition-delay: .16s } .menu li:nth-child(6) a { transition-delay: .2s }
+.menu li a i { font-family: var(--mono); font-style: normal; font-size: 11px; color: var(--ink-3); letter-spacing: .04em; min-width: 22px; }
+.menu-foot { margin-top: auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 24px; color: var(--ink-2); }
+body.menu-open { overflow: hidden; }
+
+/* ---------- running heads (section openers) ---------- */
+.runhead { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; border-top: 1px solid var(--rule-strong); padding-top: 12px; color: var(--ink-2); }
+.runhead > :nth-child(1) { grid-column: 1 / span 2; color: var(--ink); }
+.runhead > :nth-child(2) { grid-column: 3 / span 5; }
+.runhead > :nth-child(3) { grid-column: 8 / span 5; text-align: right; }
+@media (max-width: 720px) {
+  .runhead { grid-template-columns: auto 1fr auto; column-gap: 16px; }
+  .runhead > :nth-child(n) { grid-column: auto; }
+}
+
+section.block { padding: clamp(96px, 11vw, 168px) 0 0; }
+.sec-head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; margin: 40px 0 clamp(48px, 6vw, 88px); align-items: end; }
+.sec-head h2 { grid-column: 1 / span 9; font-family: var(--serif); font-size: clamp(44px, 6.2vw, 100px); line-height: .98; letter-spacing: -.025em; }
+.sec-head .sub { grid-column: 10 / span 3; margin: 0; color: var(--ink-2); font-size: 16px; max-width: 30ch; }
+@media (max-width: 900px) {
+  .sec-head { display: block; }
+  .sec-head .sub { margin-top: 18px; }
+}
+h2 em, h1 em { font-style: italic; letter-spacing: -.01em; }
+
+/* ---------- hero ---------- */
+.hero { padding: calc(var(--navh) + clamp(40px, 6vw, 80px)) 0 0; position: relative; }
+.hero-meta { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; color: var(--ink-2); border-top: 1px solid var(--rule-strong); padding-top: 12px; }
+.hero-meta > :nth-child(1) { grid-column: 1 / span 3; color: var(--ink); }
+.hero-meta > :nth-child(2) { grid-column: 4 / span 4; }
+.hero-meta > :nth-child(3) { grid-column: 8 / span 3; }
+.hero-meta > :nth-child(4) { grid-column: 11 / span 2; text-align: right; }
+.hero h1 {
+  font-family: var(--serif); font-size: clamp(60px, 11.6vw, 196px); line-height: .9; letter-spacing: -.035em;
+  margin: clamp(28px, 4vw, 56px) 0 0; max-width: 13.2em; margin-left: -.04em;
+}
+.hero h1 em { padding-right: .04em; }
+.hero h1 .fig-mark { font-family: var(--mono); font-style: normal; font-size: 12px; letter-spacing: .04em; vertical-align: super; color: var(--ink-2); margin-left: .3em; }
+.hero-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; margin-top: clamp(40px, 5vw, 72px); align-items: start; }
+.hero-copy { grid-column: 1 / span 4; padding-top: 16px; border-top: 1px solid var(--rule); }
+.hero-copy .lede { font-size: clamp(18px, 1.5vw, 21px); line-height: 1.45; margin: 0 0 32px; letter-spacing: -.005em; max-width: 30ch; }
+.actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.log { grid-column: 6 / span 7; margin: 0; }
+@media (max-width: 1100px) { .hero-copy { grid-column: 1 / span 5; } .log { grid-column: 6 / span 7; } .hero-meta > :nth-child(3) { display: none; } .hero-meta > :nth-child(2) { grid-column: 4 / span 6; } .hero-meta > :nth-child(4) { grid-column: 10 / span 3; } }
+@media (max-width: 860px) {
+  .hero-grid { display: block; }
+  .log { margin-top: 48px; }
+  .hero-meta { grid-template-columns: 1fr auto; }
+  .hero-meta > :nth-child(n) { grid-column: auto; }
+  .hero-meta > :nth-child(2) { display: none; }
+}
+
+/* field log */
+.log-box { background: var(--raised); border: 1px solid var(--rule); position: relative; }
+.log-head { display: flex; justify-content: space-between; gap: 16px; padding: 10px 16px; border-bottom: 1px solid var(--rule); color: var(--ink-2); }
+.log-head b { font-weight: 400; color: var(--ink); display: inline-flex; gap: 9px; align-items: center; }
+.log-cols, .feed .ln { display: grid; grid-template-columns: 9ch 11ch 17ch 1fr 6ch; column-gap: 1.2ch; }
+.log-cols { padding: 10px 16px 0; color: var(--ink-3); font-size: 10.5px; }
+.feed { font-family: var(--mono); font-size: 12.5px; line-height: 24px; padding: 6px 16px 14px; height: calc(24px * 9 + 20px); overflow: hidden; margin: 0; color: var(--ink); position: relative; font-variant-numeric: tabular-nums; }
+.feed .ln { white-space: pre; overflow: hidden; }
+.feed .ln > span { overflow: hidden; text-overflow: clip; }
+.feed .t { color: var(--ink-3); }
+.feed .st { text-align: right; color: var(--ink-2); }
+.feed .st.warn::before { content: ""; display: inline-block; width: 6px; height: 6px; background: var(--signal); margin-right: 6px; vertical-align: 1px; }
+.feed .ln.old { opacity: .55; }
+.caret { display: inline-block; width: .6em; height: 1.05em; background: var(--signal); vertical-align: -.18em; margin-left: 1px; animation: blink 1s steps(1) infinite; }
+.figcap { display: flex; gap: 14px; margin-top: 12px; color: var(--ink-2); }
+.figcap b { font-weight: 400; color: var(--ink); white-space: nowrap; }
+@media (max-width: 600px) {
+  .log-cols, .feed .ln { grid-template-columns: 10ch 15ch 1fr 4ch; column-gap: 1ch; }
+  .log-cols .t, .feed .t { display: none; }
+  .feed { font-size: 11px; line-height: 22px; height: calc(22px * 8 + 20px); padding: 6px 12px 14px; }
+  .log-cols { padding: 10px 12px 0; font-size: 10px; }
+  .log-head { padding: 10px 12px; }
+}
+
+/* ---------- marquee ---------- */
+.ticker { margin-top: clamp(80px, 9vw, 136px); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); overflow: hidden; padding: 18px 0; position: relative; }
+.ticker-track { display: flex; width: max-content; animation: marquee 70s linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker ul { display: flex; list-style: none; margin: 0; padding: 0; flex: none; }
+.ticker li { display: flex; align-items: center; font-family: var(--serif); font-size: clamp(28px, 3.2vw, 48px); line-height: 1.1; letter-spacing: -.01em; white-space: nowrap; }
+.ticker li:nth-child(even) { font-style: italic; }
+.ticker li::after { content: "\2192"; font-family: var(--mono); font-style: normal; font-size: 13px; color: var(--ink-3); margin: 0 clamp(20px, 2.4vw, 36px); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ---------- services (table of contents) ---------- */
+.toc { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--rule); }
+.svc { border-top: 1px solid var(--rule); position: relative; }
+.svc-row, .svc-inner { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; }
+.svc-btn { all: unset; box-sizing: border-box; width: 100%; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; cursor: pointer; padding: clamp(18px, 2vw, 28px) 0; }
+.svc-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.svc-num { grid-column: 1 / span 1; font-family: var(--mono); font-size: 12px; color: var(--ink-2); padding-top: .9em; letter-spacing: .04em; }
+.svc-title { grid-column: 2 / span 7; font-family: var(--serif); font-size: clamp(30px, 3.7vw, 60px); line-height: 1.02; letter-spacing: -.02em; transition: transform .5s var(--ease); }
+.svc-tease { grid-column: 9 / span 3; font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); text-transform: uppercase; letter-spacing: .04em; padding-top: 1.1em; transition: opacity .3s; }
+.svc-plus { grid-column: 12 / span 1; justify-self: end; width: 18px; height: 18px; position: relative; margin-top: .9em; }
+.svc-plus::before, .svc-plus::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1.5px; background: var(--ink); transition: transform .4s var(--ease); }
+.svc-plus::after { transform: rotate(90deg); }
+.svc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .55s var(--ease); }
+.svc-panel > div { overflow: hidden; min-height: 0; }
+.svc-inner { padding: 0 0 clamp(26px, 3vw, 40px); }
+.svc-inner p { grid-column: 2 / span 6; margin: 0; color: var(--ink-2); font-size: 17px; max-width: 58ch; opacity: 0; transform: translateY(-8px); transition: opacity .4s, transform .5s var(--ease); }
+.svc-tags { grid-column: 9 / span 4; list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; align-content: start; opacity: 0; transition: opacity .4s .08s; }
+.svc-tags li { font-family: var(--mono); font-size: 11px; letter-spacing: .03em; border: 1px solid var(--rule); padding: 4px 8px; color: var(--ink); background: var(--raised); }
+.svc.open .svc-panel { grid-template-rows: 1fr; }
+.svc.open .svc-inner p, .svc.open .svc-tags { opacity: 1; transform: none; }
+.svc.open .svc-plus::after { transform: rotate(0deg); }
+.svc.open .svc-tease { opacity: 0; }
+.svc.open .svc-title { transform: translateX(10px); }
+.svc::before { content: ""; position: absolute; left: 0; top: -1px; height: 1px; width: 100%; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease); }
+.svc.open::before { transform: scaleX(1); }
+html:not(.js) .svc-panel { grid-template-rows: 1fr; }
+html:not(.js) .svc-inner p, html:not(.js) .svc-tags { opacity: 1; transform: none; }
+@media (max-width: 900px) {
+  .svc-btn.svc-row, .svc-inner { grid-template-columns: 44px 1fr 24px; column-gap: 12px; }
+  .svc-num { grid-column: 1; } .svc-title { grid-column: 2; } .svc-plus { grid-column: 3; }
+  .svc-tease { display: none; }
+  .svc-inner p { grid-column: 2 / span 2; font-size: 16px; }
+  .svc-tags { grid-column: 2 / span 2; margin-top: 16px; }
+  .svc.open .svc-title { transform: none; }
+}
+
+/* ---------- stack: pinned signal path ---------- */
+#stack { position: relative; }
+.stack-stage { padding-top: 0; }
+.stack-pin { position: relative; }
+.pinned .stack-pin { height: 340vh; }
+.pinned .stack-stage { position: sticky; top: 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 64px; padding-bottom: 24px; }
+#stack .sec-head { margin-bottom: clamp(28px, 4vh, 56px); }
+#stack .sec-head h2 { font-size: clamp(40px, 4.8vw, 80px); grid-column: 1 / span 10; }
+.readout { display: flex; justify-content: space-between; gap: 16px; color: var(--ink-2); margin-bottom: 10px; }
+.readout b { font-weight: 400; color: var(--ink); }
+.readout .bar { flex: 1; align-self: center; height: 1px; background: var(--rule); position: relative; margin: 0 8px; max-width: 420px; }
+.readout .bar i { position: absolute; inset: 0; background: var(--ink); transform-origin: left; transform: scaleX(var(--p, 1)); }
+.schem { display: block; width: 100%; height: auto; overflow: visible; }
+.schem .grid line { stroke: var(--rule); stroke-width: 1; }
+.schem .track { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 3 6; fill: none; }
+.schem .ruler { stroke: var(--ink-3); stroke-width: 6; stroke-dasharray: 1 24; fill: none; }
+.schem .ruler.maj { stroke-dasharray: 1 199; stroke-width: 14; }
+.schem .sig { stroke: var(--signal); stroke-width: 2.5; fill: none; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.schem .ring { fill: var(--raised); stroke: var(--ink-3); stroke-width: 1.2; transition: stroke .4s; }
+.schem .glyph { fill: none; stroke: var(--ink-2); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; transition: stroke .4s; }
+.schem .core { fill: var(--ink-3); transition: fill .4s; }
+.schem .halo { fill: none; stroke: var(--signal); stroke-width: 1; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.schem text { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; fill: var(--ink-2); text-transform: uppercase; }
+.schem .mid { fill: var(--ink-3); font-size: 10px; }
+.schem .node.on .ring { stroke: var(--signal); }
+.schem .node.on .glyph { stroke: var(--ink); }
+.schem .node.on .core { fill: var(--signal); }
+.schem .node.on .halo { animation: halo 2.2s var(--ease) infinite; }
+.schem .node.on text { fill: var(--ink); }
+@keyframes halo { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(1.7); } }
+.hops { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: 24px; }
+.hop { opacity: .22; transform: translateY(10px); transition: opacity .5s var(--ease), transform .6s var(--ease); }
+.hop.on { opacity: 1; transform: none; }
+.hop .layer { display: flex; gap: 8px; color: var(--ink-2); padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+.hop h3 { font-family: var(--serif); font-size: clamp(24px, 2.1vw, 34px); line-height: 1.05; letter-spacing: -.015em; margin: 12px 0 10px; }
+.hop ul { list-style: none; margin: 0; padding: 0; font-size: 14.5px; color: var(--ink-2); }
+.hop li { padding: 5px 0; border-bottom: 1px dotted var(--rule); }
+html:not(.js) .hop, .static .hop { opacity: 1; transform: none; }
+@media (max-width: 1100px) { .hop ul { font-size: 13.5px; } .hops { column-gap: 16px; } }
+@media (max-width: 900px) {
+  .schem, .readout { display: none; }
+  .hops { grid-template-columns: 1fr; position: relative; padding-left: 36px; }
+  .hops::before { content: ""; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 1.5px; background: var(--signal); }
+  .hop { opacity: 1; transform: none; position: relative; padding-bottom: 32px; }
+  .hop::before { content: ""; position: absolute; left: -36px; top: 2px; width: 13px; height: 13px; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--signal); box-shadow: inset 0 0 0 2.5px var(--bg), inset 0 0 0 8px var(--signal); }
+  .hop ul { display: flex; flex-wrap: wrap; gap: 0 18px; font-size: 15px; }
+  .hop li { border: 0; padding: 2px 0; }
+}
+
+/* ---------- engagements ---------- */
+.spread { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; margin-top: 40px; }
+.spread-l { grid-column: 1 / span 6; }
+.spread-r { grid-column: 8 / span 5; }
+.spread h2 { font-family: var(--serif); font-size: clamp(48px, 6.6vw, 112px); line-height: .95; letter-spacing: -.03em; }
+.billing { list-style: none; margin: 40px 0 0; padding: 0; max-width: 520px; border-top: 1px solid var(--rule); }
+.billing li { display: grid; grid-template-columns: 40px 1fr; padding: 14px 0; border-bottom: 1px solid var(--rule); font-size: 17px; }
+.billing li span { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); padding-top: 4px; }
+.sheet { margin: 56px 0 0; max-width: 560px; }
+.sheet table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 12px; background: var(--raised); border: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
+.sheet caption { caption-side: top; text-align: left; padding: 10px 14px; border: 1px solid var(--rule); border-bottom: 0; background: var(--surface); color: var(--ink-2); display: table-caption; }
+.sheet caption b { font-weight: 400; color: var(--ink); }
+.sheet th, .sheet td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--rule); font-weight: 400; }
+.sheet th { color: var(--ink-3); font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; }
+.sheet td:last-child, .sheet th:last-child { text-align: right; }
+.sheet td.ref { color: var(--ink-3); }
+.sheet tfoot td { border-bottom: 0; border-top: 1px solid var(--ink); color: var(--ink); }
+.sheet tbody tr { transition: background-color .2s; }
+.sheet tbody tr:hover { background: var(--surface); }
+.steps { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+.steps li { display: grid; grid-template-columns: 88px 1fr; column-gap: 20px; padding: 26px 0 30px; border-top: 1px solid var(--rule); }
+.steps li:first-child { border-top: 1px solid var(--rule-strong); }
+.steps .marg { display: flex; flex-direction: column; gap: 10px; }
+.steps .marg .n { font-family: var(--serif); font-size: 54px; line-height: .8; letter-spacing: -.02em; }
+.steps .marg .note { font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); line-height: 1.4; }
+.steps h3 { font-family: var(--serif); font-size: clamp(28px, 2.4vw, 38px); line-height: 1.05; letter-spacing: -.015em; margin-bottom: 10px; }
+.steps p { margin: 0; color: var(--ink-2); max-width: 46ch; }
+@media (max-width: 1000px) {
+  .spread { display: block; }
+  .spread-r { margin-top: 64px; }
+}
+@media (max-width: 600px) {
+  .steps li { grid-template-columns: 56px 1fr; column-gap: 14px; }
+  .steps .marg .n { font-size: 42px; }
+  .sheet { margin-left: calc(var(--gutter) * -0); }
+  .sheet table { font-size: 10.5px; }
+  .sheet th, .sheet td { padding: 8px 8px; }
+  .sheet .ref { display: none; }
+}
+
+/* ---------- work ---------- */
+.flag { border-top: 1px solid var(--rule-strong); padding-top: 12px; }
+.case-meta { display: flex; justify-content: space-between; gap: 16px; color: var(--ink-2); }
+.case-meta b { font-weight: 400; color: var(--ink); }
+.flag-stat { margin: clamp(32px, 4vw, 56px) 0 0; }
+.flag-stat .big { display: block; font-family: var(--serif); font-size: clamp(64px, 13vw, 214px); line-height: .86; letter-spacing: -.045em; margin-left: -.04em; }
+.flag-stat .cap { display: block; font-family: var(--serif); font-style: italic; font-size: clamp(24px, 2.6vw, 40px); line-height: 1.1; margin-top: 18px; color: var(--ink-2); letter-spacing: -.01em; }
+.flag-body { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; margin-top: clamp(48px, 5vw, 80px); padding-top: 22px; border-top: 1px solid var(--rule); }
+.flag-body h3 { grid-column: 1 / span 4; font-family: var(--serif); font-size: clamp(30px, 2.7vw, 42px); line-height: 1.04; letter-spacing: -.015em; }
+.flag-body p { grid-column: 6 / span 4; margin: 0; color: var(--ink-2); }
+.flag-body dl { grid-column: 10 / span 3; margin: 0; }
+.flag-body dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-3); }
+.flag-body dd { margin: 4px 0 18px; font-size: 15.5px; }
+.minor { display: grid; grid-template-columns: 1fr 1fr; margin-top: clamp(72px, 8vw, 120px); border-top: 1px solid var(--rule-strong); }
+.minor article { padding: 12px 0 0; }
+.minor article + article { border-left: 1px solid var(--rule); padding-left: 24px; margin-left: 0; }
+.minor article:first-child { padding-right: 24px; }
+.minor h3 { font-family: var(--serif); font-size: clamp(36px, 3.8vw, 60px); line-height: 1; letter-spacing: -.02em; margin: 40px 0 18px; }
+.minor p { color: var(--ink-2); margin: 0; max-width: 46ch; }
+@media (max-width: 900px) {
+  .flag-body { display: block; }
+  .flag-body p { margin: 18px 0 24px; }
+  .flag-body dl { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+  .flag-body dl div { border-top: 1px solid var(--rule); padding-top: 10px; }
+  .minor { grid-template-columns: 1fr; border-top: 0; }
+  .minor article, .minor article + article { border-left: 0; padding: 12px 0 0; border-top: 1px solid var(--rule-strong); }
+  .minor article + article { margin-top: 56px; }
+  .minor h3 { margin-top: 24px; }
+}
+
+/* ---------- company ---------- */
+.profile { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 48px; }
+.portrait { grid-column: 1 / span 4; margin: 0; }
+.print { position: relative; background: var(--surface); overflow: hidden; aspect-ratio: 4 / 5; }
+.print img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: grayscale(1) contrast(1.22) brightness(1.04); mix-blend-mode: multiply; }
+.print::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle at center, rgba(22, 21, 15, .32) .7px, transparent 1.3px); background-size: 3px 3px; mix-blend-mode: multiply; opacity: .28; }
+:root[data-theme="dark"] .print img { mix-blend-mode: normal; filter: grayscale(1) contrast(1.1) brightness(.88); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .print img { mix-blend-mode: normal; filter: grayscale(1) contrast(1.1) brightness(.88); } }
+.portrait figcaption { margin-top: 12px; display: grid; gap: 4px; }
+.portrait figcaption strong { font-family: var(--serif); font-weight: 400; font-size: 30px; line-height: 1.05; letter-spacing: -.01em; margin-top: 6px; }
+.portrait figcaption .role { color: var(--ink-2); font-size: 15px; }
+.portrait figcaption .textlink { justify-self: start; margin-top: 12px; }
+.bio { grid-column: 6 / span 4; }
+.bio p { margin: 0 0 1.1em; font-size: 18px; line-height: 1.6; }
+.bio p:first-child::first-letter { font-family: var(--serif); float: left; font-size: 5.1em; line-height: .78; padding: .06em .08em 0 0; letter-spacing: -.02em; }
+.facts { margin: 32px 0 0; border-top: 1px solid var(--rule-strong); }
+.facts div { display: grid; grid-template-columns: 1fr 1fr; padding: 11px 0; border-bottom: 1px solid var(--rule); }
+.facts dt { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-3); padding-top: 3px; }
+.facts dd { margin: 0; font-size: 15.5px; }
+.pull { grid-column: 10 / span 3; margin: 0; padding-top: 4px; }
+.pull blockquote { margin: 0; font-family: var(--serif); font-size: clamp(30px, 2.6vw, 42px); line-height: 1.06; letter-spacing: -.015em; }
+.pull blockquote::before { content: "\201C"; display: block; font-size: 2.4em; line-height: .6; height: .42em; color: var(--ink-3); }
+.pull figcaption { margin-top: 18px; color: var(--ink-2); }
+@media (max-width: 1100px) {
+  .portrait { grid-column: 1 / span 5; } .bio { grid-column: 7 / span 6; } .pull { grid-column: 1 / -1; max-width: 760px; }
+}
+@media (max-width: 760px) {
+  .profile { display: block; }
+  .portrait { max-width: 420px; }
+  .bio, .pull { margin-top: 48px; }
+  .bio p:first-child::first-letter { font-size: 4.4em; }
+}
+
+/* ---------- CTA closing scene ---------- */
+.cta { background: var(--signal); color: #16150F; margin-top: clamp(112px, 12vw, 180px); padding: clamp(20px, 2vw, 28px) 0 clamp(64px, 7vw, 112px); position: relative; overflow: hidden; }
+.cta ::selection { background: #16150F; color: var(--signal); }
+.cta .runhead { border-top-color: #16150F; color: rgba(22, 21, 15, .78); }
+.cta .runhead > :nth-child(1) { color: #16150F; }
+.cta h2 { font-family: var(--serif); font-size: clamp(60px, max(12.4vw, min(17vw, 100px)), 210px); line-height: .88; letter-spacing: -.04em; margin: clamp(56px, 8vw, 128px) 0 0 -.04em; max-width: 9em; }
+.mail { display: inline-block; margin-top: clamp(40px, 5vw, 72px); font-family: var(--serif); font-size: clamp(25px, 5.7vw, 96px); line-height: 1.05; letter-spacing: -.02em; text-decoration: underline; text-decoration-thickness: max(1.5px, .035em); text-underline-offset: .14em; overflow-wrap: anywhere; transition: text-decoration-thickness .3s var(--ease), text-underline-offset .3s var(--ease); }
+.mail:hover { text-decoration-thickness: max(3px, .07em); text-underline-offset: .2em; }
+.mail .arr { font-family: var(--sans); font-size: .5em; vertical-align: .35em; margin-left: .2em; display: inline-block; transition: transform .35s var(--ease); }
+.mail:hover .arr { transform: translate(4px, -4px); }
+.cta :focus-visible { outline-color: #16150F; }
+.cta-meta { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; margin-top: clamp(48px, 6vw, 96px); border-top: 1px solid rgba(22, 21, 15, .5); padding-top: 12px; color: #16150F; }
+.cta-meta > :nth-child(1) { grid-column: 1 / span 4; }
+.cta-meta > :nth-child(2) { grid-column: 5 / span 4; }
+.cta-meta > :nth-child(3) { grid-column: 9 / span 4; text-align: right; }
+@media (max-width: 760px) { .cta-meta { display: grid; grid-template-columns: 1fr; gap: 6px; } .cta-meta > :nth-child(n) { grid-column: auto; text-align: left; } }
+
+/* ---------- footer ---------- */
+footer { padding: clamp(48px, 5vw, 72px) 0 0; overflow: hidden; }
+.foot-cols { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 32px; font-size: 13.5px; line-height: 1.55; border-top: 1px solid var(--rule-strong); padding-top: 14px; }
+.foot-cols > div { grid-column: span 2; }
+.foot-cols > div:first-child { grid-column: span 4; }
+.foot-cols h4 { font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; font-weight: 400; color: var(--ink-3); margin: 0 0 8px; }
+.foot-cols p { margin: 0; color: var(--ink-2); }
+.foot-cols a { color: var(--ink); }
+.foot-cols .brand svg { height: 30px; }
+.foot-cols .brand + p { margin-top: 14px; max-width: 30ch; }
+.giant { margin: clamp(32px, 4vw, 64px) 0 0; line-height: 1; white-space: nowrap; user-select: none; padding: 0 var(--gutter); display: flex; justify-content: center; }
+.giant span { display: inline-block; font-family: var(--serif); font-size: 23.4vw; letter-spacing: -.045em; line-height: .78; padding-bottom: .02em; transform: translateY(.06em); color: var(--ink); }
+.giant span em { font-style: italic; }
+@media (max-width: 1000px) { .foot-cols > div { grid-column: span 4; } .foot-cols > div:first-child { grid-column: 1 / -1; } }
+@media (max-width: 600px) { .foot-cols { grid-template-columns: 1fr 1fr; column-gap: 16px; } .foot-cols > div, .foot-cols > div:first-child { grid-column: span 1; } .foot-cols > div:first-child { grid-column: 1 / -1; } }
+
+/* ---------- reveals ---------- */
+.js .rv { opacity: 0; transform: translateY(18px); transition: opacity .9s var(--ease), transform 1s var(--ease); }
+.js .rv.in { opacity: 1; transform: none; }
+.js .split .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.js .split .w > span { display: inline-block; transform: translateY(105%); transition: transform 1.05s var(--ease); transition-delay: calc(var(--i) * 45ms); }
+.js .split.in .w > span { transform: none; }
+.js .hero .split .w > span { transition-delay: calc(120ms + var(--i) * 60ms); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .rv, .js .split .w > span { opacity: 1; transform: none; }
+  .ticker-track { width: auto; }
+  .ticker ul[aria-hidden] { display: none; }
+  .ticker ul { flex-wrap: wrap; row-gap: 6px; padding: 0 var(--gutter); }
+  .hop { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Mindworks, back to top">{{logo}}</a>
+    <nav class="nav-links mono" aria-label="Primary">
+      <a href="#services"><i>01</i>Services</a>
+      <a href="#stack"><i>02</i>Stack</a>
+      <a href="#engagements"><i>03</i>Engagements</a>
+      <a href="#work"><i>04</i>Work</a>
+      <a href="#company"><i>05</i>Company</a>
+    </nav>
+    <span class="clock mono live" aria-label="Local time in London"><span class="dot" aria-hidden="true"></span>London <span data-clock>--:--</span></span>
+    <button class="theme-btn" id="theme" type="button" aria-label="Toggle dark theme">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
+    </button>
+    <a class="btn btn-sm" href="#contact">Book an intro call <span class="arr" aria-hidden="true">&rarr;</span></a>
+    <button class="menu-btn mono" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu"><span class="mb-l">Menu</span><span class="bars" aria-hidden="true"></span></button>
+  </div>
+</header>
+
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Site menu">
+  <ol>
+    <li><a href="#services"><i>01</i>Services</a></li>
+    <li><a href="#stack"><i>02</i>Stack</a></li>
+    <li><a href="#engagements"><i>03</i>Engagements</a></li>
+    <li><a href="#work"><i>04</i>Work</a></li>
+    <li><a href="#company"><i>05</i>Company</a></li>
+    <li><a href="#contact"><i>06</i><em>Contact</em></a></li>
+  </ol>
+  <div class="menu-foot mono">
+    <span class="clock live"><span class="dot" aria-hidden="true"></span>London <span data-clock>--:--</span></span>
+    <a href="mailto:berk.baydur@mindworkss.co.uk">berk.baydur@mindworkss.co.uk</a>
+  </div>
+</div>
+
+<main id="main">
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top" aria-labelledby="h-hero">
+    <div class="wrap">
+      <div class="hero-meta mono">
+        <span>Mindworks Technology Ltd</span>
+        <span>Software and IoT engineering consultancy</span>
+        <span>London &middot; Est. April 2021</span>
+        <span>Field manual, 2026</span>
+      </div>
+      <h1 id="h-hero" class="split">Software for things that live in the <em>real</em> world.</h1>
+      <div class="hero-grid">
+        <div class="hero-copy rv">
+          <p class="lede">A London consultancy that designs, builds and runs connected products, from the device in the field to the cloud behind it.</p>
+          <div class="actions">
+            <a class="btn" href="#contact">Book an intro call <span class="arr" aria-hidden="true">&rarr;</span></a>
+            <a class="textlink" href="#work">See selected work</a>
+          </div>
+        </div>
+        <figure class="log rv" aria-label="Illustrative field log of device telemetry">
+          <div class="log-box">
+            <div class="log-head mono"><b><span class="dot live" aria-hidden="true"></span>Field log</b><span>Illustrative feed</span></div>
+            <div class="log-cols mono" aria-hidden="true"><span class="t">Time</span><span>Device</span><span>Reading</span><span>Detail</span><span style="text-align:right">State</span></div>
+            <div class="feed" id="feed" aria-hidden="true"></div>
+          </div>
+          <figcaption class="figcap mono"><b>Fig. 01</b><span>Telemetry as it arrives from routers, appliances and edge servers. Illustrative, not live data.</span></figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="ticker" aria-label="Capabilities">
+      <div class="ticker-track">
+        <ul>
+          <li>Device management</li><li>MQTT</li><li>4G/LTE</li><li>OTA updates</li><li>Kubernetes</li><li>Terraform</li><li>Embedded Linux</li><li>Secure tunnels</li><li>AWS, Azure</li><li>Time-series data</li><li>Ruby on Rails</li><li>Node.js, Python</li><li>CDN</li><li>Load balancing</li><li>Monitoring and alerting</li><li>CI/CD</li>
+        </ul>
+        <ul aria-hidden="true">
+          <li>Device management</li><li>MQTT</li><li>4G/LTE</li><li>OTA updates</li><li>Kubernetes</li><li>Terraform</li><li>Embedded Linux</li><li>Secure tunnels</li><li>AWS, Azure</li><li>Time-series data</li><li>Ruby on Rails</li><li>Node.js, Python</li><li>CDN</li><li>Load balancing</li><li>Monitoring and alerting</li><li>CI/CD</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="block" id="services" aria-labelledby="h-services">
+    <div class="wrap">
+      <div class="runhead mono"><span>&sect; 01</span><span>Services</span><span>Contents</span></div>
+      <div class="sec-head">
+        <h2 id="h-services" class="split">Six ways to work with <em>Mindworks.</em></h2>
+        <p class="sub rv">Clients combine whichever ones the work needs.</p>
+      </div>
+      <ol class="toc">
+        <li class="svc">
+          <h3><button class="svc-btn svc-row" type="button" aria-expanded="false" aria-controls="sv1"><span class="svc-num">01</span><span class="svc-title">Architecture and technical consultancy</span><span class="svc-tease">Reviews, ADRs, roadmaps</span><span class="svc-plus" aria-hidden="true"></span></button></h3>
+          <div class="svc-panel" id="sv1"><div><div class="svc-inner">
+            <p>System design reviews, target architectures and the decisions in between: build or buy, monolith or services, which cloud, which protocol. Clients receive written recommendations their teams can act on, with the reasoning behind each one.</p>
+            <ul class="svc-tags" aria-label="Covers"><li>Architecture reviews</li><li>Tech due diligence</li><li>ADRs</li><li>Roadmaps</li></ul>
+          </div></div></div>
+        </li>
+        <li class="svc">
+          <h3><button class="svc-btn svc-row" type="button" aria-expanded="false" aria-controls="sv2"><span class="svc-num">02</span><span class="svc-title">IoT systems, <em>end to end</em></span><span class="svc-tease">Fleet, 4G/LTE, MQTT, OTA</span><span class="svc-plus" aria-hidden="true"></span></button></h3>
+          <div class="svc-panel" id="sv2"><div><div class="svc-inner">
+            <p>Connected products from the device up: provisioning, telemetry pipelines, OTA updates, fleet management and the dashboards on top. This is the layer where hardware and software teams most often talk past each other, and where Mindworks does its best work.</p>
+            <ul class="svc-tags" aria-label="Covers"><li>Device management</li><li>Fleet tracking</li><li>4G/LTE</li><li>MQTT</li><li>Remote updates</li></ul>
+          </div></div></div>
+        </li>
+        <li class="svc">
+          <h3><button class="svc-btn svc-row" type="button" aria-expanded="false" aria-controls="sv3"><span class="svc-num">03</span><span class="svc-title">Hands-on software delivery</span><span class="svc-tease">Backend, APIs, CI/CD</span><span class="svc-plus" aria-hidden="true"></span></button></h3>
+          <div class="svc-panel" id="sv3"><div><div class="svc-inner">
+            <p>When a project needs code more than advice, Mindworks builds it: backend services, APIs, integrations and the infrastructure they run on, delivered with tests, documentation and a codebase the client team can own.</p>
+            <ul class="svc-tags" aria-label="Covers"><li>Backend and APIs</li><li>Cloud infrastructure</li><li>CI/CD</li><li>Integrations</li></ul>
+          </div></div></div>
+        </li>
+        <li class="svc">
+          <h3><button class="svc-btn svc-row" type="button" aria-expanded="false" aria-controls="sv4"><span class="svc-num">04</span><span class="svc-title">DevOps and infrastructure operations</span><span class="svc-tease">Servers, CDN, alerting</span><span class="svc-plus" aria-hidden="true"></span></button></h3>
+          <div class="svc-panel" id="sv4"><div><div class="svc-inner">
+            <p>Keeping production fast, stable and observable. Mindworks manages servers and cloud infrastructure, configures CDNs and traffic routing, and sets up monitoring and alerting so issues are caught before customers notice. Available as a one-off hardening project or as ongoing support.</p>
+            <ul class="svc-tags" aria-label="Covers"><li>Server management</li><li>CDN</li><li>Load balancing</li><li>Monitoring</li><li>Alerting</li></ul>
+          </div></div></div>
+        </li>
+        <li class="svc">
+          <h3><button class="svc-btn svc-row" type="button" aria-expanded="false" aria-controls="sv5"><span class="svc-num">05</span><span class="svc-title">Interim team <em>leadership</em></span><span class="svc-tease">Management, process, hiring</span><span class="svc-plus" aria-hidden="true"></span></button></h3>
+          <div class="svc-panel" id="sv5"><div><div class="svc-inner">
+            <p>Engineering leadership while a company hires, reorganises or recovers a delivery that has slipped. That covers running the team day to day, introducing processes that fit its size, and a clean handover once a permanent lead is in place.</p>
+            <ul class="svc-tags" aria-label="Covers"><li>Engineering management</li><li>Delivery process</li><li>Hiring</li><li>Mentoring</li></ul>
+          </div></div></div>
+        </li>
+        <li class="svc">
+          <h3><button class="svc-btn svc-row" type="button" aria-expanded="false" aria-controls="sv6"><span class="svc-num">06</span><span class="svc-title">Technology evaluation and adoption</span><span class="svc-tease">Trials, PoCs, rollout</span><span class="svc-plus" aria-hidden="true"></span></button></h3>
+          <div class="svc-panel" id="sv6"><div><div class="svc-inner">
+            <p>Before a client commits to a platform, vendor or tool, Mindworks trials it against their real constraints, reports the findings and, if it holds up, leads the rollout. Problems surface in week one rather than month six.</p>
+            <ul class="svc-tags" aria-label="Covers"><li>Vendor trials</li><li>Proofs of concept</li><li>Rollout</li><li>Developer tooling</li></ul>
+          </div></div></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ STACK (pinned scroll-scrub) ============ -->
+  <section class="block" id="stack" aria-labelledby="h-stack">
+    <div class="stack-pin">
+      <div class="stack-stage">
+        <div class="wrap">
+          <div class="runhead mono"><span>&sect; 02</span><span>Stack</span><span>Fig. 02 &mdash; Signal path</span></div>
+          <div class="sec-head">
+            <h2 id="h-stack" class="split">Every hop of the signal path, from the sensor to the <em>server room.</em></h2>
+          </div>
+          <div class="readout mono" aria-hidden="true"><span>Hop <b id="hopN">06</b>/06 &mdash; <b id="hopName">Operations</b></span><span class="bar"><i id="hopBar"></i></span><span>Schematic, not to scale</span></div>
+          <svg class="schem" id="schem" viewBox="0 0 1200 200" aria-hidden="true" focusable="false">
+            <g class="grid">
+              <line x1="0" y1="20" x2="1200" y2="20"/><line x1="0" y1="180" x2="1200" y2="180"/>
+            </g>
+            <path class="track" d="M20 100 H1180"/>
+            <path class="ruler" d="M100 156 H1100"/>
+            <path class="ruler maj" d="M100 156 H1101"/>
+            <path class="sig" id="sig" pathLength="1" d="M20 100 H1180"/>
+            <g class="mids">
+              <text class="mid" x="200" y="88" text-anchor="middle">uplink</text>
+              <text class="mid" x="400" y="88" text-anchor="middle">mqtt / tls</text>
+              <text class="mid" x="600" y="88" text-anchor="middle">ingest</text>
+              <text class="mid" x="800" y="88" text-anchor="middle">api</text>
+              <text class="mid" x="1000" y="88" text-anchor="middle">observe</text>
+              <text class="mid" x="20" y="124">in</text>
+              <text class="mid" x="1180" y="124" text-anchor="end">out</text>
+            </g>
+            <g class="node" transform="translate(100 100)"><circle class="halo" r="30"/><circle class="ring" r="30"/>
+              <rect class="glyph" x="-11" y="-6" width="22" height="14" rx="1.5"/><path class="glyph" d="M-6 -6 V-14 M6 -6 V-14 M-6 2 h3 M0 2 h3"/><text x="0" y="-46" text-anchor="middle">U1 Device</text><circle class="core" cx="0" cy="44" r="4"/></g>
+            <g class="node" transform="translate(300 100)"><circle class="halo" r="30"/><circle class="ring" r="30"/>
+              <path class="glyph" d="M0 12 V-2 M-7 -9 a10 10 0 0 1 14 0 M-12 -14 a17 17 0 0 1 24 0"/><circle class="glyph" cx="0" cy="-3" r="1.5"/><text x="0" y="-46" text-anchor="middle">U2 Transport</text><circle class="core" cx="0" cy="44" r="4"/></g>
+            <g class="node" transform="translate(500 100)"><circle class="halo" r="30"/><circle class="ring" r="30"/>
+              <path class="glyph" d="M-10 -10 h4 M-2 -10 h4 M6 -10 h4 M-10 -2 h4 M-2 -2 h4 M6 -2 h4 M-10 6 h4 M-2 6 h4 M6 6 h4"/><text x="0" y="-46" text-anchor="middle">U3 Fleet</text><circle class="core" cx="0" cy="44" r="4"/></g>
+            <g class="node" transform="translate(700 100)"><circle class="halo" r="30"/><circle class="ring" r="30"/>
+              <path class="glyph" d="M-12 7 h23 a6 6 0 0 0 0 -12 a8 8 0 0 0 -15 -2 a6 6 0 0 0 -8 14 z"/><text x="0" y="-46" text-anchor="middle">U4 Cloud</text><circle class="core" cx="0" cy="44" r="4"/></g>
+            <g class="node" transform="translate(900 100)"><circle class="halo" r="30"/><circle class="ring" r="30"/>
+              <rect class="glyph" x="-13" y="-10" width="26" height="19" rx="1.5"/><path class="glyph" d="M-13 -5 h26 M-8 5 v-5 M-3 5 v-8 M2 5 v-3 M7 5 v-6"/><text x="0" y="-46" text-anchor="middle">U5 Product</text><circle class="core" cx="0" cy="44" r="4"/></g>
+            <g class="node" transform="translate(1100 100)"><circle class="halo" r="30"/><circle class="ring" r="30"/>
+              <path class="glyph" d="M-12 6 a12 12 0 0 1 24 0 M0 6 L6 -5"/><circle class="glyph" cx="0" cy="6" r="1.6"/><text x="0" y="-46" text-anchor="middle">U6 Operations</text><circle class="core" cx="0" cy="44" r="4"/></g>
+          </svg>
+          <ol class="hops">
+            <li class="hop"><span class="layer mono"><span>U1</span>Device</span><h3>In the field</h3><ul><li>Industrial 4G routers</li><li>Home appliances</li><li>Embedded Linux</li><li>Provisioning</li></ul></li>
+            <li class="hop"><span class="layer mono"><span>U2</span>Transport</span><h3>Connectivity</h3><ul><li>4G/LTE cellular</li><li>MQTT</li><li>Wi-Fi, BLE</li><li>Secure tunnels</li></ul></li>
+            <li class="hop"><span class="layer mono"><span>U3</span>Fleet</span><h3>Device management</h3><ul><li>Tracking and health</li><li>Remote configuration</li><li>Firmware updates</li><li>10,000s of devices</li></ul></li>
+            <li class="hop"><span class="layer mono"><span>U4</span>Cloud</span><h3>Platform</h3><ul><li>AWS, Azure</li><li>Kubernetes</li><li>Terraform</li><li>Time-series data</li></ul></li>
+            <li class="hop"><span class="layer mono"><span>U5</span>Product</span><h3>Applications</h3><ul><li>Ruby on Rails</li><li>Node.js, Python</li><li>Web dashboards</li><li>Analytics and alerts</li></ul></li>
+            <li class="hop"><span class="layer mono"><span>U6</span>Operations</span><h3>Run and observe</h3><ul><li>Server management</li><li>CDN servers</li><li>Load balancing</li><li>Logs, uptime, alerts</li></ul></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ENGAGEMENTS ============ -->
+  <section class="block" id="engagements" aria-labelledby="h-engage">
+    <div class="wrap">
+      <div class="runhead mono"><span>&sect; 03</span><span>Engagements</span><span>How the work is billed</span></div>
+      <div class="spread">
+        <div class="spread-l">
+          <h2 id="h-engage" class="split">Billed by the hour. <em>Judged</em> by what ships.</h2>
+          <ul class="billing rv">
+            <li><span>a.</span>An hourly rate, agreed in writing</li>
+            <li><span>b.</span>Hours logged against tasks, so every invoice is traceable</li>
+            <li><span>c.</span>Retainers available, never required</li>
+          </ul>
+          <figure class="sheet rv" aria-label="Illustrative timesheet extract">
+            <table>
+              <caption class="mono"><b>Fig. 03</b> &nbsp;Timesheet extract &middot; illustrative</caption>
+              <thead><tr><th scope="col">Day</th><th scope="col">Task</th><th scope="col" class="ref">Ref</th><th scope="col">Hrs</th></tr></thead>
+              <tbody>
+                <tr><td>Mon</td><td>Architecture review, telemetry pipeline</td><td class="ref">T-112</td><td>3.0</td></tr>
+                <tr><td>Mon</td><td>OTA rollout plan</td><td class="ref">T-114</td><td>2.5</td></tr>
+                <tr><td>Tue</td><td>MQTT broker load test</td><td class="ref">T-117</td><td>4.0</td></tr>
+                <tr><td>Wed</td><td>Terraform, staging cluster</td><td class="ref">T-121</td><td>3.5</td></tr>
+                <tr><td>Thu</td><td>Handover walkthrough, recorded</td><td class="ref">T-125</td><td>1.5</td></tr>
+              </tbody>
+              <tfoot><tr><td></td><td>Logged against tasks</td><td class="ref"></td><td>14.5</td></tr></tfoot>
+            </table>
+          </figure>
+        </div>
+        <ol class="steps spread-r">
+          <li class="rv"><div class="marg"><span class="n">01</span><span class="note">Free,<br>30 minutes</span></div><div><h3>Introductory call</h3><p>A free thirty-minute conversation to understand the problem and confirm whether Mindworks is the right fit.</p></div></li>
+          <li class="rv"><div class="marg"><span class="n">02</span><span class="note">In writing</span></div><div><h3>Scope and rate</h3><p>A short written scope, an agreed hourly rate and an estimate of hours.</p></div></li>
+          <li class="rv"><div class="marg"><span class="n">03</span><span class="note">Your tools,<br>your rituals</span></div><div><h3>Work in the open</h3><p>Mindworks works inside the client's own tools, repositories and rituals, and reports progress where the team already looks.</p></div></li>
+          <li class="rv"><div class="marg"><span class="n">04</span><span class="note">The real<br>measure</span></div><div><h3>Hand over</h3><p>Documentation, recorded walkthroughs and a team that can carry on independently. That is how Mindworks measures a successful engagement.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WORK ============ -->
+  <section class="block" id="work" aria-labelledby="h-work">
+    <div class="wrap">
+      <div class="runhead mono"><span>&sect; 04</span><span>Work</span><span>Three case notes</span></div>
+      <div class="sec-head">
+        <h2 id="h-work" class="split">Selected <em>work.</em></h2>
+      </div>
+      <article class="flag" aria-labelledby="c1">
+        <div class="case-meta mono"><span><b>Case 01</b></span><span>Industrial IoT, implemented and maintained</span></div>
+        <p class="flag-stat"><span class="big split">Tens of <em>thousands</em></span><span class="cap rv">of industrial routers tracked and managed.</span></p>
+        <div class="flag-body rv">
+          <h3 id="c1">Device management platform for industrial 4G routers</h3>
+          <p>A manufacturer of industrial 4G routers needed visibility and control over devices deployed in the field. Mindworks designed and implemented the platform that tracks and manages that router fleet, and continues to maintain and operate it.</p>
+          <dl>
+            <div><dt>Client</dt><dd>Industrial networking manufacturer</dd></div>
+            <div><dt>Role</dt><dd>Platform design, implementation, ongoing maintenance</dd></div>
+          </dl>
+        </div>
+      </article>
+      <div class="minor">
+        <article class="rv" aria-labelledby="c2">
+          <div class="case-meta mono"><span><b>Case 02</b></span><span>Consumer IoT</span></div>
+          <h3 id="c2">Connected home <em>appliances</em></h3>
+          <p>Tracking and management for small home appliances: connecting the devices, collecting their state, and giving operators control of the fleet.</p>
+        </article>
+        <article class="rv" aria-labelledby="c3">
+          <div class="case-meta mono"><span><b>Case 03</b></span><span>Infrastructure</span></div>
+          <h3 id="c3">CDN and server <em>operations</em></h3>
+          <p>Managing CDN servers and the infrastructure around them, including provisioning, traffic management, monitoring and metrics, so content is delivered quickly and reliably.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPANY ============ -->
+  <section class="block" id="company" aria-labelledby="h-company">
+    <div class="wrap">
+      <div class="runhead mono"><span>&sect; 05</span><span>Company</span><span>Profile</span></div>
+      <div class="sec-head">
+        <h2 id="h-company" class="split">An independent technology consultancy, founded in <em>London</em> in 2021.</h2>
+      </div>
+      <div class="profile">
+        <figure class="portrait rv">
+          <div class="print"><img src="{{img:../founder.jpg}}" width="320" height="320" alt="Portrait of Berk Baydur" loading="lazy"></div>
+          <figcaption>
+            <span class="mono" style="color:var(--ink-3)">Fig. 05</span>
+            <strong>Berk Baydur</strong>
+            <span class="role">Founder and Principal Consultant</span>
+            <a class="textlink" href="https://www.linkedin.com/in/berk-baydur-4765bba2" rel="noopener">LinkedIn &nearr;</a>
+          </figcaption>
+        </figure>
+        <div class="bio rv">
+          <p>Mindworks Technology Ltd was founded in April 2021 to give technology companies direct access to senior engineering across software development, connectivity, device management and DevOps.</p>
+          <p>Its clients build products where software meets hardware: industrial networking equipment, connected home appliances, and the platforms and infrastructure behind them. Engagements range from a few days of architectural advice to long-running platform delivery and operations.</p>
+          <dl class="facts">
+            <div><dt>Founded</dt><dd>April 2021</dd></div>
+            <div><dt>Headquarters</dt><dd>London, UK</dd></div>
+            <div><dt>Sector</dt><dd>Technology</dd></div>
+          </dl>
+        </div>
+        <figure class="pull rv">
+          <blockquote><p style="margin:0">14 years in software engineering. Previously founded and ran an <em>IoT start-up.</em></p></blockquote>
+          <figcaption class="mono">Berk Baydur &middot; Specialises in software development, connectivity, device management and DevOps</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta" id="contact" aria-labelledby="h-contact">
+    <div class="wrap">
+      <div class="runhead mono"><span>&sect; 06</span><span>Contact</span><span>Open channel</span></div>
+      <h2 id="h-contact" class="split">Building a connected <em>product?</em></h2>
+      <a class="mail rv" href="mailto:berk.baydur@mindworkss.co.uk">berk.baydur@mindworkss.co.uk<span class="arr" aria-hidden="true">&nearr;</span></a>
+      <div class="cta-meta mono rv">
+        <span>Replies within one working day.</span>
+        <span>Introductory call: free, thirty minutes</span>
+        <span>Unit 408 Screenworks, London N5 2ER</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer aria-label="Site footer">
+  <div class="wrap">
+    <div class="foot-cols">
+      <div><a class="brand" href="#top" aria-label="Mindworks, back to top">{{logo}}</a><p>Software and IoT engineering consultancy.</p></div>
+      <div><h4>Company</h4><p>Mindworks Technology Ltd<br>Registered in England and Wales</p></div>
+      <div><h4>Address</h4><p>Unit 408 Screenworks<br>22 Highbury Grove<br>London N5 2ER</p></div>
+      <div><h4>&copy; <span id="yr">2026</span></h4><p>VAT No. GB 466 0822 84<br>No cookies, no tracking.</p></div>
+      <div><h4>Elsewhere</h4><p><a href="mailto:berk.baydur@mindworkss.co.uk">Email</a><br><a href="https://www.linkedin.com/in/berk-baydur-4765bba2" rel="noopener">LinkedIn</a><br><span class="clock mono" style="margin-top:6px"><span class="dot live" aria-hidden="true"></span>London <span data-clock>--:--</span></span></p></div>
+    </div>
+  </div>
+  <div class="giant" aria-hidden="true"><span id="giant">Mind<em>works</em></span></div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var d = document, root = d.documentElement, w = window;
+  var RM = w.matchMedia('(prefers-reduced-motion: reduce)');
+  var reduced = RM.matches;
+  function $(s, c) { return (c || d).querySelector(s); }
+  function $$(s, c) { return Array.prototype.slice.call((c || d).querySelectorAll(s)); }
+  var yr = $('#yr'); if (yr) yr.textContent = new Date().getFullYear();
+
+  /* ---- theme toggle ---- */
+  var tbtn = $('#theme');
+  var darkMQ = w.matchMedia('(prefers-color-scheme: dark)');
+  function current() { return root.getAttribute('data-theme') || (darkMQ.matches ? 'dark' : 'light'); }
+  function label() { tbtn.setAttribute('aria-label', current() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'); }
+  label();
+  tbtn.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('mw-b-theme', next); } catch (e) {}
+    label();
+  });
+  if (darkMQ.addEventListener) darkMQ.addEventListener('change', label);
+
+  /* ---- London clock ---- */
+  var fmt;
+  try { fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZoneName: 'short' }); } catch (e) {}
+  var fmtS;
+  try { fmtS = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' }); } catch (e) {}
+  function london() {
+    if (!fmt) return '';
+    var p = {}; fmt.formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
+    return p.hour + ':' + p.minute + ' ' + (p.timeZoneName || '');
+  }
+  function tick() { var t = london(); $$('[data-clock]').forEach(function (el) { el.textContent = t; }); }
+  tick(); setInterval(tick, 10000);
+
+  /* ---- nav: condense on scroll + current section ---- */
+  var nav = $('#nav');
+  var onScrollNav = function () { nav.classList.toggle('scrolled', w.scrollY > 24); };
+  onScrollNav();
+  var links = $$('.nav-links a');
+  if ('IntersectionObserver' in w) {
+    var secIO = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) links.forEach(function (a) { a.setAttribute('aria-current', a.getAttribute('href') === '#' + e.target.id ? 'true' : 'false'); });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    ['services', 'stack', 'engagements', 'work', 'company', 'contact'].forEach(function (id) { var el = d.getElementById(id); if (el) secIO.observe(el); });
+  }
+
+  /* ---- mobile menu ---- */
+  var mbtn = $('#menuBtn'), menu = $('#menu');
+  function setMenu(open) {
+    menu.classList.toggle('open', open);
+    mbtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    mbtn.querySelector('.mb-l').textContent = open ? 'Close' : 'Menu';
+    d.body.classList.toggle('menu-open', open);
+    if (open) { nav.classList.add('scrolled'); var f = menu.querySelector('a'); setTimeout(function () { f && f.focus(); }, 60); }
+    else onScrollNav();
+  }
+  mbtn.addEventListener('click', function () { setMenu(!menu.classList.contains('open')); });
+  $$('#menu a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.classList.contains('open')) { setMenu(false); mbtn.focus(); } });
+  w.addEventListener('resize', function () { if (w.innerWidth > 960 && menu.classList.contains('open')) setMenu(false); });
+
+  /* ---- split text ---- */
+  function split(el) {
+    var i = 0;
+    (function walk(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (c) {
+        if (c.nodeType === 3) {
+          var parts = c.textContent.split(/(\s+)/), frag = d.createDocumentFragment();
+          parts.forEach(function (p) {
+            if (!p) return;
+            if (/^\s+$/.test(p)) { frag.appendChild(d.createTextNode(' ')); return; }
+            var o = d.createElement('span'); o.className = 'w';
+            var inner = d.createElement('span'); inner.textContent = p; inner.style.setProperty('--i', i++);
+            o.appendChild(inner); frag.appendChild(o);
+          });
+          node.replaceChild(frag, c);
+        } else if (c.nodeType === 1) walk(c);
+      });
+    })(el);
+  }
+  $$('.split').forEach(split);
+
+  /* ---- reveals ---- */
+  var revealEls = $$('.rv, .split');
+  if (reduced || !('IntersectionObserver' in w)) revealEls.forEach(function (el) { el.classList.add('in'); });
+  else {
+    var rio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.01 });
+    revealEls.forEach(function (el) { rio.observe(el); });
+  }
+
+  /* ---- services: hover reveals on pointer devices, click/tap toggles ---- */
+  var hoverable = w.matchMedia('(hover: hover) and (pointer: fine)');
+  $$('.svc').forEach(function (svc) {
+    var btn = svc.querySelector('.svc-btn'), pinnedOpen = false, tmr;
+    function set(open) { svc.classList.toggle('open', open); btn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+    btn.addEventListener('click', function () {
+      clearTimeout(tmr);
+      if (hoverable.matches) { pinnedOpen = !pinnedOpen; set(pinnedOpen); }
+      else set(!svc.classList.contains('open'));
+    });
+    svc.addEventListener('mouseenter', function () { if (!hoverable.matches) return; clearTimeout(tmr); tmr = setTimeout(function () { set(true); }, 90); });
+    svc.addEventListener('mouseleave', function () { if (!hoverable.matches) return; clearTimeout(tmr); if (!pinnedOpen) set(false); });
+  });
+
+  /* ---- field log (illustrative) ---- */
+  var feed = $('#feed');
+  var R = function (a, b) { return Math.floor(a + Math.random() * (b - a + 1)); };
+  var pick = function (a) { return a[R(0, a.length - 1)]; };
+  var n5 = function () { return String(R(1000, 48999)).padStart(5, '0'); };
+  var n4 = function () { return String(R(100, 9899)).padStart(4, '0'); };
+  var MINUS = '−';
+  var gens = [
+    [5, function () { return ['rtr-' + n5(), 'LTE ' + MINUS + R(71, 99) + ' dBm', 'fw 3.2.' + R(0, 1), 'ok']; }],
+    [3, function () { return ['rtr-' + n5(), 'heartbeat', 'up ' + R(2, 180) + 'd', 'ok']; }],
+    [3, function () { return ['app-' + n4(), 'mqtt pub', 'state=' + pick(['idle', 'run', 'standby', 'eco']), 'ok']; }],
+    [2, function () { return ['rtr-' + n5(), 'ota → 3.2.1', R(6, 98) + '%', 'sync']; }],
+    [2, function () { return ['edge-lon-' + R(1, 4), 'p95 ' + R(18, 62) + ' ms', 'hit ' + (R(940, 992) / 10).toFixed(1) + '%', 'ok']; }],
+    [2, function () { return ['rtr-' + n5(), 'tunnel up', 'rtt ' + R(22, 140) + ' ms', 'ok']; }],
+    [2, function () { return ['app-' + n4(), 'cfg push', 'rev ' + R(12, 64), 'ack']; }],
+    [1, function () { return ['rtr-' + n5(), 'LTE ' + MINUS + R(104, 112) + ' dBm', 'retry 1/3', 'warn']; }]
+  ];
+  var bag = []; gens.forEach(function (g) { for (var k = 0; k < g[0]; k++) bag.push(g[1]); });
+  function stamp(off) { if (!fmtS) return ''; var p = {}; fmtS.formatToParts(new Date(Date.now() - (off || 0) * 1000)).forEach(function (x) { p[x.type] = x.value; }); return p.hour + ':' + p.minute + ':' + p.second; }
+  var MAX = 9;
+  var back = 0;
+  function makeLine(data, full) {
+    var ln = d.createElement('div'); ln.className = 'ln';
+    var t = d.createElement('span'); t.className = 't'; t.textContent = stamp(back);
+    var a = d.createElement('span'), b = d.createElement('span'), c = d.createElement('span'), s = d.createElement('span');
+    s.className = 'st' + (data[3] === 'warn' ? ' warn' : '');
+    ln.append(t, a, b, c, s);
+    if (full) { a.textContent = data[0]; b.textContent = data[1]; c.textContent = data[2]; s.textContent = data[3]; }
+    feed.appendChild(ln);
+    while (feed.children.length > MAX) feed.removeChild(feed.firstChild);
+    $$('.ln', feed).forEach(function (l, i, arr) { l.classList.toggle('old', i < arr.length - 5); });
+    return [a, b, c, s];
+  }
+  var seed = reduced ? MAX : 6;
+  for (var k = 0; k < seed; k++) { back = (seed - k) * 4 + R(0, 3); makeLine(pick(bag)(), true); }
+  back = 0;
+  if (!reduced) {
+    var visible = true;
+    if ('IntersectionObserver' in w) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(feed);
+    var caret = d.createElement('span'); caret.className = 'caret';
+    var run = function () {
+      if (!visible || d.hidden) { setTimeout(run, 600); return; }
+      var data = pick(bag)(), cells = makeLine(data, false), ci = 0, chi = 0;
+      (function type() {
+        if (ci > 3) { caret.remove(); setTimeout(run, R(500, 1300)); return; }
+        var txt = data[ci], cell = cells[ci];
+        if (ci === 3) { cell.textContent = txt; cell.appendChild(caret); ci++; setTimeout(type, 180); return; }
+        chi++; cell.textContent = txt.slice(0, chi); cell.appendChild(caret);
+        if (chi >= txt.length) { ci++; chi = 0; setTimeout(type, 70); } else setTimeout(type, R(14, 34));
+      })();
+    };
+    setTimeout(run, 1200);
+  }
+
+  /* ---- pinned signal-path scrub ---- */
+  var stack = $('#stack'), sig = $('#sig'), nodes = $$('#schem .node'), hops = $$('.hops .hop');
+  var hopN = $('#hopN'), hopName = $('#hopName'), hopBar = $('#hopBar');
+  var names = ['Device', 'Transport', 'Fleet', 'Cloud', 'Product', 'Operations'];
+  var pinMQ = w.matchMedia('(min-width: 901px) and (min-height: 640px)');
+  var lastLit = -2;
+  function paint(p) {
+    // line spans x 20..1180; nodes at 100 + 200i  -> fraction (80 + 200i)/1160
+    sig.style.strokeDashoffset = String(1 - p);
+    var lit = -1;
+    for (var i = 0; i < 6; i++) if (p >= (80 + 200 * i) / 1160 - 0.002) lit = i;
+    if (lit !== lastLit) {
+      nodes.forEach(function (n, i) { n.classList.toggle('on', i <= lit); });
+      hops.forEach(function (h, i) { h.classList.toggle('on', i <= lit); });
+      hopN.textContent = String(Math.max(lit + 1, 0)).padStart(2, '0');
+      hopName.textContent = lit >= 0 ? names[lit] : 'Standby';
+      lastLit = lit;
+    }
+    hopBar.style.setProperty('--p', p.toFixed(4));
+  }
+  var ticking = false;
+  function scrub() {
+    ticking = false;
+    var r = stack.querySelector('.stack-pin').getBoundingClientRect();
+    var total = r.height - w.innerHeight;
+    var p = total > 0 ? Math.min(1, Math.max(0, (-r.top + w.innerHeight * 0.05) / (total * 0.92))) : 1;
+    paint(p);
+  }
+  function setupPin() {
+    var on = pinMQ.matches && !reduced;
+    stack.classList.toggle('pinned', on);
+    stack.classList.toggle('static', !on);
+    if (on) scrub(); else paint(1);
+  }
+  setupPin();
+  if (pinMQ.addEventListener) pinMQ.addEventListener('change', setupPin);
+
+  w.addEventListener('scroll', function () {
+    onScrollNav();
+    if (stack.classList.contains('pinned') && !ticking) { ticking = true; w.requestAnimationFrame(scrub); }
+  }, { passive: true });
+
+  /* ---- large-type footer: fit wordmark to the viewport ---- */
+  var giant = $('#giant');
+  function fit() {
+    giant.style.fontSize = '100px';
+    var avail = giant.parentElement.clientWidth - parseFloat(getComputedStyle(giant.parentElement).paddingLeft) * 2;
+    var wdt = giant.getBoundingClientRect().width;
+    if (wdt > 0) giant.style.fontSize = (100 * avail / wdt).toFixed(2) + 'px';
+  }
+  fit();
+  if (d.fonts && d.fonts.ready) d.fonts.ready.then(fit);
+  var rz; w.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(fit, 120); });
+})();
+</script>
+</body>
+</html>
