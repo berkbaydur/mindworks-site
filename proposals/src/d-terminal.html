@@ -1,0 +1,1139 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mindworks | Software and IoT engineering consultancy, London</title>
+<meta name="description" content="Mindworks Technology Ltd is a London software and IoT engineering consultancy, founded in 2021. Device management, connectivity, software development and DevOps for technology companies, billed by the hour.">
+<meta property="og:title" content="Mindworks | Software and IoT engineering consultancy">
+<meta property="og:description" content="Software for things that live in the real world. Device management, connectivity, software delivery and DevOps, billed by the hour.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.mindworkss.co.uk/">
+<meta name="theme-color" content="#0B0E14">
+<link rel="icon" href="{{img:../favicon.svg}}" type="image/svg+xml">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Mindworks Technology Ltd",
+  "alternateName": "Mindworks",
+  "url": "https://www.mindworkss.co.uk/",
+  "logo": "https://www.mindworkss.co.uk/logo.svg",
+  "description": "Software and IoT engineering consultancy: device management, connectivity, software development and DevOps.",
+  "foundingDate": "2021-04",
+  "vatID": "GB466082284",
+  "email": "berk.baydur@mindworkss.co.uk",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Unit 408 Screenworks, 22 Highbury Grove",
+    "addressLocality": "London",
+    "postalCode": "N5 2ER",
+    "addressCountry": "GB"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Berk Baydur",
+    "jobTitle": "Founder & Principal Consultant",
+    "sameAs": "https://www.linkedin.com/in/berk-baydur-4765bba2"
+  }
+}
+</script>
+<script>
+document.documentElement.classList.add('js');
+try { if (localStorage.getItem('mw-term-theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
+</script>
+<style>
+@font-face { font-family: "JetBrains Mono"; src: url("{{font:assets/jetbrains-mono-normal-400.woff2}}") format("woff2"); font-weight: 100 800; font-display: swap; }
+@font-face { font-family: "Inter Tight"; src: url("{{font:assets/inter-tight-normal-400-800.woff2}}") format("woff2"); font-weight: 400 800; font-display: swap; }
+
+/* Ink-navy terminal. Amber has three jobs only: the cursor, the primary action, the active selection. */
+:root {
+  --bg: #0B0E14; --p1: #11151D; --p2: #171C26; --line: #232A36; --line-2: #2E3644;
+  --tx: #D7DCE5; --tx2: #8A93A3; --tx3: #4F586A;
+  --amber: #FFB547; --amber-tx: #FFB547; --on-amber: #1B1204;
+  --ok: #7EE0A1; --err: #FF8F87;
+  --outer: #07090D; --dot: rgba(138,147,163,.09);
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --g: clamp(16px, 3.4vw, 48px);
+  --max: 1320px;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  --bg: #F3F1EC; --p1: #FAF9F6; --p2: #ECE9E2; --line: #DBD6CB; --line-2: #CBC5B8;
+  --tx: #161A22; --tx2: #565E6C; --tx3: #A4A9B2;
+  --amber: #FFB547; --amber-tx: #945400; --on-amber: #1B1204;
+  --ok: #1D7A45; --err: #B93A2B;
+  --outer: #E4E1D9; --dot: rgba(22,26,34,.07);
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 72px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0; background: var(--outer); color: var(--tx);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.2px); background-size: 22px 22px;
+  font: 400 14px/1.6 var(--mono); -webkit-font-smoothing: antialiased; font-feature-settings: "calt" 0;
+}
+a { color: inherit; text-underline-offset: .22em; text-decoration-thickness: 1px; }
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; }
+::selection { background: var(--amber); color: var(--on-amber); }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; border-radius: 3px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+p { text-wrap: pretty; margin: 0; }
+kbd { font: 500 11px/1 var(--mono); padding: 3px 5px 2px; border: 1px solid var(--line-2); border-bottom-width: 2px; border-radius: 4px; color: var(--tx2); background: var(--p2); }
+.sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: fixed; left: 16px; top: -60px; z-index: 100; background: var(--amber); color: var(--on-amber); padding: 10px 14px; border-radius: 6px; text-decoration: none; font-weight: 500; transition: top .2s; }
+.skip:focus { top: 14px; }
+
+/* ---------- app window ---------- */
+.window {
+  margin: 12px; background: var(--bg); border: 1px solid var(--line); border-radius: 14px;
+  overflow-x: clip; min-height: calc(100vh - 24px);
+}
+@media (max-width: 700px) { .window { margin: 0; border: 0; border-radius: 0; } }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--g); }
+
+/* ---------- header: title bar + tab strip ---------- */
+.hdr { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%); border-bottom: 1px solid var(--line); border-radius: 14px 14px 0 0; }
+@media (max-width: 700px) { .hdr { border-radius: 0; } }
+.titlebar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 38px; padding: 0 14px; border-bottom: 1px solid var(--line); overflow: hidden; transition: height .3s var(--ease), opacity .25s, border-color .3s; font-size: 12px; color: var(--tx2); }
+.dots { display: flex; gap: 7px; }
+.dots i { width: 11px; height: 11px; border-radius: 50%; background: var(--line-2); display: block; }
+.path { font-size: 12px; color: var(--tx2); letter-spacing: .01em; }
+.path b { color: var(--tx); font-weight: 500; }
+.tb-hints { justify-self: end; display: flex; gap: 14px; align-items: center; }
+.tb-hints span { display: inline-flex; gap: 6px; align-items: center; }
+.tabs { display: flex; align-items: center; gap: 22px; height: 50px; padding: 0 14px 0 18px; transition: height .3s var(--ease); }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex: none; border-radius: 4px; }
+.brand .mini-dots { display: none; gap: 5px; margin-right: 6px; }
+.brand .mini-dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--line-2); display: block; }
+.logo { height: 28px; width: auto; aspect-ratio: 435 / 100; display: block; }
+.lw { fill: var(--tx); stroke: var(--tx); stroke-width: 1.3; stroke-linejoin: round; }
+.lt { fill: var(--tx2); }
+nav.strip { display: flex; height: 100%; margin-left: 8px; }
+nav.strip a { position: relative; display: flex; align-items: center; padding: 0 13px; text-decoration: none; color: var(--tx2); font-size: 13px; transition: color .2s; }
+nav.strip a .n { color: var(--tx3); margin-right: 6px; font-size: 11px; }
+nav.strip a:hover { color: var(--tx); }
+nav.strip a::after { content: ""; position: absolute; left: 13px; right: 13px; bottom: -1px; height: 2px; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
+nav.strip a[aria-current="true"] { color: var(--tx); }
+nav.strip a[aria-current="true"]::after { transform: scaleX(1); }
+.tab-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.kbtn { display: inline-flex; align-items: center; gap: 10px; height: 32px; padding: 0 8px 0 12px; border: 1px solid var(--line-2); border-radius: 7px; background: var(--p1); color: var(--tx2); font-size: 12.5px; cursor: pointer; transition: border-color .2s, color .2s; }
+.kbtn:hover { border-color: var(--tx3); color: var(--tx); }
+.btn-amber { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px; border-radius: 7px; background: var(--amber); color: var(--on-amber); text-decoration: none; font-weight: 500; font-size: 12.5px; white-space: nowrap; transition: filter .2s, transform .2s var(--ease); }
+.btn-amber:hover { filter: brightness(1.07); transform: translateY(-1px); }
+.hdr.condensed .titlebar { height: 0; opacity: 0; border-color: transparent; }
+.hdr.condensed .tabs { height: 44px; }
+.hdr.condensed .brand .mini-dots { display: flex; }
+.hdr.condensed .logo { height: 24px; }
+.kbtn .mob { display: none; }
+@media (max-width: 1100px) { nav.strip a .n { display: none; } nav.strip a { padding: 0 9px; } nav.strip a::after { left: 9px; right: 9px; } .tb-hints .h2x { display: none; } }
+@media (max-width: 900px) {
+  nav.strip, .tab-right .btn-amber, .tb-hints { display: none; }
+  .titlebar { grid-template-columns: auto 1fr; gap: 14px; }
+  .kbtn .desk { display: none; } .kbtn .mob { display: inline; }
+  .kbtn { height: 36px; padding: 0 12px; color: var(--tx); }
+  .tabs { padding: 0 12px 0 16px; }
+}
+
+/* ---------- sections ---------- */
+section { padding: clamp(88px, 10vw, 152px) 0 0; }
+.cmd { font-size: 12.5px; color: var(--tx2); margin-bottom: 22px; }
+.cmd > span { margin-right: .8ch; }
+.cmd .cwd { color: var(--tx3); }
+.cmd .dl { color: var(--tx3); }
+.cmd .ct { color: var(--tx); }
+.h2 { font: 500 clamp(34px, 4.6vw, 66px)/1.04 var(--sans); letter-spacing: -.035em; max-width: 17em; }
+.lede2 { font: 400 clamp(16px, 1.3vw, 19px)/1.55 var(--sans); color: var(--tx2); margin-top: 18px; max-width: 34em; }
+.panel { background: var(--p1); border: 1px solid var(--line); border-radius: 10px; }
+.pbar { display: flex; align-items: center; gap: 12px; height: 36px; padding: 0 14px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--tx2); }
+.pbar .r { margin-left: auto; color: var(--tx3); flex: none; }
+.pbar > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pbar .dots i { width: 9px; height: 9px; }
+
+/* ---------- hero ---------- */
+.hero { padding-top: clamp(48px, 7vw, 104px); }
+.hero-meta { font-size: 12.5px; color: var(--tx2); display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 26px; }
+.hero-meta span::before { content: "// "; color: var(--tx3); }
+h1 { font: 500 clamp(44px, 7.6vw, 116px)/1 var(--sans); letter-spacing: -.045em; max-width: 12.4em; }
+h1 .cur { display: inline-block; width: .36em; height: .72em; background: var(--amber); margin-left: .08em; vertical-align: -.04em; animation: blink 1.1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 80px); margin-top: clamp(36px, 4.6vw, 64px); align-items: start; }
+.lede { font: 400 clamp(18px, 1.55vw, 22px)/1.5 var(--sans); color: var(--tx); max-width: 26em; }
+.lede + .lede { color: var(--tx2); margin-top: 14px; font-size: clamp(16px, 1.2vw, 17px); }
+.actions { display: flex; flex-wrap: wrap; gap: 12px 16px; margin-top: 34px; align-items: center; }
+.actions .btn-amber { height: 46px; padding: 0 20px; font-size: 14px; border-radius: 8px; }
+.ghost { display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 18px; border: 1px solid var(--line-2); border-radius: 8px; text-decoration: none; font-size: 14px; color: var(--tx); transition: border-color .2s, background .2s; }
+.ghost:hover { border-color: var(--tx3); background: var(--p1); }
+.keys { margin-top: 44px; border-top: 1px solid var(--line); padding-top: 18px; display: grid; gap: 10px; font-size: 12.5px; color: var(--tx2); max-width: 26em; }
+.keys div { display: flex; gap: 12px; align-items: center; }
+.keys kbd { min-width: 34px; text-align: center; }
+
+/* terminal */
+.term { overflow: hidden; box-shadow: 0 40px 80px -40px rgba(0,0,0,.6); }
+:root[data-theme="light"] .term { box-shadow: 0 40px 80px -48px rgba(40,30,10,.25); }
+.term .pbar { background: var(--p2); border-radius: 10px 10px 0 0; }
+.term-tabs { display: flex; gap: 2px; margin-left: 10px; }
+.term-tabs span { padding: 3px 10px; border-radius: 5px; font-size: 11.5px; }
+.term-tabs span.on { background: var(--p1); color: var(--tx); border: 1px solid var(--line); }
+.term-body { height: clamp(360px, 34vw, 470px); overflow-y: auto; padding: 16px 18px 18px; font-size: 13.5px; line-height: 1.65; cursor: text; scrollbar-width: thin; scrollbar-color: var(--line-2) transparent; overscroll-behavior: contain; }
+.ln { white-space: pre-wrap; word-break: break-word; min-height: 1.65em; }
+.ln a { color: var(--tx); text-decoration: underline; text-decoration-color: var(--tx3); }
+.ln a:hover { text-decoration-color: var(--amber); }
+.ps1 { color: var(--tx2); }
+.ps2 { color: var(--tx3); }
+.ok { color: var(--ok); } .err { color: var(--err); } .mut { color: var(--tx2); } .dim { color: var(--tx3); } .hi { color: var(--tx); font-weight: 500; }
+.amb { color: var(--amber-tx); }
+.out-h { font: 500 22px/1.2 var(--sans); letter-spacing: -.02em; color: var(--tx); display: block; margin: 6px 0 4px; white-space: normal; }
+.gridout { display: grid; grid-template-columns: max-content 1fr; gap: 0 20px; }
+.prompt { position: relative; display: flex; flex-wrap: wrap; align-items: baseline; }
+.prompt .typed { white-space: pre-wrap; word-break: break-all; }
+.prompt .typed .c { display: inline-block; min-width: .6em; background: var(--amber); color: var(--on-amber); animation: blink 1.1s steps(1) infinite; }
+.term:not(.focus) .prompt .typed .c { background: transparent; outline: 1px solid var(--amber); outline-offset: -1px; animation: none; color: inherit; }
+.prompt input { position: absolute; inset: 0; width: 100%; opacity: 0; font-size: 16px; border: 0; padding: 0; background: transparent; color: transparent; caret-color: transparent; }
+.prompt input:focus { outline: none; }
+.term.focus { border-color: var(--line-2); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 14px; border-top: 1px solid var(--line); background: var(--p1); }
+.chips span { font-size: 11.5px; color: var(--tx3); margin-right: 4px; align-self: center; }
+.chips button { border: 1px solid var(--line); background: var(--p2); border-radius: 5px; padding: 4px 9px; font-size: 12px; color: var(--tx2); cursor: pointer; transition: color .2s, border-color .2s; }
+.chips button:hover { color: var(--tx); border-color: var(--tx3); }
+
+@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } .keys { display: none; } .term-body { height: 380px; font-size: 12.5px; padding: 14px; } .term-tabs span:not(.on) { display: none; } }
+/* ---------- services explorer ---------- */
+.svc-head { display: flex; justify-content: space-between; align-items: end; gap: 32px; flex-wrap: wrap; }
+.explorer { margin-top: 48px; display: grid; grid-template-columns: 300px minmax(0, 1fr); grid-template-rows: auto repeat(6, auto) 1fr; overflow: hidden; }
+.ex-side-h { grid-column: 1; grid-row: 1; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--tx3); padding: 18px 18px 10px; border-right: 1px solid var(--line); }
+.ex-side-h b { color: var(--tx2); font-weight: 500; letter-spacing: 0; text-transform: none; font-size: 12.5px; display: block; margin-top: 10px; }
+.ex-item { display: contents; }
+.ex-file { grid-column: 1; display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; border: 0; background: transparent; padding: 9px 18px 9px 34px; font-size: 13px; color: var(--tx2); cursor: pointer; border-right: 1px solid var(--line); position: relative; transition: background .15s, color .15s; }
+.ex-file::before { content: ""; position: absolute; left: 22px; top: 0; bottom: 0; border-left: 1px solid var(--line-2); }
+.ex-file .ic { width: 10px; height: 12px; border: 1px solid currentColor; border-radius: 1px 4px 1px 1px; opacity: .7; flex: none; }
+.ex-file:hover { color: var(--tx); background: var(--p2); }
+.ex-file[aria-expanded="true"] { color: var(--tx); background: var(--p2); box-shadow: inset 2px 0 0 var(--amber); }
+.ex-file[aria-expanded="true"] .ic { border-color: var(--amber); opacity: 1; }
+.ex-file:focus-visible { outline-offset: -2px; }
+.ex-side-f { grid-column: 1; grid-row: 8; border-right: 1px solid var(--line); padding: 24px 18px 18px; font-size: 11.5px; color: var(--tx3); align-self: stretch; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; }
+.ex-pane { grid-column: 2; grid-row: 1 / span 8; display: none; flex-direction: column; min-height: 440px; }
+.ex-pane.on { display: flex; }
+.ex-pane .pbar { height: 40px; }
+.ex-pane .pbar .tabname { color: var(--tx); border-bottom: 2px solid var(--amber); height: 100%; display: flex; align-items: center; margin-bottom: -1px; }
+.ex-body { padding: clamp(24px, 3.6vw, 52px); display: flex; flex-direction: column; gap: 22px; flex: 1; }
+.fm { font-size: 12.5px; color: var(--tx3); line-height: 1.7; }
+.fm b { color: var(--tx2); font-weight: 400; }
+.ex-body h3 { font: 500 clamp(28px, 3vw, 44px)/1.08 var(--sans); letter-spacing: -.03em; max-width: 18em; }
+.ex-body h3::before { content: "# "; color: var(--tx3); font-family: var(--mono); font-weight: 400; font-size: .6em; vertical-align: .2em; }
+.ex-body p { font: 400 clamp(16px, 1.3vw, 19px)/1.6 var(--sans); color: var(--tx2); max-width: 36em; }
+.flags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 12px; }
+.flags code { font: 400 12.5px/1 var(--mono); padding: 7px 10px; border: 1px solid var(--line); border-radius: 5px; background: var(--p2); color: var(--tx); }
+.flags code::before { content: "--"; color: var(--tx3); }
+.flags .lbl { width: 100%; font-size: 11.5px; color: var(--tx3); }
+@media (max-width: 860px) {
+  .explorer { display: block; }
+  .ex-side-h { border-right: 0; border-bottom: 1px solid var(--line); }
+  .ex-side-f { display: none; }
+  .ex-item { display: block; border-bottom: 1px solid var(--line); }
+  .ex-item:last-of-type { border-bottom: 0; }
+  .ex-file { border-right: 0; padding: 16px; font-size: 13.5px; }
+  .ex-file::before { display: none; }
+  .ex-file::after { content: "+"; margin-left: auto; color: var(--tx3); font-size: 16px; }
+  .ex-file[aria-expanded="true"]::after { content: "−"; color: var(--amber-tx); }
+  .ex-pane { min-height: 0; }
+  .ex-pane .pbar { display: none; }
+  .ex-body { padding: 4px 16px 22px; gap: 16px; }
+  .ex-body h3 { font-size: 26px; }
+  .ex-body p { font-size: 16px; }
+}
+
+/* ---------- stack: pinned scrub ---------- */
+.stack-scene { position: relative; }
+.stack-pin { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+.stack-scene.scrub { height: 330vh; }
+.stack-scene.scrub .stack-pin { position: sticky; top: 44px; height: calc(100vh - 44px); align-items: center; padding-top: 28px; padding-bottom: 28px; }
+.log { margin-top: 36px; overflow: hidden; }
+.log-body { padding: 14px 16px; font-size: 12px; line-height: 1.75; height: 252px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
+.log-body .l { display: grid; grid-template-columns: 58px 92px 1fr auto; gap: 8px; white-space: nowrap; color: var(--tx2); }
+.log-body .l span:nth-child(3) { overflow: hidden; text-overflow: ellipsis; }
+.log-body .l .t { color: var(--tx3); }
+.log-body .l .tag { color: var(--tx); }
+.stack-scene .l { transition: opacity .25s; }
+.stack-scene .l[hidden] { display: none; }
+.pipe { padding: 22px clamp(16px, 2.4vw, 30px) 18px; }
+.layer { position: relative; display: grid; grid-template-columns: 34px 1fr; column-gap: 14px; padding-bottom: 14px; --c: var(--tx3); }
+.layer:last-child { padding-bottom: 0; }
+.layer .node { grid-row: 1 / span 2; position: relative; display: flex; justify-content: center; }
+.layer .node b { position: relative; z-index: 1; width: 34px; height: 24px; display: grid; place-items: center; border: 1px solid var(--line-2); border-radius: 5px; font: 500 11px/1 var(--mono); color: var(--tx3); background: var(--p1); transition: all .35s var(--ease); }
+.layer .node::after { content: ""; position: absolute; top: 24px; bottom: -14px; left: 50%; border-left: 1px solid var(--line-2); transition: border-color .4s; }
+.layer:last-child .node::after { display: none; }
+.layer .lh { display: flex; align-items: baseline; gap: 12px; height: 24px; font-size: 12.5px; color: var(--tx3); transition: color .35s; }
+.layer .lh .nm { text-transform: uppercase; letter-spacing: .1em; font-weight: 500; }
+.layer .lh .ttl { font: 500 17px/1 var(--sans); letter-spacing: -.01em; }
+.layer .lh .st { margin-left: auto; font-size: 11.5px; }
+.layer ul { list-style: none; margin: 6px 0 0; padding: 0 0 0 2px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 18px; font-size: 12.5px; color: var(--tx3); transition: color .35s; }
+.layer li { position: relative; padding: 2px 0 2px 26px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.layer li::before { content: ""; position: absolute; left: 4px; top: 0; height: 50%; width: 14px; border-left: 1px solid var(--line-2); border-bottom: 1px solid var(--line-2); transition: border-color .35s; }
+.layer li::after { content: ""; position: absolute; left: 4px; top: 50%; bottom: 0; border-left: 1px solid var(--line-2); transition: border-color .35s; }
+.layer li:nth-last-child(-n+2)::after { display: none; }
+.layer:not(.lit) { opacity: .5; transition: opacity .35s; }
+.layer.lit .node b { color: var(--tx); border-color: var(--tx3); }
+.layer.lit .node::after { border-color: var(--tx3); }
+.layer.lit .lh { color: var(--tx2); }
+.layer.lit .lh .ttl { color: var(--tx); }
+.layer.lit ul { color: var(--tx); }
+.layer.lit li::before, .layer.lit li::after { border-color: var(--tx3); }
+.layer.lit .st { color: var(--ok); }
+.layer.cur .node b { background: var(--amber); color: var(--on-amber); border-color: var(--amber); }
+.pipe-f { display: flex; gap: 12px; align-items: center; border-top: 1px solid var(--line); margin-top: 18px; padding-top: 14px; font-size: 11.5px; color: var(--tx2); }
+.bar { flex: 1; height: 4px; background: var(--p2); border-radius: 2px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 100%; background: var(--tx2); transform-origin: left; transform: scaleX(var(--p, 1)); }
+@media (max-width: 900px) {
+  .stack-pin { grid-template-columns: 1fr; }
+  .log-body { height: auto; }
+  .log-body .l { grid-template-columns: 76px 1fr auto; }
+  .log-body .l .t { display: none; }
+  .log-body .l, .log-body .l span:nth-child(3) { white-space: normal; }
+}
+@media (max-width: 480px) {
+  .layer ul { grid-template-columns: 1fr; }
+  .layer li:nth-last-child(2)::after { display: block; }
+  .layer .lh .nm { display: none; }
+  .log-body .l { font-size: 11px; grid-template-columns: 70px 1fr auto; }
+}
+
+/* ---------- engagements ---------- */
+.eng-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(20px, 3vw, 40px); margin-top: 52px; align-items: start; }
+.gitlog { padding: 22px clamp(16px, 2.6vw, 32px) 26px; }
+.commit { position: relative; display: grid; grid-template-columns: 28px 1fr; column-gap: 12px; padding-bottom: 28px; }
+.commit:last-child { padding-bottom: 0; }
+.commit .g { position: relative; }
+.commit .g::before { content: ""; position: absolute; left: 50%; top: 8px; bottom: -28px; border-left: 1px solid var(--line-2); }
+.commit:last-child .g::before { display: none; }
+.commit .g i { position: absolute; left: 50%; top: 5px; width: 11px; height: 11px; margin-left: -5px; border-radius: 50%; border: 1.5px solid var(--tx2); background: var(--p1); }
+.commit.head .g i { border-color: var(--amber); background: var(--amber); }
+.commit .meta { font-size: 12.5px; color: var(--tx2); display: flex; gap: 10px; flex-wrap: wrap; }
+.commit .meta .hash { color: var(--tx3); }
+.commit .meta .ref { color: var(--ok); }
+.commit .meta .ref.h { color: var(--amber-tx); }
+.commit h3 { font: 500 clamp(22px, 2.1vw, 28px)/1.15 var(--sans); letter-spacing: -.02em; margin: 6px 0 8px; }
+.commit p { font: 400 16px/1.55 var(--sans); color: var(--tx2); max-width: 34em; }
+.toml pre { margin: 0; padding: 18px 0; font: 400 13px/1.85 var(--mono); overflow-x: auto; counter-reset: ln; }
+.toml .row { display: block; padding: 0 18px 0 0; white-space: pre; }
+.toml .row::before { counter-increment: ln; content: counter(ln); display: inline-block; width: 40px; padding-right: 14px; text-align: right; color: var(--tx3); opacity: .7; }
+.tk-c { color: var(--tx3); font-style: italic; }
+.tk-s { color: var(--ok); }
+.tk-h { color: var(--tx); font-weight: 500; }
+.tk-k { color: var(--tx2); }
+.tk-b { color: var(--err); }
+.tk-n { color: var(--tx); font-weight: 500; }
+.toml-note { padding: 14px 18px; border-top: 1px solid var(--line); display: grid; gap: 6px; font: 400 15px/1.45 var(--sans); color: var(--tx); }
+.toml-note div::before { content: "✓"; font-family: var(--sans); color: var(--ok); margin-right: 10px; }
+@media (max-width: 960px) { .eng-grid { grid-template-columns: 1fr; } }
+
+/* ---------- work ---------- */
+.work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 24px); margin-top: 52px; }
+.readme { display: flex; flex-direction: column; overflow: hidden; }
+.readme.big { grid-column: 1 / -1; }
+.readme .pbar .ok { display: inline-flex; align-items: center; gap: 7px; }
+.readme .pbar .ok::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ok); }
+.rd { padding: clamp(22px, 3vw, 40px); display: flex; flex-direction: column; gap: 16px; flex: 1; }
+.big .rd { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(28px, 4vw, 64px); }
+.rd .kicker { font-size: 12.5px; color: var(--tx2); }
+.rd .kicker::before { content: "## "; color: var(--tx3); }
+.rd h3 { font: 500 clamp(24px, 2.4vw, 34px)/1.1 var(--sans); letter-spacing: -.025em; max-width: 20em; }
+.rd p { font: 400 16.5px/1.6 var(--sans); color: var(--tx2); max-width: 36em; }
+.rd dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 22px; margin: 8px 0 0; font-size: 13px; border-top: 1px solid var(--line); padding-top: 18px; }
+.rd dt { color: var(--tx3); }
+.rd dd { margin: 0; color: var(--tx); }
+.stat { border-left: 1px solid var(--line); padding-left: clamp(24px, 3vw, 48px); display: flex; flex-direction: column; justify-content: flex-end; gap: 12px; }
+.stat .k { font-size: 12.5px; color: var(--tx2); }
+.stat .k b { color: var(--tx); font-weight: 500; }
+.stat .num { font: 500 clamp(72px, 8.6vw, 136px)/.9 var(--sans); letter-spacing: -.055em; color: var(--tx); white-space: nowrap; }
+.stat .num span { color: var(--tx3); }
+.stat .ph { margin-top: 10px; font: 400 clamp(17px, 1.4vw, 20px)/1.4 var(--sans); color: var(--tx); max-width: 20em; }
+@media (max-width: 860px) {
+  .work-grid { grid-template-columns: 1fr; }
+  .big .rd { grid-template-columns: 1fr; }
+  .stat { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 24px; }
+}
+
+/* ---------- company ---------- */
+#company .h2 { font-size: clamp(32px, 3.7vw, 54px); }
+.co-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+.co-copy p { font: 400 clamp(16.5px, 1.3vw, 19px)/1.6 var(--sans); color: var(--tx2); margin-top: 22px; max-width: 34em; }
+.co-copy p:first-of-type { color: var(--tx); }
+.facts { margin: 36px 0 0; font-size: 13px; max-width: 30em; }
+.facts div { display: flex; gap: 8px; padding: 9px 0; border-bottom: 1px dashed var(--line-2); }
+.facts dt { color: var(--tx3); width: 128px; flex: none; }
+.facts dt::after { content: ":"; }
+.facts dd { margin: 0; color: var(--tx); }
+.man { font-size: 13px; line-height: 1.7; }
+.man-h { display: flex; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--tx2); gap: 12px; }
+.man-h span:nth-child(2) { color: var(--tx3); }
+.man-b { padding: 22px 20px 6px; }
+.man-top { display: grid; grid-template-columns: 148px 1fr; gap: 22px; align-items: start; }
+.man h4 { margin: 0; font: 500 12px/1 var(--mono); letter-spacing: .1em; color: var(--tx); }
+.man .ind { padding-left: 4ch; color: var(--tx2); margin: 8px 0 20px; }
+.man .ind b { color: var(--tx); font-weight: 500; }
+.man .desc { font: 400 16px/1.6 var(--sans); color: var(--tx); }
+.man .opt { color: var(--tx3); }
+.man .opt em { font-style: normal; color: var(--tx2); }
+.man .opt > span { white-space: nowrap; }
+.man-f { display: flex; justify-content: space-between; padding: 12px 20px; border-top: 1px solid var(--line); font-size: 12px; color: var(--tx3); gap: 12px; }
+.photo { position: relative; width: 148px; aspect-ratio: 1; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); background: var(--p2); }
+.photo img, .photo canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.photo canvas { image-rendering: pixelated; transition: opacity .5s var(--ease); }
+.photo::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0,0,0,.16) 0 1px, transparent 1px 3px); pointer-events: none; mix-blend-mode: multiply; }
+.photo:hover canvas, .photo:focus-within canvas { opacity: 0; }
+.photo figcaption { position: absolute; left: 6px; bottom: 6px; z-index: 2; font-size: 10px; color: #D7DCE5; background: rgba(11,14,20,.7); padding: 2px 5px; border-radius: 3px; }
+@media (max-width: 900px) { .co-grid { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .man-top { grid-template-columns: 1fr; } .photo { width: 132px; } .man-h span:nth-child(2) { display: none; } }
+
+/* ---------- CTA scene ---------- */
+.cta { margin-top: clamp(88px, 10vw, 152px); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--p1); background-image: repeating-linear-gradient(0deg, var(--dot) 0 1px, transparent 1px 4px); padding: clamp(72px, 9vw, 140px) 0; }
+.cta .h2 { font-size: clamp(40px, 6.4vw, 96px); max-width: 12em; }
+.mail { display: inline-block; margin-top: clamp(32px, 4vw, 56px); font: 500 clamp(19px, 3.5vw, 50px)/1.25 var(--mono); letter-spacing: -.02em; color: var(--amber-tx); text-decoration: none; word-break: break-word; border-radius: 6px; }
+.mail .p { color: var(--tx3); }
+.mail .addr { background-image: linear-gradient(currentColor, currentColor); background-size: 0 2px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size .5s var(--ease); }
+.mail:hover .addr, .mail:focus-visible .addr { background-size: 100% 2px; }
+.mail .c { display: inline-block; width: .6em; height: 1.05em; background: var(--amber); vertical-align: -.2em; margin-left: .1em; animation: blink 1.1s steps(1) infinite; }
+.cta-meta { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; font-size: 13px; color: var(--tx2); }
+.cta-meta .rep { font: 400 18px/1.4 var(--sans); color: var(--tx); }
+.cta-meta button, .cta-meta a.sm { border: 1px solid var(--line-2); background: transparent; border-radius: 6px; padding: 6px 11px; font-size: 12.5px; color: var(--tx2); cursor: pointer; text-decoration: none; transition: color .2s, border-color .2s; }
+.cta-meta button:hover, .cta-meta a.sm:hover { color: var(--tx); border-color: var(--tx3); }
+.cta-meta .copied { color: var(--ok); }
+
+/* ---------- footer ---------- */
+footer { padding: 56px 0 12px; overflow: hidden; }
+footer .wrap { container-type: inline-size; }
+.legal { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 28px; font-size: 12px; color: var(--tx2); line-height: 1.7; }
+.legal h4 { margin: 0 0 8px; font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--tx3); }
+.legal .logo { height: 34px; margin-bottom: 12px; }
+.legal p { margin: 0; }
+.wordmark { font: 500 calc(100cqw / 5.8)/0.9 var(--mono); letter-spacing: -.02em; color: var(--tx); margin: 48px 0 0; padding-bottom: .1em; white-space: nowrap; user-select: none; }
+.wordmark .c { color: var(--amber); animation: blink 1.1s steps(1) infinite; }
+@media (max-width: 860px) { .legal { grid-template-columns: 1fr 1fr; } .legal > div:first-child { grid-column: 1 / -1; } }
+
+
+/* ---------- command palette ---------- */
+.pal { position: fixed; inset: 0; z-index: 90; display: flex; justify-content: center; align-items: flex-start; padding: 12vh 16px 16px; }
+.pal[hidden] { display: none; }
+.pal-scrim { position: absolute; inset: 0; background: rgba(5,7,10,.55); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+:root[data-theme="light"] .pal-scrim { background: rgba(40,36,28,.28); }
+.pal-box { position: relative; width: min(640px, 100%); background: color-mix(in srgb, var(--p1) 92%, transparent); backdrop-filter: blur(24px) saturate(170%); -webkit-backdrop-filter: blur(24px) saturate(170%); border: 1px solid var(--line-2); border-radius: 12px; box-shadow: 0 30px 80px -20px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.05); overflow: hidden; animation: palIn .18s var(--ease); }
+@keyframes palIn { from { opacity: 0; transform: translateY(-6px) scale(.985); } }
+.pal-in { display: flex; align-items: center; gap: 12px; padding: 0 16px; height: 56px; border-bottom: 1px solid var(--line); }
+.pal-in .ch { color: var(--amber-tx); font-size: 16px; }
+.pal-in input { flex: 1; min-width: 0; height: 100%; border: 0; background: transparent; color: var(--tx); font: 400 16px var(--mono); caret-color: var(--amber); }
+.pal-in input:focus { outline: none; }
+.pal-in input::placeholder { color: var(--tx3); }
+.pal-list { list-style: none; margin: 0; padding: 6px; max-height: min(420px, 56vh); overflow-y: auto; scrollbar-width: thin; }
+.pal-list .grp { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--tx3); padding: 12px 10px 6px; }
+.pal-list [role="option"] { display: flex; align-items: center; gap: 12px; padding: 0 10px; height: 40px; border-radius: 7px; font-size: 13.5px; color: var(--tx2); cursor: pointer; position: relative; }
+.pal-list [role="option"] > span:nth-child(2) { white-space: nowrap; }
+.pal-list [role="option"] .ico { width: 18px; color: var(--tx3); text-align: center; flex: none; }
+.pal-list [role="option"] .hint { margin-left: auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 45%; font-size: 11.5px; color: var(--tx3); }
+.pal-list [role="option"] mark { background: none; color: var(--amber-tx); }
+.pal-list [aria-selected="true"] { background: var(--p2); color: var(--tx); box-shadow: inset 2px 0 0 var(--amber); }
+.pal-list [aria-selected="true"] .ico { color: var(--amber-tx); }
+.pal-empty { padding: 22px 12px; color: var(--tx3); font-size: 13px; }
+.pal-foot { display: flex; gap: 16px; padding: 10px 16px; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--tx3); }
+.pal-foot span { display: inline-flex; gap: 6px; align-items: center; }
+.pal-foot .r { margin-left: auto; }
+@media (max-width: 600px) { .pal { padding-top: 10px; } .pal-foot .hide-m { display: none; } }
+
+/* ---------- reveals ---------- */
+.js .rv { opacity: 0; transform: translateY(18px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.js .rv.in { opacity: 1; transform: none; }
+.js .split .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.js .split .w > span { display: inline-block; transform: translateY(105%); transition: transform .9s var(--ease); transition-delay: calc(var(--i) * 35ms); }
+.js .split.in .w > span { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .js .rv { opacity: 1; transform: none; transition: none; }
+  .js .split .w > span { transform: none; transition: none; }
+  h1 .cur, .mail .c, .wordmark .c, .prompt .typed .c { animation: none; }
+  .pal-box { animation: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="window">
+
+<header class="hdr" id="hdr">
+  <div class="titlebar" aria-hidden="true">
+    <div class="dots"><i></i><i></i><i></i></div>
+    <div class="path"><b>~/mindworks</b> — zsh</div>
+    <div class="tb-hints"><span><kbd class="mk">⌘</kbd><kbd>K</kbd> commands</span><span class="h2x"><kbd>/</kbd> terminal</span></div>
+  </div>
+  <div class="tabs">
+    <a class="brand" href="#top" aria-label="Mindworks, back to top"><span class="mini-dots" aria-hidden="true"><i></i><i></i><i></i></span>{{logo}}</a>
+    <nav class="strip" aria-label="Sections">
+      <a href="#services"><span class="n">01</span>services</a>
+      <a href="#stack"><span class="n">02</span>stack</a>
+      <a href="#engagements"><span class="n">03</span>engagements</a>
+      <a href="#work"><span class="n">04</span>work</a>
+      <a href="#company"><span class="n">05</span>company</a>
+      <a href="#contact"><span class="n">06</span>contact</a>
+    </nav>
+    <div class="tab-right">
+      <button class="kbtn" type="button" id="pal-open" aria-haspopup="dialog" aria-controls="pal"><span class="desk">commands</span><span class="mob">menu</span><kbd class="desk mk">⌘K</kbd></button>
+      <a class="btn-amber" href="#contact">book an intro call</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<!-- ================= HERO ================= -->
+<section class="hero" id="top" aria-labelledby="h1">
+  <div class="wrap">
+    <div class="hero-meta"><span>mindworks technology ltd</span><span>london</span><span>est. 2021-04</span></div>
+    <h1 id="h1">Software for things that live in the real world.<span class="cur" aria-hidden="true"></span></h1>
+    <div class="hero-grid">
+      <div>
+        <p class="lede">A London consultancy that designs, builds and runs connected products, from the device in the field to the cloud behind it.</p>
+        <p class="lede">Device management, connectivity, software delivery and DevOps, billed by the hour.</p>
+        <div class="actions">
+          <a class="btn-amber" href="#contact">Book an intro call <span aria-hidden="true">→</span></a>
+          <a class="ghost" href="#work">See selected work</a>
+        </div>
+        <div class="keys" aria-label="Keyboard shortcuts">
+          <div><kbd class="mk">⌘K</kbd> open the command menu</div>
+          <div><kbd>/</kbd> type into the terminal</div>
+          <div><kbd>↑↓</kbd> browse files and history</div>
+        </div>
+      </div>
+      <div class="panel term" id="term">
+        <div class="pbar">
+          <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="term-tabs" aria-hidden="true"><span class="on">visitor@mindworks</span><span>~/mindworks</span></div>
+          <span class="r">interactive</span>
+        </div>
+        <div class="term-body" id="term-body">
+          <div id="term-out" role="log" aria-live="polite" aria-label="Terminal output">
+            <noscript><div class="ln"><span class="ps1">visitor@mindworks</span><span class="ps2">:~$</span> mindworks --about</div><div class="ln">Software for things that live in the real world.</div></noscript>
+          </div>
+          <label class="prompt" id="prompt"><span class="ps1">visitor@mindworks</span><span class="ps2">:~$&nbsp;</span><span class="typed" id="typed" aria-hidden="true"><span class="b"></span><span class="c"> </span><span class="a"></span></span><input id="term-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command. Type help for a list of commands."></label>
+        </div>
+        <div class="chips" aria-label="Quick commands"><span>try</span><button type="button" data-run="help">help</button><button type="button" data-run="services">services</button><button type="button" data-run="stack">stack</button><button type="button" data-run="work">work</button><button type="button" data-run="whoami">whoami</button><button type="button" data-run="contact">contact</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section id="services" aria-labelledby="svc-h">
+  <div class="wrap">
+    <div class="svc-head">
+      <div>
+        <div class="cmd"><span class="cwd">~/mindworks</span><span class="dl">$</span><span class="ct">ls services/</span></div>
+        <h2 class="h2 split" id="svc-h">Six ways to work with Mindworks.</h2>
+      </div>
+      <p class="lede2 rv">Clients combine whichever ones the work needs.</p>
+    </div>
+    <div class="panel explorer rv" id="explorer">
+      <div class="ex-side-h">Explorer<b>▾ services/</b></div>
+
+      <div class="ex-item">
+        <button class="ex-file" type="button" id="f1" aria-expanded="true" aria-controls="p1" style="grid-row:2"><span class="ic" aria-hidden="true"></span>01-architecture.md</button>
+        <article class="ex-pane on" id="p1" aria-labelledby="t1">
+          <div class="pbar"><span class="tabname">01-architecture.md</span><span class="r">markdown · 4 flags</span></div>
+          <div class="ex-body">
+            <div class="fm">---<br><b>service:</b> 01 / 06<br><b>kind:</b> advisory<br>---</div>
+            <h3 id="t1">Architecture and technical consultancy</h3>
+            <p>System design reviews, target architectures and the decisions in between: build or buy, monolith or services, which cloud, which protocol. Clients receive written recommendations their teams can act on, with the reasoning behind each one.</p>
+            <div class="flags"><span class="lbl">flags</span><code>architecture-reviews</code><code>tech-due-diligence</code><code>adrs</code><code>roadmaps</code></div>
+          </div>
+        </article>
+      </div>
+      <div class="ex-item">
+        <button class="ex-file" type="button" id="f2" aria-expanded="false" aria-controls="p2" style="grid-row:3"><span class="ic" aria-hidden="true"></span>02-iot-end-to-end.md</button>
+        <article class="ex-pane" id="p2" aria-labelledby="t2">
+          <div class="pbar"><span class="tabname">02-iot-end-to-end.md</span><span class="r">markdown · 5 flags</span></div>
+          <div class="ex-body">
+            <div class="fm">---<br><b>service:</b> 02 / 06<br><b>kind:</b> build + run<br>---</div>
+            <h3 id="t2">IoT systems, end to end</h3>
+            <p>Connected products from the device up: provisioning, telemetry pipelines, OTA updates, fleet management and the dashboards on top. This is the layer where hardware and software teams most often talk past each other, and where Mindworks does its best work.</p>
+            <div class="flags"><span class="lbl">flags</span><code>device-management</code><code>fleet-tracking</code><code>4g-lte</code><code>mqtt</code><code>remote-updates</code></div>
+          </div>
+        </article>
+      </div>
+      <div class="ex-item">
+        <button class="ex-file" type="button" id="f3" aria-expanded="false" aria-controls="p3" style="grid-row:4"><span class="ic" aria-hidden="true"></span>03-software-delivery.md</button>
+        <article class="ex-pane" id="p3" aria-labelledby="t3">
+          <div class="pbar"><span class="tabname">03-software-delivery.md</span><span class="r">markdown · 4 flags</span></div>
+          <div class="ex-body">
+            <div class="fm">---<br><b>service:</b> 03 / 06<br><b>kind:</b> hands-on<br>---</div>
+            <h3 id="t3">Hands-on software delivery</h3>
+            <p>When a project needs code more than advice, Mindworks builds it: backend services, APIs, integrations and the infrastructure they run on, delivered with tests, documentation and a codebase the client team can own.</p>
+            <div class="flags"><span class="lbl">flags</span><code>backend-and-apis</code><code>cloud-infrastructure</code><code>ci-cd</code><code>integrations</code></div>
+          </div>
+        </article>
+      </div>
+      <div class="ex-item">
+        <button class="ex-file" type="button" id="f4" aria-expanded="false" aria-controls="p4" style="grid-row:5"><span class="ic" aria-hidden="true"></span>04-devops-operations.md</button>
+        <article class="ex-pane" id="p4" aria-labelledby="t4">
+          <div class="pbar"><span class="tabname">04-devops-operations.md</span><span class="r">markdown · 5 flags</span></div>
+          <div class="ex-body">
+            <div class="fm">---<br><b>service:</b> 04 / 06<br><b>kind:</b> one-off or ongoing<br>---</div>
+            <h3 id="t4">DevOps and infrastructure operations</h3>
+            <p>Keeping production fast, stable and observable. Mindworks manages servers and cloud infrastructure, configures CDNs and traffic routing, and sets up monitoring and alerting so issues are caught before customers notice. Available as a one-off hardening project or as ongoing support.</p>
+            <div class="flags"><span class="lbl">flags</span><code>server-management</code><code>cdn</code><code>load-balancing</code><code>monitoring</code><code>alerting</code></div>
+          </div>
+        </article>
+      </div>
+      <div class="ex-item">
+        <button class="ex-file" type="button" id="f5" aria-expanded="false" aria-controls="p5" style="grid-row:6"><span class="ic" aria-hidden="true"></span>05-interim-leadership.md</button>
+        <article class="ex-pane" id="p5" aria-labelledby="t5">
+          <div class="pbar"><span class="tabname">05-interim-leadership.md</span><span class="r">markdown · 4 flags</span></div>
+          <div class="ex-body">
+            <div class="fm">---<br><b>service:</b> 05 / 06<br><b>kind:</b> leadership<br>---</div>
+            <h3 id="t5">Interim team leadership</h3>
+            <p>Engineering leadership while a company hires, reorganises or recovers a delivery that has slipped. That covers running the team day to day, introducing processes that fit its size, and a clean handover once a permanent lead is in place.</p>
+            <div class="flags"><span class="lbl">flags</span><code>engineering-management</code><code>delivery-process</code><code>hiring</code><code>mentoring</code></div>
+          </div>
+        </article>
+      </div>
+      <div class="ex-item">
+        <button class="ex-file" type="button" id="f6" aria-expanded="false" aria-controls="p6" style="grid-row:7"><span class="ic" aria-hidden="true"></span>06-tech-evaluation.md</button>
+        <article class="ex-pane" id="p6" aria-labelledby="t6">
+          <div class="pbar"><span class="tabname">06-tech-evaluation.md</span><span class="r">markdown · 4 flags</span></div>
+          <div class="ex-body">
+            <div class="fm">---<br><b>service:</b> 06 / 06<br><b>kind:</b> evaluation + rollout<br>---</div>
+            <h3 id="t6">Technology evaluation and adoption</h3>
+            <p>Before a client commits to a platform, vendor or tool, Mindworks trials it against their real constraints, reports the findings and, if it holds up, leads the rollout. Problems surface in week one rather than month six.</p>
+            <div class="flags"><span class="lbl">flags</span><code>vendor-trials</code><code>proofs-of-concept</code><code>rollout</code><code>developer-tooling</code></div>
+          </div>
+        </article>
+      </div>
+      <div class="ex-side-f" aria-hidden="true"><span>↑ ↓ browse · 6 files</span><span>combine any of them</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STACK ================= -->
+<section id="stack" aria-labelledby="stk-h">
+  <div class="stack-scene" id="stack-scene">
+    <div class="wrap stack-pin">
+      <div>
+        <div class="cmd"><span class="cwd">~/mindworks</span><span class="dl">$</span><span class="ct">mindworks trace --signal-path</span></div>
+        <h2 class="h2 split" id="stk-h">Every hop of the signal path, from the sensor to the server room.</h2>
+        <div class="panel log" aria-hidden="true">
+          <div class="pbar"><span>trace.log</span><span class="r" id="log-count">6 / 6 layers</span></div>
+          <div class="log-body" id="log-body">
+            <div class="l" data-s="0"><span class="t">00:00.08</span><span class="tag">[device]</span><span>scan field hardware: routers, appliances</span><span class="ok">ok</span></div>
+            <div class="l" data-s="0"><span class="t">00:00.21</span><span class="tag">[device]</span><span>embedded linux images · provisioning</span><span class="ok">ok</span></div>
+            <div class="l" data-s="1"><span class="t">00:00.47</span><span class="tag">[transport]</span><span>link up: 4G/LTE cellular, Wi-Fi, BLE</span><span class="ok">ok</span></div>
+            <div class="l" data-s="1"><span class="t">00:00.63</span><span class="tag">[transport]</span><span>MQTT connected over secure tunnel</span><span class="ok">ok</span></div>
+            <div class="l" data-s="2"><span class="t">00:01.02</span><span class="tag">[fleet]</span><span>tracking + health: 10,000s of devices</span><span class="ok">ok</span></div>
+            <div class="l" data-s="2"><span class="t">00:01.19</span><span class="tag">[fleet]</span><span>remote configuration, firmware updates</span><span class="ok">ok</span></div>
+            <div class="l" data-s="3"><span class="t">00:01.55</span><span class="tag">[cloud]</span><span>terraform apply: AWS, Azure, Kubernetes</span><span class="ok">ok</span></div>
+            <div class="l" data-s="3"><span class="t">00:01.70</span><span class="tag">[cloud]</span><span>time-series data store online</span><span class="ok">ok</span></div>
+            <div class="l" data-s="4"><span class="t">00:02.06</span><span class="tag">[product]</span><span>Ruby on Rails, Node.js, Python services up</span><span class="ok">ok</span></div>
+            <div class="l" data-s="4"><span class="t">00:02.24</span><span class="tag">[product]</span><span>web dashboards, analytics and alerts live</span><span class="ok">ok</span></div>
+            <div class="l" data-s="5"><span class="t">00:02.61</span><span class="tag">[ops]</span><span>servers, CDN, load balancing healthy</span><span class="ok">ok</span></div>
+            <div class="l" data-s="5"><span class="t">00:02.80</span><span class="tag">[ops]</span><span>logs, uptime, alerts: watching</span><span class="ok">ok</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel" role="img" aria-label="Signal path in six layers. Device, in the field: industrial 4G routers, home appliances, embedded Linux, provisioning. Transport, connectivity: 4G/LTE cellular, MQTT, Wi-Fi and BLE, secure tunnels. Fleet, device management: tracking and health, remote configuration, firmware updates, 10,000s of devices. Cloud, platform: AWS and Azure, Kubernetes, Terraform, time-series data. Product, applications: Ruby on Rails, Node.js and Python, web dashboards, analytics and alerts. Operations, run and observe: server management, CDN servers, load balancing, logs, uptime and alerts.">
+        <div class="pbar"><span>$ tree --pipeline stack/</span><span class="r">device → operations</span></div>
+        <div class="pipe" id="pipe">
+          <div class="layer lit" data-s="0"><div class="node"><b>01</b></div><div class="lh"><span class="nm">Device</span><span class="ttl">In the field</span><span class="st">ok</span></div><ul><li>Industrial 4G routers</li><li>Home appliances</li><li>Embedded Linux</li><li>Provisioning</li></ul></div>
+          <div class="layer lit" data-s="1"><div class="node"><b>02</b></div><div class="lh"><span class="nm">Transport</span><span class="ttl">Connectivity</span><span class="st">ok</span></div><ul><li>4G/LTE cellular</li><li>MQTT</li><li>Wi-Fi, BLE</li><li>Secure tunnels</li></ul></div>
+          <div class="layer lit" data-s="2"><div class="node"><b>03</b></div><div class="lh"><span class="nm">Fleet</span><span class="ttl">Device management</span><span class="st">ok</span></div><ul><li>Tracking and health</li><li>Remote configuration</li><li>Firmware updates</li><li>10,000s of devices</li></ul></div>
+          <div class="layer lit" data-s="3"><div class="node"><b>04</b></div><div class="lh"><span class="nm">Cloud</span><span class="ttl">Platform</span><span class="st">ok</span></div><ul><li>AWS, Azure</li><li>Kubernetes</li><li>Terraform</li><li>Time-series data</li></ul></div>
+          <div class="layer lit" data-s="4"><div class="node"><b>05</b></div><div class="lh"><span class="nm">Product</span><span class="ttl">Applications</span><span class="st">ok</span></div><ul><li>Ruby on Rails</li><li>Node.js, Python</li><li>Web dashboards</li><li>Analytics and alerts</li></ul></div>
+          <div class="layer lit cur" data-s="5"><div class="node"><b>06</b></div><div class="lh"><span class="nm">Operations</span><span class="ttl">Run and observe</span><span class="st">ok</span></div><ul><li>Server management</li><li>CDN servers</li><li>Load balancing</li><li>Logs, uptime, alerts</li></ul></div>
+          <div class="pipe-f"><span id="pipe-n">6/6</span><div class="bar"><i id="pipe-bar"></i></div><span>signal path</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ENGAGEMENTS ================= -->
+<section id="engagements" aria-labelledby="eng-h">
+  <div class="wrap">
+    <div class="cmd"><span class="cwd">~/mindworks</span><span class="dl">$</span><span class="ct">git log --graph --reverse engagement</span></div>
+    <h2 class="h2 split" id="eng-h">Billed by the hour. Judged by what ships.</h2>
+    <div class="eng-grid">
+      <div class="panel rv">
+        <div class="pbar"><span>engagement · 4 commits</span><span class="r">main</span></div>
+        <ol class="gitlog" style="list-style:none;margin:0">
+          <li class="commit"><div class="g" aria-hidden="true"><i></i></div><div><div class="meta"><span class="hash">0d41aa7</span><span class="ref">(tag: free, 30 min)</span><span>step 1/4</span></div><h3>Introductory call</h3><p>A free thirty-minute conversation to understand the problem and confirm whether Mindworks is the right fit.</p></div></li>
+          <li class="commit"><div class="g" aria-hidden="true"><i></i></div><div><div class="meta"><span class="hash">3c9e5f2</span><span>step 2/4</span></div><h3>Scope and rate</h3><p>A short written scope, an agreed hourly rate and an estimate of hours.</p></div></li>
+          <li class="commit"><div class="g" aria-hidden="true"><i></i></div><div><div class="meta"><span class="hash">7be21d4</span><span>step 3/4</span></div><h3>Work in the open</h3><p>Mindworks works inside the client's own tools, repositories and rituals, and reports progress where the team already looks.</p></div></li>
+          <li class="commit head"><div class="g" aria-hidden="true"><i></i></div><div><div class="meta"><span class="hash">a1f3c09</span><span class="ref h">(HEAD → handover)</span><span>step 4/4</span></div><h3>Hand over</h3><p>Documentation, recorded walkthroughs and a team that can carry on independently. That is how Mindworks measures a successful engagement.</p></div></li>
+        </ol>
+      </div>
+      <div class="panel toml rv">
+        <div class="pbar"><span>engagement.toml</span><span class="r">toml</span></div>
+<pre aria-label="Billing terms"><span class="row"><span class="tk-c"># how billing works</span></span><span class="row"><span class="tk-h">[billing]</span></span><span class="row"><span class="tk-k">model</span>     = <span class="tk-s">"hourly"</span></span><span class="row"><span class="tk-k">rate</span>      = <span class="tk-s">"agreed in writing"</span></span><span class="row"><span class="tk-k">invoices</span>  = <span class="tk-s">"hours logged against tasks"</span></span><span class="row"><span class="tk-c">            # every invoice is traceable</span></span><span class="row"></span><span class="row"><span class="tk-h">[retainer]</span></span><span class="row"><span class="tk-k">available</span> = <span class="tk-n">true</span></span><span class="row"><span class="tk-k">required</span>  = <span class="tk-b">false</span> <span class="tk-c"># never</span></span><span class="row"></span><span class="row"><span class="tk-h">[intro_call]</span></span><span class="row"><span class="tk-k">cost</span>      = <span class="tk-n">0</span></span><span class="row"><span class="tk-k">length</span>    = <span class="tk-s">"30 minutes"</span></span></pre>
+        <div class="toml-note"><div>An hourly rate, agreed in writing</div><div>Hours logged against tasks, so every invoice is traceable</div><div>Retainers available, never required</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WORK ================= -->
+<section id="work" aria-labelledby="work-h">
+  <div class="wrap">
+    <div class="cmd"><span class="cwd">~/mindworks</span><span class="dl">$</span><span class="ct">cat work/*/README.md</span></div>
+    <h2 class="h2 split" id="work-h">Selected work.</h2>
+    <div class="work-grid">
+      <article class="panel readme big rv">
+        <div class="pbar"><span>work/01-industrial-4g-routers/README.md</span><span class="r"><span class="ok">operating</span></span></div>
+        <div class="rd">
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div class="kicker">Industrial IoT, implemented and maintained</div>
+            <h3>Device management platform for industrial 4G routers</h3>
+            <p>A manufacturer of industrial 4G routers needed visibility and control over devices deployed in the field. Mindworks designed and implemented the platform that tracks and manages that router fleet, and continues to maintain and operate it.</p>
+            <dl><dt>client</dt><dd>Industrial networking manufacturer</dd><dt>role</dt><dd>Platform design, implementation, ongoing maintenance</dd></dl>
+          </div>
+          <div class="stat">
+            <div class="k"><b>fleet.size</b> = tens_of_thousands</div>
+            <div class="num" aria-hidden="true">10,000<span>s</span></div>
+            <p class="ph"><span class="sr">Tens of thousands: </span>Tens of thousands of industrial routers tracked and managed.</p>
+          </div>
+        </div>
+      </article>
+      <article class="panel readme rv">
+        <div class="pbar"><span>work/02-connected-home/README.md</span></div>
+        <div class="rd">
+          <div class="kicker">Consumer IoT</div>
+          <h3>Connected home appliances</h3>
+          <p>Tracking and management for small home appliances: connecting the devices, collecting their state, and giving operators control of the fleet.</p>
+        </div>
+      </article>
+      <article class="panel readme rv">
+        <div class="pbar"><span>work/03-cdn-operations/README.md</span></div>
+        <div class="rd">
+          <div class="kicker">Infrastructure</div>
+          <h3>CDN and server operations</h3>
+          <p>Managing CDN servers and the infrastructure around them, including provisioning, traffic management, monitoring and metrics, so content is delivered quickly and reliably.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPANY ================= -->
+<section id="company" aria-labelledby="co-h">
+  <div class="wrap co-grid">
+    <div class="co-copy">
+      <div class="cmd"><span class="cwd">~/mindworks</span><span class="dl">$</span><span class="ct">cat company.txt</span></div>
+      <h2 class="h2 split" id="co-h">An independent technology consultancy, founded in London in 2021.</h2>
+      <p class="rv">Mindworks Technology Ltd was founded in April 2021 to give technology companies direct access to senior engineering across software development, connectivity, device management and DevOps.</p>
+      <p class="rv">Its clients build products where software meets hardware: industrial networking equipment, connected home appliances, and the platforms and infrastructure behind them. Engagements range from a few days of architectural advice to long-running platform delivery and operations.</p>
+      <dl class="facts rv"><div><dt>founded</dt><dd>April 2021</dd></div><div><dt>headquarters</dt><dd>London, UK</dd></div><div><dt>sector</dt><dd>Technology</dd></div></dl>
+    </div>
+    <div>
+      <div class="cmd"><span class="cwd">~/mindworks</span><span class="dl">$</span><span class="ct">man berk</span></div>
+      <article class="panel man rv" aria-label="Founder: Berk Baydur">
+        <div class="man-h" aria-hidden="true"><span>BERK(1)</span><span>Mindworks Manual</span><span>BERK(1)</span></div>
+        <div class="man-b">
+          <div class="man-top">
+            <figure class="photo" style="margin:0" tabindex="0" aria-label="Portrait of Berk Baydur. Hover or focus to remove the dither."><img id="founder-img" src="{{img:../founder.jpg}}" alt="Berk Baydur" width="320" height="320"><canvas id="dither" width="296" height="296" aria-hidden="true"></canvas><figcaption aria-hidden="true">dither: bayer 8×8</figcaption></figure>
+            <div>
+              <h4>NAME</h4>
+              <p class="ind"><b>Berk Baydur</b> — Founder and Principal Consultant</p>
+              <h4>SYNOPSIS</h4>
+              <p class="ind"><b>berk</b> <span class="opt"><span>[<em>--software</em>]</span> <span>[<em>--connectivity</em>]</span> <span>[<em>--device-management</em>]</span> <span>[<em>--devops</em>]</span></span></p>
+            </div>
+          </div>
+          <h4>DESCRIPTION</h4>
+          <p class="ind desc">14 years in software engineering. Previously founded and ran an IoT start-up. Specialises in software development, connectivity, device management and DevOps.</p>
+          <h4>SEE ALSO</h4>
+          <p class="ind"><a href="https://www.linkedin.com/in/berk-baydur-4765bba2" rel="noopener" target="_blank">linkedin(1) ↗</a>, <a href="mailto:berk.baydur@mindworkss.co.uk">mail(1)</a></p>
+        </div>
+        <div class="man-f" aria-hidden="true"><span>Mindworks</span><span>2021-04</span><span>BERK(1)</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta" id="contact" aria-labelledby="cta-h">
+  <div class="wrap">
+    <div class="cmd"><span class="cwd">~/mindworks/contact</span><span class="dl">$</span><span class="ct">./start</span></div>
+    <h2 class="h2 split" id="cta-h">Building a connected product?</h2>
+    <a class="mail" href="mailto:berk.baydur@mindworkss.co.uk"><span class="p" aria-hidden="true">$ mail </span><span class="addr">berk.baydur@mindworkss.co.uk</span><span class="c" aria-hidden="true"></span></a>
+    <div class="cta-meta">
+      <span class="rep">Replies within one working day.</span>
+      <span>Unit 408 Screenworks, London N5 2ER</span>
+      <button type="button" id="copy">copy address</button>
+      <a class="sm" href="https://www.linkedin.com/in/berk-baydur-4765bba2" rel="noopener" target="_blank">LinkedIn ↗</a>
+      <span class="sr" aria-live="polite" id="copy-live"></span>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="legal">
+      <div>{{logo}}<p>Software and IoT engineering consultancy.</p></div>
+      <div><h4>Company</h4><p>Mindworks Technology Ltd<br>Registered in England and Wales</p></div>
+      <div><h4>Address</h4><p>Unit 408 Screenworks<br>22 Highbury Grove<br>London N5 2ER</p></div>
+      <div><h4>© 2026</h4><p>VAT No. GB 466 0822 84<br>No cookies, no tracking.</p></div>
+    </div>
+    <div class="wordmark" aria-hidden="true">mindworks<span class="c">_</span></div>
+  </div>
+</footer>
+</div>
+
+<!-- ================= COMMAND PALETTE ================= -->
+<div class="pal" id="pal" hidden>
+  <div class="pal-scrim" data-close></div>
+  <div class="pal-box" role="dialog" aria-modal="true" aria-label="Command menu">
+    <div class="pal-in"><span class="ch" aria-hidden="true">›</span><input id="pal-q" type="text" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search sections and actions…"><kbd>esc</kbd></div>
+    <ul class="pal-list" id="pal-list" role="listbox" aria-label="Commands"></ul>
+    <div class="pal-foot"><span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>↵</kbd> select</span><span class="hide-m"><kbd>esc</kbd> close</span><span class="r">mindworks</span></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const EMAIL = 'berk.baydur@mindworkss.co.uk';
+  const LINKEDIN = 'https://www.linkedin.com/in/berk-baydur-4765bba2';
+  const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+  if (!isMac) $$('.mk').forEach(k => k.textContent = k.textContent.replace('⌘', 'Ctrl '));
+  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  /* ---------- navigation helpers ---------- */
+  const SECTIONS = ['services', 'stack', 'engagements', 'work', 'company', 'contact'];
+  function go(id) {
+    const el = id === 'top' ? document.body : document.getElementById(id);
+    if (!el) return;
+    if (id === 'top') window.scrollTo({ top: 0, behavior: reduce.matches ? 'auto' : 'smooth' });
+    else el.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth' });
+    if (id !== 'top') history.replaceState(null, '', '#' + id);
+  }
+  function copyEmail() {
+    const done = () => { const b = $('#copy'); b.textContent = 'copied ✓'; b.classList.add('copied'); $('#copy-live').textContent = 'Email address copied'; setTimeout(() => { b.textContent = 'copy address'; b.classList.remove('copied'); }, 1800); };
+    try { navigator.clipboard.writeText(EMAIL).then(done, done); } catch (e) { done(); }
+  }
+  $('#copy').addEventListener('click', copyEmail);
+
+  /* ---------- theme ---------- */
+  function setTheme(t) {
+    if (t === 'light') root.dataset.theme = 'light'; else delete root.dataset.theme;
+    try { localStorage.setItem('mw-term-theme', t); } catch (e) {}
+    $('meta[name="theme-color"]').content = t === 'light' ? '#F3F1EC' : '#0B0E14';
+    drawDither();
+  }
+  const isLight = () => root.dataset.theme === 'light';
+  if (isLight()) $('meta[name="theme-color"]').content = '#F3F1EC';
+
+  /* ---------- header: condense + active tab ---------- */
+  const hdr = $('#hdr');
+  const tabs = $$('nav.strip a');
+  let ticking = false;
+  function onScroll() {
+    ticking = false;
+    hdr.classList.toggle('condensed', scrollY > 40);
+    let cur = null;
+    const line = innerHeight * 0.35;
+    for (const id of SECTIONS) { const el = document.getElementById(id); if (el.getBoundingClientRect().top <= line) cur = id; }
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = 'contact';
+    tabs.forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#' + cur ? 'true' : 'false'));
+    scrub();
+  }
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  addEventListener('resize', () => { setupScrub(); onScroll(); });
+
+  /* ---------- split-text + reveals ---------- */
+  $$('.split').forEach(h => {
+    let i = 0;
+    const walk = node => {
+      [...node.childNodes].forEach(n => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(part => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+            const w = document.createElement('span'); w.className = 'w';
+            const s = document.createElement('span'); s.textContent = part; s.style.setProperty('--i', i++);
+            w.appendChild(s); frag.appendChild(w);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1) walk(n);
+      });
+    };
+    h.setAttribute('aria-label', h.textContent.trim());
+    walk(h);
+    $$('.w', h).forEach(w => w.setAttribute('aria-hidden', 'true'));
+  });
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+  $$('.rv, .split').forEach(el => io.observe(el));
+
+  /* ---------- services explorer ---------- */
+  const files = $$('.ex-file');
+  const narrow = matchMedia('(max-width: 860px)');
+  function openFile(i, focus) {
+    files.forEach((f, j) => {
+      const on = narrow.matches ? (j === i ? f.getAttribute('aria-expanded') !== 'true' || focus === 'force' : false) : j === i;
+      f.setAttribute('aria-expanded', on ? 'true' : 'false');
+      document.getElementById(f.getAttribute('aria-controls')).classList.toggle('on', on);
+    });
+    if (focus === true || focus === 'force') files[i].focus({ preventScroll: focus === 'force' });
+  }
+  files.forEach((f, i) => {
+    f.addEventListener('click', () => openFile(i));
+    f.addEventListener('keydown', e => {
+      let n = null;
+      if (e.key === 'ArrowDown') n = (i + 1) % files.length;
+      else if (e.key === 'ArrowUp') n = (i - 1 + files.length) % files.length;
+      else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = files.length - 1;
+      if (n === null) return;
+      e.preventDefault();
+      if (narrow.matches) files[n].focus(); else openFile(n, true);
+    });
+  });
+  narrow.addEventListener('change', () => { if (!narrow.matches && !files.some(f => f.getAttribute('aria-expanded') === 'true')) openFile(0); });
+  function showService(i) { go('services'); setTimeout(() => openFile(i, 'force'), reduce.matches ? 0 : 450); }
+
+  /* ---------- stack scrub ---------- */
+  const scene = $('#stack-scene');
+  const layers = $$('.layer', scene);
+  const logLines = $$('.l', scene);
+  const scrubMQ = matchMedia('(min-width: 901px) and (min-height: 640px)');
+  let scrubOn = false;
+  function setupScrub() {
+    scrubOn = scrubMQ.matches && !reduce.matches;
+    scene.classList.toggle('scrub', scrubOn);
+    if (!scrubOn) paint(6, 1);
+  }
+  function paint(lit, p) {
+    layers.forEach((l, i) => { l.classList.toggle('lit', i < lit); l.classList.toggle('cur', i === lit - 1); });
+    logLines.forEach(l => l.hidden = +l.dataset.s >= lit);
+    $('#pipe-n').textContent = lit + '/6';
+    $('#log-count').textContent = lit + ' / 6 layers';
+    $('#pipe-bar').style.setProperty('--p', p.toFixed(3));
+  }
+  let lastLit = -1;
+  function scrub() {
+    if (!scrubOn) return;
+    const r = scene.getBoundingClientRect();
+    const total = r.height - innerHeight;
+    const p = Math.min(1, Math.max(0, -r.top / total));
+    const lit = Math.min(6, Math.max(1, Math.floor(p * 6.6) + 1));
+    $('#pipe-bar').style.setProperty('--p', p.toFixed(3));
+    if (lit !== lastLit) { lastLit = lit; paint(lit, p); }
+  }
+  reduce.addEventListener('change', () => { setupScrub(); onScroll(); });
+
+  /* ---------- founder dither ---------- */
+  const img = $('#founder-img'), cv = $('#dither');
+  const bayer = [0,48,12,60,3,51,15,63,32,16,44,28,35,19,47,31,8,56,4,52,11,59,7,55,40,24,36,20,43,27,39,23,2,50,14,62,1,49,13,61,34,18,46,30,33,17,45,29,10,58,6,54,9,57,5,53,42,26,38,22,41,25,37,21];
+  function drawDither() {
+    if (!img.complete || !img.naturalWidth) return;
+    const N = 148, ctx = cv.getContext('2d', { willReadFrequently: true });
+    cv.width = N; cv.height = N;
+    ctx.drawImage(img, 0, 0, N, N);
+    let d; try { d = ctx.getImageData(0, 0, N, N); } catch (e) { cv.remove(); return; }
+    const light = isLight();
+    const lo = light ? [236, 233, 226] : [17, 21, 29], hi = light ? [32, 38, 52] : [215, 220, 229];
+    const px = d.data;
+    for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+      const k = (y * N + x) * 4;
+      let v = (px[k] * .3 + px[k + 1] * .59 + px[k + 2] * .11) / 255;
+      v = Math.min(1, Math.max(0, (v - .5) * 1.35 + .52));
+      if (light) v = 1 - v;
+      const on = v > (bayer[(y & 7) * 8 + (x & 7)] + .5) / 64;
+      const c = on ? hi : lo;
+      px[k] = c[0]; px[k + 1] = c[1]; px[k + 2] = c[2]; px[k + 3] = 255;
+    }
+    ctx.putImageData(d, 0, 0);
+  }
+  if (img.complete) drawDither(); else img.addEventListener('load', drawDither);
+
+  /* ---------- terminal ---------- */
+  const term = $('#term'), tbody = $('#term-body'), tout = $('#term-out'), tin = $('#term-in'), typed = $('#typed');
+  const hist = []; let hIdx = 0, autotyping = false, skipAuto = false;
+  function renderPrompt() {
+    const v = tin.value, pos = tin.selectionStart ?? v.length;
+    typed.querySelector('.b').textContent = v.slice(0, pos);
+    typed.querySelector('.c').textContent = v[pos] || ' ';
+    typed.querySelector('.a').textContent = v.slice(pos + 1);
+  }
+  const scrollTerm = () => { tbody.scrollTop = tbody.scrollHeight; };
+  function print(html, cls) { const d = document.createElement('div'); d.className = 'ln' + (cls ? ' ' + cls : ''); d.innerHTML = html; tout.appendChild(d); scrollTerm(); return d; }
+  const ps = cmd => `<span class="ps1">visitor@mindworks</span><span class="ps2">:~$</span> ${esc(cmd)}`;
+  const link = (href, text, ext) => `<a href="${href}"${ext ? ' target="_blank" rel="noopener"' : ''}>${text}</a>`;
+  const SVC = [['01-architecture.md', 'Architecture and technical consultancy'], ['02-iot-end-to-end.md', 'IoT systems, end to end'], ['03-software-delivery.md', 'Hands-on software delivery'], ['04-devops-operations.md', 'DevOps and infrastructure operations'], ['05-interim-leadership.md', 'Interim team leadership'], ['06-tech-evaluation.md', 'Technology evaluation and adoption']];
+  const STACK = [['device', 'In the field', 'Industrial 4G routers · Home appliances · Embedded Linux · Provisioning'], ['transport', 'Connectivity', '4G/LTE cellular · MQTT · Wi-Fi, BLE · Secure tunnels'], ['fleet', 'Device management', 'Tracking and health · Remote configuration · Firmware updates · 10,000s of devices'], ['cloud', 'Platform', 'AWS, Azure · Kubernetes · Terraform · Time-series data'], ['product', 'Applications', 'Ruby on Rails · Node.js, Python · Web dashboards · Analytics and alerts'], ['operations', 'Run and observe', 'Server management · CDN servers · Load balancing · Logs, uptime, alerts']];
+  const COMMANDS = {
+    help: () => `<span class="mut">available commands</span>\n<div class="gridout">${[['about', 'what Mindworks is'], ['services', 'six ways to work together'], ['stack', 'the signal path, device to operations'], ['engagements', 'how an engagement runs and is billed'], ['work', 'selected case studies'], ['whoami', 'the founder'], ['contact', 'email, LinkedIn, address'], ['ls', 'list sections'], ['cd &lt;section&gt;', 'jump to a section'], ['mail · linkedin', 'open them directly'], ['theme', 'toggle light / dark'], ['clear', 'clear the screen']].map(([c, d]) => `<span class="hi">${c}</span><span class="mut">${d}</span>`).join('')}</div><span class="dim">tip: ↑/↓ recalls history, tab completes, ${isMac ? '⌘K' : 'Ctrl K'} opens the command menu.</span>`,
+    about: () => `<span class="out-h">Software for things that live in the real world.</span><span class="mut">A London consultancy that designs, builds and runs connected products, from the device in the field to the cloud behind it.</span>\n<span class="ok">ok</span>  <span class="mut">founded 2021-04 · billed by the hour · replies within one working day</span>\n<span class="dim">type</span> <span class="hi">help</span> <span class="dim">to see what else this terminal knows.</span>`,
+    ls: () => `${SECTIONS.map(s => link('#' + s, s + '/')).join('   ')}   <span class="mut">README.md</span>`,
+    services: () => `<span class="mut">services/ · 6 files · clients combine whichever ones the work needs</span>\n<div class="gridout">${SVC.map(([f, t], i) => `<a href="#services" data-file="${i}">${f}</a><span class="mut">${t}</span>`).join('')}</div>`,
+    stack: () => `<span class="mut">every hop of the signal path, from the sensor to the server room</span>\n${STACK.map(([k, t, items], i) => `<span class="hi">${String(i + 1).padStart(2, '0')} ${k.padEnd(10)}</span> <span class="mut">${t}</span>\n   <span class="dim">${i < 5 ? '│' : ' '}</span> <span>${items}</span>`).join('\n')}\n${link('#stack', 'view the pipeline ↓')}`,
+    engagements: () => `<span class="mut">billed by the hour. judged by what ships.</span>\n<div class="gridout"><span class="hi">1 intro call</span><span class="mut">free, thirty minutes, is Mindworks the right fit?</span><span class="hi">2 scope + rate</span><span class="mut">short written scope, agreed hourly rate, estimate of hours</span><span class="hi">3 in the open</span><span class="mut">inside your tools, repositories and rituals</span><span class="hi">4 hand over</span><span class="mut">docs, recorded walkthroughs, an independent team</span></div><span class="ok">ok</span>  <span class="mut">hours logged against tasks · retainers available, never required</span>`,
+    work: () => `<span class="hi">01</span> Device management platform for industrial 4G routers\n   <span class="ok">▲ tens of thousands</span> <span class="mut">of industrial routers tracked and managed</span>\n<span class="hi">02</span> Connected home appliances <span class="dim">· consumer IoT</span>\n<span class="hi">03</span> CDN and server operations <span class="dim">· infrastructure</span>\n${link('#work', 'read the READMEs ↓')}`,
+    whoami: () => `<span class="out-h">Berk Baydur</span><span class="mut">Founder and Principal Consultant, Mindworks Technology Ltd</span>\n14 years in software engineering. Previously founded and ran an IoT start-up.\n<span class="mut">specialises in: software development · connectivity · device management · DevOps</span>\n${link(LINKEDIN, 'linkedin ↗', true)}   ${link('#company', 'man berk ↓')}`,
+    contact: () => `<span class="out-h">Building a connected product?</span>${link('mailto:' + EMAIL, EMAIL)}\n<span class="ok">ok</span>  <span class="mut">replies within one working day</span>\n<span class="mut">Unit 408 Screenworks, 22 Highbury Grove, London N5 2ER</span>\n${link(LINKEDIN, 'linkedin ↗', true)}`,
+    mail: () => { location.href = 'mailto:' + EMAIL; return `<span class="ok">ok</span>  opening mail to ${link('mailto:' + EMAIL, EMAIL)}`; },
+    linkedin: () => { window.open(LINKEDIN, '_blank', 'noopener'); return `<span class="ok">ok</span>  ${link(LINKEDIN, 'linkedin.com/in/berk-baydur ↗', true)}`; },
+    theme: () => { setTheme(isLight() ? 'dark' : 'light'); return `<span class="ok">ok</span>  theme set to ${isLight() ? 'light' : 'dark'}`; },
+    pwd: () => '/home/visitor/mindworks',
+    date: () => new Date().toString(),
+    echo: a => esc(a.join(' ')),
+    sudo: () => `<span class="err">err</span>  permission denied. Berk does take requests, though: ${link('mailto:' + EMAIL, 'mail')}`,
+    exit: () => `<span class="mut">there is no exit, only</span> <span class="hi">${isMac ? '⌘K' : 'Ctrl K'}</span>`,
+    history: () => hist.map((h, i) => `<span class="dim">${String(i + 1).padStart(3)}</span>  ${esc(h)}`).join('\n') || '<span class="dim">(empty)</span>',
+  };
+  const ALIAS = { mindworks: 'about', '?': 'help', man: 'whoami', email: 'mail', light: 'theme', dark: 'theme', company: 'whoami', engagement: 'engagements', billing: 'engagements', cat: 'ls' };
+  function run(raw, silentEcho) {
+    const line = raw.trim();
+    if (!silentEcho) print(ps(line));
+    if (!line) return;
+    hist.push(line); hIdx = hist.length;
+    let [cmd, ...args] = line.split(/\s+/);
+    cmd = cmd.toLowerCase();
+    if (cmd === 'clear' || cmd === 'cls') { tout.innerHTML = ''; return; }
+    if (cmd === 'cd' || cmd === 'open' || cmd === 'goto') {
+      const t = (args[0] || '').replace(/[\/~.]/g, '').toLowerCase();
+      if (!t) { go('top'); print('<span class="mut">~</span>'); return; }
+      const hit = SECTIONS.find(s => s.startsWith(t));
+      if (hit) { print(`<span class="ok">ok</span>  cd ${hit}/`); go(hit); }
+      else print(`<span class="err">err</span>  no such section: ${esc(t)}  <span class="dim">try</span> <span class="hi">ls</span>`);
+      return;
+    }
+    if (cmd === 'mindworks' && args.length && !/^--?about$/.test(args[0])) cmd = args[0].replace(/^-+/, '');
+    if (cmd === 'light' && isLight() || cmd === 'dark' && !isLight()) { print(`<span class="mut">already ${cmd}</span>`); return; }
+    const fn = COMMANDS[ALIAS[cmd] || cmd];
+    if (fn) print(fn(args));
+    else print(`<span class="err">err</span>  command not found: ${esc(cmd)}\n<span class="dim">type</span> <span class="hi">help</span> <span class="dim">for the list, or press</span> <span class="hi">${isMac ? '⌘K' : 'Ctrl K'}</span>`);
+  }
+  tout.addEventListener('click', e => { const a = e.target.closest('a[data-file]'); if (a) { e.preventDefault(); showService(+a.dataset.file); } });
+  const ALLCMDS = [...Object.keys(COMMANDS), 'clear', 'cd', ...SECTIONS.map(s => 'cd ' + s)];
+  tin.addEventListener('keydown', e => {
+    if (autotyping) { skipAuto = true; }
+    if (e.key === 'Enter') { e.preventDefault(); const v = tin.value; tin.value = ''; run(v); renderPrompt(); }
+    else if (e.key === 'ArrowUp') { if (hist.length) { e.preventDefault(); hIdx = Math.max(0, hIdx - 1); tin.value = hist[hIdx]; requestAnimationFrame(() => { tin.setSelectionRange(tin.value.length, tin.value.length); renderPrompt(); }); } }
+    else if (e.key === 'ArrowDown') { if (hist.length) { e.preventDefault(); hIdx = Math.min(hist.length, hIdx + 1); tin.value = hist[hIdx] || ''; renderPrompt(); } }
+    else if (e.key === 'Tab' && tin.value.trim()) {
+      const v = tin.value.trimStart().toLowerCase(), m = ALLCMDS.filter(c => c.startsWith(v));
+      if (m.length === 1) { e.preventDefault(); tin.value = m[0] + ' '; renderPrompt(); }
+      else if (m.length > 1) { e.preventDefault(); print(ps(tin.value)); print(`<span class="mut">${m.join('   ')}</span>`); }
+    }
+    else if (e.key === 'l' && e.ctrlKey) { e.preventDefault(); tout.innerHTML = ''; }
+  });
+  ['input', 'keyup', 'click', 'select'].forEach(ev => tin.addEventListener(ev, renderPrompt));
+  document.addEventListener('selectionchange', () => { if (document.activeElement === tin) renderPrompt(); });
+  tin.addEventListener('focus', () => term.classList.add('focus'));
+  tin.addEventListener('blur', () => term.classList.remove('focus'));
+  tbody.addEventListener('mouseup', e => { if (!e.target.closest('a') && !String(getSelection())) tin.focus({ preventScroll: true }); });
+  $$('[data-run]').forEach(b => b.addEventListener('click', () => { skipAuto = true; run(b.dataset.run); }));
+
+  async function boot() {
+    const cmd = 'mindworks --about';
+    if (reduce.matches) { print(ps(cmd)); print(COMMANDS.about()); renderPrompt(); return; }
+    autotyping = true;
+    await sleep(700);
+    for (let i = 1; i <= cmd.length && !skipAuto; i++) { tin.value = cmd.slice(0, i); renderPrompt(); await sleep(38 + Math.random() * 55); }
+    if (!skipAuto) await sleep(320);
+    tin.value = ''; renderPrompt();
+    print(ps(cmd));
+    const out = COMMANDS.about();
+    const parts = out.split('\n');
+    const wrap = print('');
+    for (let i = 0; i < parts.length; i++) { wrap.innerHTML = parts.slice(0, i + 1).join('\n'); scrollTerm(); if (!skipAuto) await sleep(140); }
+    autotyping = false;
+  }
+  renderPrompt(); boot();
+
+  /* ---------- command palette ---------- */
+  const pal = $('#pal'), q = $('#pal-q'), list = $('#pal-list');
+  let items = [], sel = 0, lastFocus = null;
+  const ITEMS = () => [
+    { g: 'Actions', label: 'Email Berk', hint: EMAIL, ico: '@', kw: 'mail contact write', run: () => { location.href = 'mailto:' + EMAIL; } },
+    { g: 'Actions', label: 'Copy email address', hint: 'clipboard', ico: '⧉', kw: 'copy', run: copyEmail },
+    { g: 'Actions', label: 'Open LinkedIn', hint: '↗', ico: 'in', kw: 'linkedin profile berk', run: () => window.open(LINKEDIN, '_blank', 'noopener') },
+    { g: 'Actions', label: isLight() ? 'Toggle dark theme' : 'Toggle light theme', hint: 'theme', ico: '◐', kw: 'theme light dark mode', run: () => setTheme(isLight() ? 'dark' : 'light') },
+    { g: 'Actions', label: 'Focus the terminal', hint: '/', ico: '$', kw: 'terminal shell prompt type', run: () => { go('top'); setTimeout(() => tin.focus({ preventScroll: true }), 300); } },
+    { g: 'Actions', label: 'Run help in terminal', hint: '$ help', ico: '$', kw: 'help commands', run: () => { go('top'); skipAuto = true; run('help'); } },
+    ...['top', ...SECTIONS].map((s, i) => ({ g: 'Go to', label: s === 'top' ? 'Top of page' : s[0].toUpperCase() + s.slice(1), hint: s === 'top' ? '~' : '#' + s, ico: '#', kw: s, run: () => go(s) })),
+    ...SVC.map(([f, t], i) => ({ g: 'Services', label: f, hint: t, ico: '·', kw: t, run: () => showService(i) })),
+  ];
+  function fuzzy(str, qs) {
+    if (!qs) return { score: 0, idx: [] };
+    const s = str.toLowerCase(); let j = 0, score = 0, prev = -2; const idx = [];
+    for (let i = 0; i < s.length && j < qs.length; i++) {
+      if (s[i] === qs[j]) { idx.push(i); score += 1 + (i === prev + 1 ? 3 : 0) + (i === 0 || /[\s\-_./#@]/.test(s[i - 1]) ? 4 : 0); prev = i; j++; }
+    }
+    return j === qs.length ? { score: score - s.length * .02, idx } : null;
+  }
+  const hl = (s, idx) => [...s].map((c, i) => idx.includes(i) ? `<mark>${esc(c)}</mark>` : esc(c)).join('');
+  function renderPal() {
+    const qs = q.value.trim().toLowerCase().replace(/\s+/g, ' ');
+    items = [];
+    ITEMS().forEach(it => {
+      const a = fuzzy(it.label, qs), b = qs ? fuzzy(it.kw, qs) : null;
+      if (a || b) items.push({ ...it, score: Math.max(a ? a.score + 2 : -1, b ? b.score : -1), idx: a ? a.idx : [] });
+    });
+    if (qs) items.sort((x, y) => y.score - x.score);
+    sel = Math.min(sel, Math.max(0, items.length - 1));
+    let html = '', g = null;
+    items.forEach((it, i) => {
+      if (!qs && it.g !== g) { g = it.g; html += `<li class="grp" role="presentation">${g}</li>`; }
+      html += `<li role="option" id="po-${i}" data-i="${i}" aria-selected="${i === sel}"><span class="ico" aria-hidden="true">${it.ico}</span><span>${hl(it.label, it.idx)}</span><span class="hint">${esc(it.hint)}</span></li>`;
+    });
+    list.innerHTML = html || '<li class="pal-empty" role="presentation">No matches. Try “mail”, “stack” or “theme”.</li>';
+    q.setAttribute('aria-activedescendant', items.length ? 'po-' + sel : '');
+  }
+  function move(d) {
+    if (!items.length) return;
+    sel = (sel + d + items.length) % items.length;
+    $$('[role="option"]', list).forEach(o => o.setAttribute('aria-selected', +o.dataset.i === sel));
+    q.setAttribute('aria-activedescendant', 'po-' + sel);
+    const el = $('#po-' + sel); el && el.scrollIntoView({ block: 'nearest' });
+  }
+  function openPal() {
+    if (!pal.hidden) return;
+    lastFocus = document.activeElement; pal.hidden = false; q.value = ''; sel = 0; renderPal();
+    document.body.style.overflow = 'hidden';
+    q.focus();
+  }
+  function closePal(restore = true) {
+    if (pal.hidden) return;
+    pal.hidden = true; document.body.style.overflow = '';
+    if (restore && lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  }
+  function choose(i) { const it = items[i]; if (!it) return; closePal(false); it.run(); }
+  q.addEventListener('input', () => { sel = 0; renderPal(); });
+  q.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); move(1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); }
+    else if (e.key === 'Enter') { e.preventDefault(); choose(sel); }
+    else if (e.key === 'Escape') { e.preventDefault(); closePal(); }
+    else if (e.key === 'Tab') { e.preventDefault(); move(e.shiftKey ? -1 : 1); }
+  });
+  list.addEventListener('mousemove', e => { const o = e.target.closest('[role="option"]'); if (o && +o.dataset.i !== sel) { sel = +o.dataset.i - 0; move(0); } });
+  list.addEventListener('click', e => { const o = e.target.closest('[role="option"]'); if (o) choose(+o.dataset.i); });
+  pal.addEventListener('click', e => { if (e.target.hasAttribute('data-close')) closePal(); });
+  $('#pal-open').addEventListener('click', openPal);
+  document.addEventListener('keydown', e => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); pal.hidden ? openPal() : closePal(); return; }
+    const t = e.target;
+    if (e.key === '/' && pal.hidden && !/INPUT|TEXTAREA|SELECT/.test(t.tagName) && !t.isContentEditable) {
+      e.preventDefault(); skipAuto = true;
+      const r = term.getBoundingClientRect();
+      if (r.bottom < 60 || r.top > innerHeight) term.scrollIntoView({ block: 'center', behavior: reduce.matches ? 'auto' : 'smooth' });
+      tin.focus({ preventScroll: true });
+    }
+  });
+
+  setupScrub(); onScroll();
+})();
+</script>
+</body>
+</html>
