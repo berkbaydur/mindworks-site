@@ -2,11 +2,11 @@
 
 A single self-contained static page (`index.html`): no build step, so it can be hosted anywhere (Netlify, Cloudflare Pages, GitHub Pages, or your current host).
 
-## Design system
-- **Type:** Schibsted Grotesk (display/body) + IBM Plex Mono (technical labels, data).
-- **Colour:** warm paper `#F1EEE7`, ink `#15140F`, one signal accent `#E8480C` (international orange). Automatic dark mode.
-- **Motif:** engineering datasheet: numbered sections (§01…), figure captions, hairline rules, square corners.
-- **Motion:** one staged hero load, a live device→edge→cloud simulation, a signal pulse along the IoT stack, timesheet bars filling on scroll. Everything respects `prefers-reduced-motion`.
+## Design system ("Atmosphere")
+- **Type:** Fraunces (light display, italics for emphasis) + Inter Tight (body) + JetBrains Mono (small labels).
+- **Colour:** warm cream `#F5F0E8` and sand `#EAE1D3`, moss ink `#1F2A24`; a slow canvas mesh gradient (apricot, sage, lilac, sky) under fine grain. One accent: deep moss `#2F4A3A`, used only for the primary action.
+- **Motif:** liquid glass. A glass lens drifts over the hero gradient and follows the cursor; the nav is a floating glass capsule.
+- **Motion:** blur-to-sharp reveals, and one pinned scroll scene ("a day in the life of a signal") where an orb travels the six stack layers while the background moves from dawn to night. Everything respects `prefers-reduced-motion`, and canvases pause when off screen.
 
 ## Files
 - `index.html`: the site
