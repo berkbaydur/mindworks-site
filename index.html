@@ -293,8 +293,8 @@ body::after {
 }
 
 /* ---------------- stack: a day in the life of a signal ---------------- */
-.stack { position: relative; height: 520vh; --s-ink: var(--ink); --s-ink2: var(--ink-2); color: var(--s-ink); background: #F3E7DB; }
-.stack-pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: flex; flex-direction: column; isolation: isolate; }
+.stack { position: relative; --s-ink: var(--ink); --s-ink2: var(--ink-2); color: var(--s-ink); background: #F3E7DB; }
+.stack-pin { position: relative; height: calc(100vh + 56px); height: calc(100svh + 56px); padding-bottom: 56px; overflow: hidden; display: flex; flex-direction: column; isolation: isolate; }
 .stack .field { z-index: -1; }
 .stack-head { width: 100%; padding-top: 112px; display: grid; grid-template-columns: 1fr auto; gap: 8px 40px; align-items: end; }
 .stack-head .label { grid-column: 1 / -1; color: var(--s-ink2); transition: color .8s; }
@@ -964,10 +964,28 @@ footer { padding-top: 30px; }
     stLen = xs.map(X => { let lo = 0, hi = RL; for (let k = 0; k < 24; k++) { const m = (lo + hi) / 2; rpath.getPointAtLength(m).x < X ? lo = m : hi = m; } return lo; });
   }
   const TOD = [[5.6, 'First light'], [8, 'Morning'], [12, 'Midday'], [16, 'Afternoon'], [19.2, 'Dusk'], [21.5, 'Night']];
+  // The scene plays once, on its own, the first time it comes into view; scrolling is never captured.
+  let stackP = 0, playStart = 0;
+  const PLAY_MS = 7000, ease = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  function playStack(now) {
+    if (!playStart) playStart = now;
+    stackP = ease(Math.min(1, (now - playStart) / PLAY_MS));
+    stackFrame();
+    if (stackP < 1) requestAnimationFrame(playStack);
+  }
+  new IntersectionObserver((es, obs) => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    obs.disconnect();
+    if (reduced || staticStack) { stackP = 1; stackFrame(); } else requestAnimationFrame(playStack);
+  }), { threshold: .45 }).observe(stackEl);
+  function stackDark() {
+    if (staticStack) return;
+    const r = stackEl.getBoundingClientRect();
+    root.classList.toggle('on-dark', lastDark && r.top < 40 && r.bottom > 60);
+  }
   function stackFrame() {
     if (staticStack) return;
-    const r = stackEl.getBoundingClientRect(), span = stackEl.offsetHeight - innerHeight;
-    const p = Math.min(1, Math.max(0, -r.top / span));
+    const p = stackP;
     setStackPalette(p);
     const pp = Math.min(1, Math.max(0, (p - .04) / .86));
     const len = stLen[0] + (stLen[5] - stLen[0]) * pp;
@@ -979,8 +997,7 @@ footer { padding-top: 30px; }
     const hr = 5.6 + pp * 17.2, hh = Math.floor(hr), mm = Math.floor((hr - hh) * 60 / 5) * 5;
     clock.textContent = String(hh).padStart(2, '0') + ':' + String(mm).padStart(2, '0');
     let lab = TOD[0][1]; for (const [at, l] of TOD) if (hr >= at) lab = l; tod.textContent = lab;
-    // brand + capsule over the dark end of the scene
-    root.classList.toggle('on-dark', lastDark && r.top < 40 && r.bottom > 60);
+    stackDark();
   }
   function decideStatic() {
     const was = staticStack;
@@ -1053,7 +1070,7 @@ footer { padding-top: 30px; }
     stackFrame(); navFrame();
     if (reduced) { lpos.x = 0; sizeLens(); requestAnimationFrame(frame); }
   }
-  addEventListener('scroll', () => { stackFrame(); navFrame(); if (reduced) requestAnimationFrame(frame); }, { passive: true });
+  addEventListener('scroll', () => { stackDark(); navFrame(); if (reduced) requestAnimationFrame(frame); }, { passive: true });
   let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { layout(); buildEdgeMap(); }, 120); });
   RM.addEventListener && RM.addEventListener('change', () => { reduced = RM.matches; cancelAnimationFrame(raf); layout(); if (!reduced) raf = requestAnimationFrame(frame); });
 
